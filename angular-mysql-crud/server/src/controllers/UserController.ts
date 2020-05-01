@@ -1,40 +1,43 @@
 import { Request, Response } from 'express';
 import pool from '../database';
-class UserController {
+import {UserService} from '../services/UserService';
+import {User} from '../models/User';
 
-    public async list (req: Request, res: Response){
-        const cuestionarios = await pool.query('SELECT * FROM users')
-        res.json(cuestionarios);
-    }
-    
-    public async getOne (req: Request, res: Response): Promise<any>{
-        const { id } = req.params;
-        const cuestionario = await pool.query('SELECT * FROM users WHERE idUser = ?', {id});
-        console.log(cuestionario);
-        if ( cuestionario.length > 0 ){
-            return res.json(cuestionario[0]);
+export class UserController {
+
+    static async login(req: Request, res: Response) {
+        const { userName, password } = req.query;
+        const _user: User = await UserService.login(userName, password);
+        if(_user == null){
+            res.json({message:'the user is not valid ', user: null})
+        }else{
+            res.json({message:'the user is valid', user: _user});
         }
-        res.status(404).json({'text':'the user doesnt exist'})
+    }
+
+    static async listUser (req: Request, res: Response){
+        const { usuario } = req.query;
+        const _usuarios: User[] = await UserService.listUser(usuario);
+        res.json(_usuarios);
     }
     
-    public async create(req: Request, res: Response): Promise<void>{
-        await pool.query('INSERT INTO users set ?', [req.body])
-        res.json({'message':'saved user'});
+    static async createUser (req: Request, res: Response) {
+        let user: User = req.body;    
+        const createdUser: User[] = await UserService.createUser(user);   
+        res.json(createdUser);
     }
     
-    public async delete(req: Request, res: Response): Promise<void>{
-        const { id } = req.params;
-        await pool.query('DELETE FROM users WHERE idUser = ?', [{id}]);
-        res.json({'message': 'the user was deleted'});
+    static async updateUser(req: Request, res: Response): Promise<void>{
+        const { idUser } = req.params;
+        let user: User = req.body;    
+        await UserService.updateUser(parseInt(idUser), user);    
+        res.json({'message':'the usuario was updated '})
+    
     }
     
-    public async update(req: Request, res: Response): Promise<void>{
-        const { id } = req.params;
-        await pool.query('UPDATE users set ? WHERE idUser = ?', [req.body, id])
-        res.json({'message':'the user was updated '})
+    static async deleteUser(req: Request, res: Response): Promise<void>{
+        const { idUser} = req.params;
+        await UserService.deleteUser(parseInt(idUser));     
+        res.json({'message': 'the usuarios was deleted'});
     }
 }
-
-
-const userController = new UserController();
-export default userController;

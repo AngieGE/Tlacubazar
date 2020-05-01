@@ -1,6 +1,5 @@
 import express, {Application} from 'express';
-import indexRoutes from './routes/indexRoutes';
-import userRoutes from './routes/userRoutes';
+import { UserRoutes } from './routes';
 import morgan from 'morgan';
 import cors from 'cors';
 
@@ -27,14 +26,13 @@ class Server{
 
     routes(): void{
         console.log('en routes');
-        this.app.use('/',indexRoutes);
-        this.app.use('/api/user', userRoutes);
+        this.app.use('/user', UserRoutes.getInstance().router);
     }
 
     start(): void{
         console.log('en start');
         this.app.listen(this.app.get('port'), () =>{
-            console.log("en start: Server running on port", this.app.get('port'));
+            console.log("Server running on port", this.app.get('port'));
         });
     }
 }

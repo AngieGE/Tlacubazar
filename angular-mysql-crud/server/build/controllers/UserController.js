@@ -8,49 +8,49 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const database_1 = __importDefault(require("../database"));
+const UserService_1 = require("../services/UserService");
 class UserController {
-    list(req, res) {
+    static login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const cuestionarios = yield database_1.default.query('SELECT * FROM users');
-            res.json(cuestionarios);
-        });
-    }
-    getOne(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            const cuestionario = yield database_1.default.query('SELECT * FROM users WHERE idUser = ?', { id });
-            console.log(cuestionario);
-            if (cuestionario.length > 0) {
-                return res.json(cuestionario[0]);
+            const { userName, password } = req.query;
+            const _user = yield UserService_1.UserService.login(userName, password);
+            if (_user == null) {
+                res.json({ message: 'the user is not valid ', user: null });
             }
-            res.status(404).json({ 'text': 'the user doesnt exist' });
+            else {
+                res.json({ message: 'the user is valid', user: _user });
+            }
         });
     }
-    create(req, res) {
+    static listUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO users set ?', [req.body]);
-            res.json({ 'message': 'saved user' });
+            const { usuario } = req.query;
+            const _usuarios = yield UserService_1.UserService.listUser(usuario);
+            res.json(_usuarios);
         });
     }
-    delete(req, res) {
+    static createUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            yield database_1.default.query('DELETE FROM users WHERE idUser = ?', [{ id }]);
-            res.json({ 'message': 'the user was deleted' });
+            let user = req.body;
+            const createdUser = yield UserService_1.UserService.createUser(user);
+            res.json(createdUser);
         });
     }
-    update(req, res) {
+    static updateUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            yield database_1.default.query('UPDATE users set ? WHERE idUser = ?', [req.body, id]);
-            res.json({ 'message': 'the user was updated ' });
+            const { idUser } = req.params;
+            let user = req.body;
+            yield UserService_1.UserService.updateUser(parseInt(idUser), user);
+            res.json({ 'message': 'the usuario was updated ' });
+        });
+    }
+    static deleteUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { idUser } = req.params;
+            yield UserService_1.UserService.deleteUser(parseInt(idUser));
+            res.json({ 'message': 'the usuarios was deleted' });
         });
     }
 }
-const userController = new UserController();
-exports.default = userController;
+exports.UserController = UserController;

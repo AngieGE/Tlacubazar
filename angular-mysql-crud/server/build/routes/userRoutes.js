@@ -1,23 +1,24 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const UserController_1 = __importDefault(require("../controllers/UserController"));
+const controllers_1 = require("../controllers");
 class UserRoutes {
     constructor() {
         this.router = express_1.Router();
         this.config();
     }
+    static getInstance() {
+        if (this.instance == null)
+            this.instance = new UserRoutes();
+        return this.instance;
+    }
     config() {
-        //cuando entren en la ruta inicial yo envio un mensaje hello
-        this.router.get('/', UserController_1.default.list);
-        this.router.get('/:id', UserController_1.default.getOne);
-        this.router.post('/', UserController_1.default.create);
-        this.router.delete('/:id', UserController_1.default.delete);
-        this.router.put('/:id', UserController_1.default.update);
+        this.router.get('/login', controllers_1.UserController.login);
+        this.router.get('/', controllers_1.UserController.listUser);
+        this.router.post('/', controllers_1.UserController.createUser);
+        //this.router.get('/:idUsuario', UserController.obtenerUsuario);
+        this.router.put('/:idUsuario', controllers_1.UserController.updateUser);
+        this.router.delete('/:idUsuario', controllers_1.UserController.deleteUser);
     }
 }
-const userRoutes = new UserRoutes();
-exports.default = userRoutes.router;
+exports.UserRoutes = UserRoutes;

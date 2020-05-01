@@ -4,8 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
-const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
+const routes_1 = require("./routes");
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 class Server {
@@ -25,13 +24,12 @@ class Server {
     }
     routes() {
         console.log('en routes');
-        this.app.use('/', indexRoutes_1.default);
-        this.app.use('/api/user', userRoutes_1.default);
+        this.app.use('/user', routes_1.UserRoutes.getInstance().router);
     }
     start() {
         console.log('en start');
         this.app.listen(this.app.get('port'), () => {
-            console.log("en start: Server running on port", this.app.get('port'));
+            console.log("Server running on port", this.app.get('port'));
         });
     }
 }
