@@ -16,10 +16,10 @@ import {StoreController} from '../controllers'
     }
 
     config():void{
-        //this.router.get('/', StoreController.listUser);
-        //this.router.post('/', StoreController.createUser);
-        //this.router.put('/:idStore', StoreController.updateUser);
-        //this.router.delete('/:idStore', StoreController.deleteUser);
+        this.router.get('/', StoreController.listStore);
+        this.router.post('/', StoreController.createStore);
+        this.router.put('/:idStore', StoreController.updateStore);
+        this.router.delete('/:idStore', StoreController.deleteStore);
     }
 }
 

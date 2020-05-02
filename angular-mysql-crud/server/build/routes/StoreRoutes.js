@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const controllers_1 = require("../controllers");
 class StoreRoutes {
     constructor() {
         this.router = express_1.Router();
@@ -12,10 +13,10 @@ class StoreRoutes {
         return this.instance;
     }
     config() {
-        //this.router.get('/', StoreController.listUser);
-        //this.router.post('/', StoreController.createUser);
-        //this.router.put('/:idStore', StoreController.updateUser);
-        //this.router.delete('/:idStore', StoreController.deleteUser);
+        this.router.get('/', controllers_1.StoreController.listStore);
+        this.router.post('/', controllers_1.StoreController.createStore);
+        this.router.put('/:idStore', controllers_1.StoreController.updateStore);
+        this.router.delete('/:idStore', controllers_1.StoreController.deleteStore);
     }
 }
 exports.StoreRoutes = StoreRoutes;

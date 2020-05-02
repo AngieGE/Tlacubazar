@@ -1,2 +1,2 @@
 export * from './UserController';
-export * from './StoreService';
+export * from './StoreController';

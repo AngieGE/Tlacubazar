@@ -27,7 +27,7 @@ class UserController {
         return __awaiter(this, void 0, void 0, function* () {
             const { idUser } = req.body; //req.body req.query req.params
             const _usuarios = yield UserService_1.UserService.listUser(idUser);
-            res.json({ "lenght": _usuarios.length, "recordset": _usuarios });
+            res.json({ "length": _usuarios.length, "recordset": _usuarios });
         });
     }
     static createUser(req, res) {
