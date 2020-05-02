@@ -21,45 +21,42 @@ class UserService {
             return recordset.recordset[0];
         });
     }
-    static listUser(idUser, firstName, lastName, userName, isVendo) {
+    static listUser(idUser) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "SELECT * FROM user WHERE ";
-            sql += firstName != null ? "userName = '" + userName + "' AND " : "";
-            sql += lastName != null ? "lastName = '" + lastName + "' AND " : "";
-            sql += userName != null ? "userName = '" + userName + "' AND " : "";
-            sql += isVendo != null ? "isVendo = '" + isVendo + "' AND " : "";
+            sql += idUser != null ? "idUser = " + idUser + " AND " : "";
             sql += "1 = 1 ";
             const recordset = yield database_1.default.query(sql);
-            return recordset.recordset;
+            return recordset;
         });
     }
     static createUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "INSERT INTO user (firstName, lastName, userName, password, isVendor, phone, cacaoBalance) " +
-                "VALUES ('" + user.firstName + "', '" +
+            let sql = "INSERT INTO user (email, firstName, lastName, isVendor, phone, cacaoBalance) " +
+                "VALUES ('" + user.email + "', '" +
+                user.firstName + "', '" +
                 user.lastName + "', '" +
-                user.userName + "', '" +
-                user.password + "', '" +
+                //user.password + "', '" + 
                 user.isVendor + "', '" +
                 user.phone + "', '" +
                 user.cacaoBalance + "');";
             const resultado = yield database_1.default.query(sql);
-            return resultado.recordset[0].id;
+            return resultado;
         });
     }
     static updateUser(idUser, user) {
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "UPDATE user SET" +
+            let sql = "UPDATE user SET " +
+                "email = '" + user.email + "', " +
                 "firstName = '" + user.firstName + "', " +
-                "lastName = '" + user.lastName + "', '" +
-                "userName = '" + user.userName + "', '" +
-                "password = '" + user.password + "', '" +
-                "isVendor = '" + user.isVendor + "', '" +
-                "phone = '" + user.phone + "', '" +
-                "cacaoBalance = '" + user.cacaoBalance + "' " +
+                "lastName = '" + user.lastName + "', " +
+                //"password = '" + user.password +"', '" +  
+                "isVendor = " + user.isVendor + ", " +
+                "phone = '" + user.phone + "', " +
+                "cacaoBalance = " + user.cacaoBalance + " " +
                 "WHERE idUser = " + idUser + ";";
             const resultado = yield database_1.default.query(sql);
-            return resultado.recordset[0].id;
+            return resultado;
         });
     }
     static deleteUser(idUser) {

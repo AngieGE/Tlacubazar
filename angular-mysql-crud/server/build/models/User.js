@@ -9,7 +9,7 @@ class User {
         this.idUser = user.idUser;
         this.firstName = user.firstName;
         this.lastName = user.lastName;
-        this.userName = user.userName;
+        this.email = user.email;
         this.password = user.password;
         this.isVendor = user.isVendor;
         this.phone = user.phone;

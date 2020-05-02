@@ -16,28 +16,40 @@ export class UserController {
     }
 
     static async listUser (req: Request, res: Response){
-        const { usuario } = req.query;
-        const _usuarios: User[] = await UserService.listUser(usuario);
-        res.json(_usuarios);
+        const { idUser } = req.body; //req.body req.query req.params
+        const _usuarios: User[] = await UserService.listUser(idUser);
+        res.json({"lenght": _usuarios.length, "recordset":_usuarios});
     }
     
     static async createUser (req: Request, res: Response) {
         let user: User = req.body;    
-        const createdUser: User[] = await UserService.createUser(user);   
+        const createdUser=await UserService.createUser(user);   
+        console.log(createdUser);
         res.json(createdUser);
     }
     
     static async updateUser(req: Request, res: Response): Promise<void>{
         const { idUser } = req.params;
         let user: User = req.body;    
-        await UserService.updateUser(parseInt(idUser), user);    
-        res.json({'message':'the usuario was updated '})
-    
+        const _updateUser=await UserService.updateUser(parseInt(idUser), user);  
+        console.log(_updateUser);  
+        if (_updateUser.affectedRows < 1) {
+            _updateUser.message='the user was not updated ';
+        }else{
+            _updateUser.message='the user was updated ';
+        }
+        res.json({updateUser: _updateUser})
     }
     
     static async deleteUser(req: Request, res: Response): Promise<void>{
         const { idUser} = req.params;
-        await UserService.deleteUser(parseInt(idUser));     
-        res.json({'message': 'the usuarios was deleted'});
+        const _deleteUser=await UserService.deleteUser(parseInt(idUser));   
+        console.log(_deleteUser);  
+        if (_deleteUser.affectedRows < 1) {
+            _deleteUser.message='the user was not deleted ';
+        }else{
+            _deleteUser.message='the user was deleted ';
+        }
+        res.json({deleteUserUser: _deleteUser})
     }
 }

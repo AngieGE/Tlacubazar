@@ -1,1 +1,1 @@
-export * from './UserRoutes';
+export * from './userRoutes';

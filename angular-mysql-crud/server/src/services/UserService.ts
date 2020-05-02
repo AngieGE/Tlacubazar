@@ -9,42 +9,39 @@ export class UserService {
         return recordset.recordset[0];
     }
 
-    static async listUser(idUser: number,firstName?: string, lastName?: string, userName?: string, isVendo?:boolean): Promise<User[]>  {
+    static async listUser(idUser?:number): Promise<User[]>  {
         let sql: string = "SELECT * FROM user WHERE "
-        sql += firstName!=null ? "userName = '" + userName + "' AND " : "";
-        sql += lastName!=null ? "lastName = '" + lastName + "' AND " : "";
-        sql += userName!=null ? "userName = '" + userName + "' AND " : "";
-        sql += isVendo!=null ? "isVendo = '" + isVendo + "' AND " : "";
+        sql += idUser!=null ? "idUser = " + idUser + " AND " : "";
         sql += "1 = 1 ";
         const recordset = await pool.query(sql);
-        return recordset.recordset;
+        return recordset;
     }
 
     static async createUser(user: User): Promise<any> {
-        let sql: string = "INSERT INTO user (firstName, lastName, userName, password, isVendor, phone, cacaoBalance) " + 
-                                "VALUES ('"+ user.firstName + "', '" + 
-                                            user.lastName +"', '" + 
-                                            user.userName + "', '" + 
-                                            user.password + "', '" + 
+        let sql: string = "INSERT INTO user (email, firstName, lastName, isVendor, phone, cacaoBalance) " + 
+                                "VALUES ('"+ user.email + "', '" + 
+                                            user.firstName +"', '" + 
+                                            user.lastName + "', '" + 
+                                            //user.password + "', '" + 
                                             user.isVendor + "', '" + 
                                             user.phone + "', '" + 
                                             user.cacaoBalance + "');"
         const resultado= await pool.query(sql);
-        return resultado.recordset[0].id;
+        return resultado;
     }
 
     static async updateUser(idUser: number, user: User): Promise<any> {
-        let sql: string = "UPDATE user SET" +
+        let sql: string = "UPDATE user SET " +
+                                "email = '" + user.email +"', " +  
                                 "firstName = '" + user.firstName + "', " +
-                                "lastName = '" + user.lastName +"', '" + 
-                                "userName = '" + user.userName +"', '" +  
-                                "password = '" + user.password +"', '" +  
-                                "isVendor = '" + user.isVendor +"', '" +  
-                                "phone = '" + user.phone +"', '" +  
-                                "cacaoBalance = '" + user.cacaoBalance + "' " +
+                                "lastName = '" + user.lastName +"', " + 
+                                //"password = '" + user.password +"', '" +  
+                                "isVendor = " + user.isVendor +", " +  
+                                "phone = '" + user.phone +"', " +  
+                                "cacaoBalance = " + user.cacaoBalance + " " +
                                 "WHERE idUser = " + idUser + ";";
         const resultado= await pool.query(sql);
-        return resultado.recordset[0].id;
+        return resultado;
     }
 
     static async deleteUser(idUser: number): Promise<any> {

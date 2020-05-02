@@ -25,15 +25,16 @@ class UserController {
     }
     static listUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { usuario } = req.query;
-            const _usuarios = yield UserService_1.UserService.listUser(usuario);
-            res.json(_usuarios);
+            const { idUser } = req.body; //req.body req.query req.params
+            const _usuarios = yield UserService_1.UserService.listUser(idUser);
+            res.json({ "lenght": _usuarios.length, "recordset": _usuarios });
         });
     }
     static createUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let user = req.body;
             const createdUser = yield UserService_1.UserService.createUser(user);
+            console.log(createdUser);
             res.json(createdUser);
         });
     }
@@ -41,15 +42,29 @@ class UserController {
         return __awaiter(this, void 0, void 0, function* () {
             const { idUser } = req.params;
             let user = req.body;
-            yield UserService_1.UserService.updateUser(parseInt(idUser), user);
-            res.json({ 'message': 'the usuario was updated ' });
+            const _updateUser = yield UserService_1.UserService.updateUser(parseInt(idUser), user);
+            console.log(_updateUser);
+            if (_updateUser.affectedRows < 1) {
+                _updateUser.message = 'the user was not updated ';
+            }
+            else {
+                _updateUser.message = 'the user was updated ';
+            }
+            res.json({ updateUser: _updateUser });
         });
     }
     static deleteUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { idUser } = req.params;
-            yield UserService_1.UserService.deleteUser(parseInt(idUser));
-            res.json({ 'message': 'the usuarios was deleted' });
+            const _deleteUser = yield UserService_1.UserService.deleteUser(parseInt(idUser));
+            console.log(_deleteUser);
+            if (_deleteUser.affectedRows < 1) {
+                _deleteUser.message = 'the user was not deleted ';
+            }
+            else {
+                _deleteUser.message = 'the user was deleted ';
+            }
+            res.json({ deleteUserUser: _deleteUser });
         });
     }
 }
