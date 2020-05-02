@@ -1,9 +1,7 @@
-//import {Address} from './';
-
 export class User {
 
     idUser?: number;
-    email?: string;
+    email?: number;
     firstName?:	string;
     lastName?: string;
     password?: string;
@@ -12,15 +10,14 @@ export class User {
     cacaoBalance?: number;
 
     // Has many
-    //address?: Address[]
 
     // Belongs to 
 
     constructor(user: User) {
         this.idUser=user.idUser;
+        this.email=user.email;
         this.firstName=user.firstName;
         this.lastName=user.lastName;
-        this.email=user.email;
         this.password=user.password;
         this.isVendor=user.isVendor;
         this.phone=user.phone;
