@@ -1,7 +1,20 @@
+export namespace _Order {
+    export type Status ='ESPERANDO_ENVIO'| 'PAUSADA'|'ENVIADA'| 'RECIBIDA'| 'PAGADA'| 'CANCELADA';
+    export const Status = {
+        ESPERANDO_ENVIO: 'ESPERANDO_ENVIO' as Status,
+        PAUSADA: 'PAUSADA' as Status,
+        ENVIADA: 'ENVIADA' as Status,
+        RECIBIDA: 'RECIBIDA' as Status,
+        PAGADA: 'PAGADA' as Status,
+        CANCELADA: 'CANCELADA' as Status
+    };
+
+}
+
 export class Order {
     idOrder?: number;
     orderDate?:Date;
-    status?:string;     //DEBERIA SER FK NO?  VER COMO CAMBIAR A ENUM
+    status?:_Order.Status; 
     comments?:string;
     totalPrice?:number;
     totalMaxCacaoPrice?: number;

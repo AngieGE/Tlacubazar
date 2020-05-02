@@ -17,13 +17,6 @@ CREATE TABLE `AddressEnum` (
     `address` VARCHAR(50)
 );
 
-/*CREATE TABLE `PostalCodeEnum` (
-  `idPostalCodeEnum` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `postalCode` VARCHAR(15)
-  `fkSuburbEnum` INT NOT NULL,
-  FOREIGN KEY (`fkSuburbEnum`) REFERENCES `SuburbEnum` (`idSuburbEnum`)
-);*/
-
 CREATE TABLE `StateEnum` (
     `idStateEnum` INT PRIMARY KEY  NOT NULL AUTO_INCREMENT,
     `state` VARCHAR(50)
@@ -74,6 +67,7 @@ CREATE TABLE `Store` (
   `fkAddress` INT NOT NULL,
   `isServiceStore` BOOLEAN,
   `acceptsCacao` BOOLEAN,
+  `status` ENUM('EN_ESPERA', 'ACEPTADA', 'RECHAZADA') NOT NULL,
   `fkVendor` INT NOT NULL,
   FOREIGN KEY (`fkAddress`) REFERENCES `Address` (`idAddress`),
   FOREIGN KEY (`fkVendor`) REFERENCES `User` (`idUser`) ON DELETE CASCADE
@@ -97,21 +91,15 @@ CREATE TABLE `Product` (
   FOREIGN KEY (`fkStore`) REFERENCES `Store` (`idStore`) ON DELETE CASCADE
 );
 
-CREATE TABLE `StatusEnum` (
-  `idStatusEnum` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `status` VARCHAR(15)
-);
-
 CREATE TABLE `Order` (
   `idOrder` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `orderDate` DATE,
-  `status` INT NOT NULL,
+  `status` ENUM('ESPERANDO_ENVIO', 'PAUSADA', 'ENVIADA', 'RECIBIDA', 'PAGADA', 'CANCELADA') NOT NULL,
   `comments` TEXT,
   `totalPrice` DECIMAL(13,2),
   `totalMaxCacaoPrice` DECIMAL(13,2),
   `fkUser` INT NOT NULL,
-  FOREIGN KEY (`fkUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE,
-  FOREIGN KEY (`status`) REFERENCES `StatusEnum` (`idStatusEnum`) ON DELETE CASCADE
+  FOREIGN KEY (`fkUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE
 );
 
 CREATE TABLE `OrderDetails` (
@@ -158,8 +146,6 @@ CREATE TABLE `StoreReview` (
 
 INSERT INTO `DeliveryMethodEnum` (`deliveryMethod`) VALUES ('En automóvil'), ('Transporte público'), ('A pie'), ('En bicicleta'), ('Recoger pedido');
 
-INSERT INTO `StatusEnum` (`status`) VALUES ('Esperando envío'), ('Pausada'), ('Enviada'), ('Recibida'), ('Pagada'), ('Cancelada');
-
 INSERT INTO `User` (`email`, `firstName`, `lastName`, `isVendor`, `phone`, `cacaoBalance`) VALUES ('alejandro.m@gmail.com', 'Alejandro', 'Moral', FALSE, '7771414141', 0.0), ('milagros@manzanas4dayz.com.mx', 'Milagros', 'Ramírez', TRUE, '7774004040', 0.0);
 
 INSERT INTO `AddressEnum` (`address`) VALUES ('Revolución 42'), ('Caudillo del Sur 500'), ('Avenida Universidad 404');
@@ -191,7 +177,8 @@ INSERT INTO `Address` (`fkAddressEnum`, `fkStateEnum`, `fkCityEnum`, `fkSuburbEn
 
 INSERT INTO `UserAdress` (`fkUser`, `fkAddress`) VALUES (1, 1), (1, 3), (2, 2);
 
-INSERT INTO `Store` (`name`, `fkAddress`, `isServiceStore`, `acceptsCacao`, `fkVendor`) VALUES ('Manzanas4Dayz', 3, FALSE, TRUE, 2), ('Nutrición Milagros', 3, TRUE, FALSE, 2);
+INSERT INTO `Store` (`name`, `fkAddress`, `isServiceStore`, `acceptsCacao`, status,`fkVendor`) VALUES 
+					('Manzanas4Dayz', 3, FALSE, TRUE, 'ACEPTADA',2), ('Nutrición Milagros', 3, TRUE, FALSE, 'ACEPTADA', 2);
 
 INSERT INTO `DeliveryMethod` (`fkStore`, `fkDeliveryMethodEnum`) VALUES (1, 3), (2, 3), (2, 4);
 

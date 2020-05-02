@@ -19,10 +19,8 @@ import {UserController} from '../controllers'
         this.router.get('/login', UserController.login);
         this.router.get('/', UserController.listUser);
         this.router.post('/', UserController.createUser);
-        //this.router.get('/:idUsuario', UserController.obtenerUsuario);
-        this.router.put('/:idUsuario', UserController.updateUser);
-        this.router.delete('/:idUsuario', UserController.deleteUser);
-
+        this.router.put('/:idUser', UserController.updateUser);
+        this.router.delete('/:idUser', UserController.deleteUser);
     }
 }
 

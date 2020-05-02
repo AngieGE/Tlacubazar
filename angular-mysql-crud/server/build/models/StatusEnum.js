@@ -1,9 +1,9 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class StatusEnum {
-    constructor(statusEnum) {
-        this.idStatusEnum = statusEnum.idStatusEnum;
-        this.status = statusEnum.status;
+/*export class StatusEnum {
+    idStatusEnum?:number;
+    status?:string;
+    constructor(statusEnum:StatusEnum){
+        this.idStatusEnum=statusEnum.idStatusEnum;
+        this.status=statusEnum.status;
     }
-}
-exports.StatusEnum = StatusEnum;
+}*/ 
