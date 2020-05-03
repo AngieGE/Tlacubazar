@@ -22,5 +22,3 @@ import {StoreController} from '../controllers'
         this.router.delete('/:idStore', StoreController.deleteStore);
     }
 }
-
-

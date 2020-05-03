@@ -25,6 +25,7 @@ class Server {
     routes() {
         console.log('en routes');
         this.app.use('/user', routes_1.UserRoutes.getInstance().router);
+        this.app.use('/store', routes_1.StoreRoutes.getInstance().router);
     }
     start() {
         console.log('en start');

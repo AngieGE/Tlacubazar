@@ -33,9 +33,17 @@ class UserController {
     static createUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let user = req.body;
-            const createdUser = yield UserService_1.UserService.createUser(user);
-            console.log(createdUser);
-            res.json(createdUser);
+            const _createdUser = yield UserService_1.UserService.createUser(user);
+            let suc;
+            if (_createdUser.affectedRows < 1) {
+                _createdUser.message = "user was not created";
+                suc = false;
+            }
+            else {
+                _createdUser.message = "user was created";
+                suc = true;
+            }
+            res.json({ success: suc, createdUser: _createdUser });
         });
     }
     static updateUser(req, res) {
@@ -43,28 +51,32 @@ class UserController {
             const { idUser } = req.params;
             let user = req.body;
             const _updateUser = yield UserService_1.UserService.updateUser(parseInt(idUser), user);
-            console.log(_updateUser);
+            let suc;
             if (_updateUser.affectedRows < 1) {
                 _updateUser.message = 'the user was not updated ';
+                suc = false;
             }
             else {
                 _updateUser.message = 'the user was updated ';
+                suc = true;
             }
-            res.json({ updateUser: _updateUser });
+            res.json({ success: suc, updateUser: _updateUser });
         });
     }
     static deleteUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { idUser } = req.params;
             const _deleteUser = yield UserService_1.UserService.deleteUser(parseInt(idUser));
-            console.log(_deleteUser);
+            let suc;
             if (_deleteUser.affectedRows < 1) {
                 _deleteUser.message = 'the user was not deleted ';
+                suc = false;
             }
             else {
                 _deleteUser.message = 'the user was deleted ';
+                suc = true;
             }
-            res.json({ deleteUserUser: _deleteUser });
+            res.json({ success: suc, deleteUserUser: _deleteUser });
         });
     }
 }

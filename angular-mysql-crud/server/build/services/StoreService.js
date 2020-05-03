@@ -25,14 +25,24 @@ class StoreService {
     }
     static createStore(store) {
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "INSERT INTO store (name, fkAddress, isServiceStore, acceptsCacao, status, fkVendor) " +
-                "VALUES ('" + store.name + "', '" +
+            let sql = "CALL createStoreProcedure( '" +
+                store.name + "', '" +
                 store.fkAddress + "', '" +
                 store.isServiceStore + "', '" +
                 store.acceptsCacao + "', '" +
                 store.status + "', '" +
                 store.fkVendor + "');";
+            /*
+            let sql: string = "INSERT INTO store (name, fkAddress, isServiceStore, acceptsCacao, status, fkVendor) " +
+                                      "VALUES ('"+ store.name + "', '" +
+                                                  store.fkAddress +"', '" +
+                                                  store.isServiceStore + "', '" +
+                                                  store.acceptsCacao + "', '" +
+                                                  store.status + "', '" +
+                                                  store.fkVendor + "');"
+                                                  */
             const resultado = yield database_1.default.query(sql);
+            console.log(resultado);
             return resultado;
         });
     }

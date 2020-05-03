@@ -183,3 +183,19 @@ INSERT INTO `Store` (`name`, `fkAddress`, `isServiceStore`, `acceptsCacao`, stat
 INSERT INTO `DeliveryMethod` (`fkStore`, `fkDeliveryMethodEnum`) VALUES (1, 3), (2, 3), (2, 4);
 
 INSERT INTO `Product` (`name`, `description`, `quantityInStock`, `buyPrice`, `maxCacaoBuyPrice`, `fkStore`) VALUES ('Manzana Roja', 'Clásica y tradicional manzana roja', 10, 3.43, 0.686, 1), ('Manzana Verde', 'La alternativa de siempre: manzana verde', 14, 2.5, 0.5, 1), ('Pera', 'Fantástica pera de máxima calidad', 7, 5.99, 1.198, 1);
+
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS createStoreProcedure;
+CREATE PROCEDURE createStoreProcedure(IN _name VARCHAR(30), IN _fkAddress INT, IN _isServiceStore BOOLEAN,
+                IN _acceptsCacao BOOLEAN, IN _status ENUM('EN_ESPERA', 'ACEPTADA', 'RECHAZADA'), IN _fkVendor INT)
+BEGIN
+    IF (EXISTS(SELECT * FROM user WHERE idUser = _fkVendor) AND EXISTS(SELECT * FROM address WHERE idAddress = _fkAddress)) THEN
+        begin
+            INSERT INTO Store(name, fkAddress, isServiceStore, acceptsCacao, status,fkVendor) VALUES
+					(_name, _fkAddress, _isServiceStore, _acceptsCacao, _status, _fkVendor);
+        end;
+
+    END IF;
+END //
+DELIMITER ;

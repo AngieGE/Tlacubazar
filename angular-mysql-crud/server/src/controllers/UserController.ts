@@ -23,33 +23,44 @@ export class UserController {
     
     static async createUser (req: Request, res: Response) {
         let user: User = req.body;    
-        const createdUser=await UserService.createUser(user);   
-        console.log(createdUser);
-        res.json(createdUser);
+        const _createdUser=await UserService.createUser(user);   
+        let suc;
+        if (_createdUser.affectedRows < 1) {
+            _createdUser.message = "user was not created";
+            suc=false;
+        }else{
+            _createdUser.message = "user was created";
+            suc=true;
+        }
+        res.json({success:suc,createdUser:_createdUser});
     }
     
     static async updateUser(req: Request, res: Response): Promise<void>{
         const { idUser } = req.params;
         let user: User = req.body;    
         const _updateUser=await UserService.updateUser(parseInt(idUser), user);  
-        console.log(_updateUser);  
+        let suc;
         if (_updateUser.affectedRows < 1) {
             _updateUser.message='the user was not updated ';
+            suc=false;
         }else{
             _updateUser.message='the user was updated ';
+            suc=true;
         }
-        res.json({updateUser: _updateUser})
+        res.json({success:suc,updateUser: _updateUser})
     }
     
     static async deleteUser(req: Request, res: Response): Promise<void>{
         const { idUser} = req.params;
         const _deleteUser=await UserService.deleteUser(parseInt(idUser));   
-        console.log(_deleteUser);  
+        let suc;
         if (_deleteUser.affectedRows < 1) {
             _deleteUser.message='the user was not deleted ';
+            suc=false;
         }else{
             _deleteUser.message='the user was deleted ';
+            suc=true;
         }
-        res.json({deleteUserUser: _deleteUser})
+        res.json({success:suc,deleteUserUser: _deleteUser})
     }
 }

@@ -12,14 +12,24 @@ export class StoreService {
     }
 
     static async createStore(store: Store): Promise<any> {
-        let sql: string = "INSERT INTO store (name, fkAddress, isServiceStore, acceptsCacao, status, fkVendor) " + 
+        let sql: string = "CALL createStoreProcedure( '"+
+                            store.name + "', '" + 
+                            store.fkAddress +"', '" + 
+                            store.isServiceStore + "', '" + 
+                            store.acceptsCacao + "', '" + 
+                            store.status + "', '" + 
+                            store.fkVendor + "');"
+      /*  
+      let sql: string = "INSERT INTO store (name, fkAddress, isServiceStore, acceptsCacao, status, fkVendor) " + 
                                 "VALUES ('"+ store.name + "', '" + 
                                             store.fkAddress +"', '" + 
                                             store.isServiceStore + "', '" + 
                                             store.acceptsCacao + "', '" + 
                                             store.status + "', '" + 
                                             store.fkVendor + "');"
+                                            */
         const resultado= await pool.query(sql);
+        console.log(resultado);
         return resultado;
     }
 

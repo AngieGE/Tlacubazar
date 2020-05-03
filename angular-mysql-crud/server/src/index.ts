@@ -1,5 +1,5 @@
 import express, {Application} from 'express';
-import { UserRoutes } from './routes';
+import { UserRoutes, StoreRoutes } from './routes';
 import morgan from 'morgan';
 import cors from 'cors';
 
@@ -27,6 +27,7 @@ class Server{
     routes(): void{
         console.log('en routes');
         this.app.use('/user', UserRoutes.getInstance().router);
+        this.app.use('/store', StoreRoutes.getInstance().router);
     }
 
     start(): void{
