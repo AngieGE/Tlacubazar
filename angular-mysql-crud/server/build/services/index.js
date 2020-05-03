@@ -5,3 +5,8 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./StoreService"));
 __export(require("./UserService"));
+__export(require("./AddressService"));
+__export(require("./AddressEnumService"));
+__export(require("./StateEnumService"));
+__export(require("./CityEnumService"));
+__export(require("./SuburbEnumService"));

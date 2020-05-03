@@ -26,6 +26,11 @@ class Server {
         console.log('en routes');
         this.app.use('/user', routes_1.UserRoutes.getInstance().router);
         this.app.use('/store', routes_1.StoreRoutes.getInstance().router);
+        this.app.use('/address', routes_1.AddressRoutes.getInstance().router);
+        this.app.use('/addressEnum', routes_1.AddressEnumRoutes.getInstance().router);
+        this.app.use('/stateEnum', routes_1.StateEnumRoutes.getInstance().router);
+        this.app.use('/cityEnum', routes_1.CityEnumRoutes.getInstance().router);
+        this.app.use('/suburbEnum', routes_1.SuburbEnumRoutes.getInstance().router);
     }
     start() {
         console.log('en start');

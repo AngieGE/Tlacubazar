@@ -1,5 +1,7 @@
 import express, {Application} from 'express';
-import { UserRoutes, StoreRoutes } from './routes';
+import { UserRoutes, StoreRoutes, AddressRoutes,
+        AddressEnumRoutes, StateEnumRoutes, CityEnumRoutes,
+        SuburbEnumRoutes } from './routes';
 import morgan from 'morgan';
 import cors from 'cors';
 
@@ -28,6 +30,12 @@ class Server{
         console.log('en routes');
         this.app.use('/user', UserRoutes.getInstance().router);
         this.app.use('/store', StoreRoutes.getInstance().router);
+        this.app.use('/address', AddressRoutes.getInstance().router);
+        this.app.use('/addressEnum', AddressEnumRoutes.getInstance().router);
+        this.app.use('/stateEnum', StateEnumRoutes.getInstance().router);
+        this.app.use('/cityEnum', CityEnumRoutes.getInstance().router);
+        this.app.use('/suburbEnum', SuburbEnumRoutes.getInstance().router);
+
     }
 
     start(): void{

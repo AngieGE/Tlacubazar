@@ -5,3 +5,8 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./UserController"));
 __export(require("./StoreController"));
+__export(require("./AddressController"));
+__export(require("./AddressEnumController"));
+__export(require("./StateEnumController"));
+__export(require("./CityEnumController"));
+__export(require("./SuburbEnumController"));
