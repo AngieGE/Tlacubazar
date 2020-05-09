@@ -14,6 +14,7 @@ class AddressEnumRoutes {
     }
     config() {
         this.router.get('/', controllers_1.AddressEnumController.listAddressEnum);
+        this.router.get('/:idAddressEnum', controllers_1.AddressEnumController.getAddressEnum);
         this.router.post('/', controllers_1.AddressEnumController.createAddressEnum);
         this.router.put('/:idAddressEnum', controllers_1.AddressEnumController.updateAddressEnum);
         this.router.delete('/:idAddressEnum', controllers_1.AddressEnumController.deleteAddressEnum);

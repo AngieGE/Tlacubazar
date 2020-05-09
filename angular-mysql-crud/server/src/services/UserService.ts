@@ -17,6 +17,13 @@ export class UserService {
         return recordset;
     }
 
+    static async getUser(idUser?:number): Promise<User[]>  {
+        let sql: string = "SELECT * FROM user WHERE "
+        sql += idUser!=null ? "idUser = " + idUser + " AND " : "";
+        sql += "1 = 1 ";
+        const recordset = await pool.query(sql);
+        return recordset;
+    }
     static async createUser(user: User): Promise<any> {
         let sql: string = "INSERT INTO user (email, firstName, lastName, isVendor, phone, cacaoBalance) " + 
                                 "VALUES ('"+ user.email + "', '" + 

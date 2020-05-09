@@ -11,6 +11,14 @@ export class AddressEnumService {
         const recordset = await pool.query(sql);
         return recordset;
     }
+    
+    static async getAddressEnum(idAddressEnum:number): Promise<AddressEnum[]>  {
+        let sql: string = "SELECT * FROM addressEnum WHERE "
+        sql += idAddressEnum!=null ? "idAddressEnum = " + idAddressEnum + " AND " : "";
+        sql += "1 = 1 ";
+        const recordset = await pool.query(sql);
+        return recordset;
+    }
 
     static async createAddressEnum(addressEnum: AddressEnum): Promise<any> {
         let sql: string = "INSERT INTO addressEnum (address) " + 

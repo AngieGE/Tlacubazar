@@ -14,6 +14,7 @@ class StoreRoutes {
     }
     config() {
         this.router.get('/', controllers_1.StoreController.listStore);
+        this.router.get('/:idStore', controllers_1.StoreController.getStore);
         this.router.post('/', controllers_1.StoreController.createStore);
         this.router.put('/:idStore', controllers_1.StoreController.updateStore);
         this.router.delete('/:idStore', controllers_1.StoreController.deleteStore);

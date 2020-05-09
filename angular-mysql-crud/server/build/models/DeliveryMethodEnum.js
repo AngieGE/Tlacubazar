@@ -7,3 +7,10 @@ class DeliveryMethodEnum {
     }
 }
 exports.DeliveryMethodEnum = DeliveryMethodEnum;
+var _DeliveryMethodEnum;
+(function (_DeliveryMethodEnum) {
+    _DeliveryMethodEnum.DeliveryMethodEnum = {
+        MOTO: 'MOTO',
+        TAXI: 'TAXI',
+    };
+})(_DeliveryMethodEnum = exports._DeliveryMethodEnum || (exports._DeliveryMethodEnum = {}));

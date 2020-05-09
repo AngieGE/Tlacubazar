@@ -18,6 +18,13 @@ class StoreController {
             res.json({ "length": _stores.length, "recordset": _stores });
         });
     }
+    static getStore(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { idStore } = req.params; //req.body req.query req.params
+            const _store = yield services_1.StoreService.listStore(parseInt(idStore));
+            res.json({ "length": _store.length, "recordset": _store });
+        });
+    }
     static createStore(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let user = req.body;

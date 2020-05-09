@@ -15,6 +15,14 @@ export class AddressService {
         return recordset;
     }
 
+    static async getAddress(idAddress?:number): Promise<Address[]>  {
+        let sql: string = "SELECT * FROM address WHERE "
+        sql += idAddress!=null ? "idAddress = " + idAddress + " AND " : "";
+        sql += "1 = 1 ";
+        const recordset = await pool.query(sql);
+        return recordset;
+    }
+
     static async createAddress(address: Address): Promise<any> {
         let sql: string = "INSERT INTO address (fkAddressEnum, fkStateEnum, fkCityEnum, fkSuburbEnum) " + 
                                 "VALUES ('"+ address.fkAddressEnum + "', '" + 

@@ -14,7 +14,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 class StoreService {
-    static listStore(idStore) {
+    static listStore(idStore, fkStatusEnum, fkVendor) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let sql = "SELECT * FROM store WHERE ";
+            sql += idStore != null ? "idStore = " + idStore + " AND " : "";
+            sql += fkStatusEnum != null ? "fkStatusEnum = " + fkStatusEnum + " AND " : "";
+            sql += fkVendor != null ? "fkVendor = " + fkVendor + " AND " : "";
+            sql += "1 = 1 ";
+            const recordset = yield database_1.default.query(sql);
+            return recordset;
+        });
+    }
+    static getStore(idStore) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "SELECT * FROM store WHERE ";
             sql += idStore != null ? "idStore = " + idStore + " AND " : "";
@@ -30,7 +41,7 @@ class StoreService {
                 store.fkAddress + "', '" +
                 store.isServiceStore + "', '" +
                 store.acceptsCacao + "', '" +
-                store.status + "', '" +
+                store.fkStatusEnum + "', '" +
                 store.fkVendor + "');";
             /*
             let sql: string = "INSERT INTO store (name, fkAddress, isServiceStore, acceptsCacao, status, fkVendor) " +
@@ -53,7 +64,7 @@ class StoreService {
                 "fkAddress = '" + store.fkAddress + "', " +
                 "isServiceStore = '" + store.isServiceStore + "', " +
                 "acceptsCacao = " + store.acceptsCacao + ", " +
-                "status = '" + store.status + "', " +
+                "fkStatusEnum = '" + store.fkStatusEnum + "', " +
                 "fkVendor = " + store.fkVendor + " " +
                 "WHERE idStore = " + idStore + ";";
             const resultado = yield database_1.default.query(sql);

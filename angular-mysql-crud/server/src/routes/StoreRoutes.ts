@@ -17,6 +17,7 @@ import {StoreController} from '../controllers'
 
     config():void{
         this.router.get('/', StoreController.listStore);
+        this.router.get('/:idStore', StoreController.getStore);
         this.router.post('/', StoreController.createStore);
         this.router.put('/:idStore', StoreController.updateStore);
         this.router.delete('/:idStore', StoreController.deleteStore);

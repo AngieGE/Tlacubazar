@@ -17,6 +17,7 @@ import {AddressController} from '../controllers'
 
     config():void{
         this.router.get('/', AddressController.listAddress);
+        this.router.get('/:idAddress', AddressController.getAddress);
         this.router.post('/', AddressController.createAddress);
         this.router.put('/:idAddress', AddressController.updateAddress);
         this.router.delete('/:idAddress', AddressController.deleteAddress);

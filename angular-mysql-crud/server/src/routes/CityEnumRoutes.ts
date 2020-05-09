@@ -17,6 +17,7 @@ import {CityEnumController} from '../controllers'
 
     config():void{
         this.router.get('/', CityEnumController.listCityEnum);
+        this.router.get('/:idCityEnum', CityEnumController.getCityEnum);
         this.router.post('/', CityEnumController.createCityEnum);
         this.router.put('/:idCityEnum', CityEnumController.updateCityEnum);
         this.router.delete('/:idCityEnum', CityEnumController.deleteCityEnum);

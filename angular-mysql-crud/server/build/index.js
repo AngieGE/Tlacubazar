@@ -23,7 +23,6 @@ class Server {
         this.app.use(express_1.default.urlencoded({ extended: false }));
     }
     routes() {
-        console.log('en routes');
         this.app.use('/user', routes_1.UserRoutes.getInstance().router);
         this.app.use('/store', routes_1.StoreRoutes.getInstance().router);
         this.app.use('/address', routes_1.AddressRoutes.getInstance().router);
@@ -31,6 +30,14 @@ class Server {
         this.app.use('/stateEnum', routes_1.StateEnumRoutes.getInstance().router);
         this.app.use('/cityEnum', routes_1.CityEnumRoutes.getInstance().router);
         this.app.use('/suburbEnum', routes_1.SuburbEnumRoutes.getInstance().router);
+        this.app.use('/deliveryMethod', routes_1.DeliveryMethodRoutes.getInstance().router);
+        this.app.use('/orderDetails', routes_1.OrderDetailsRoutes.getInstance().router);
+        this.app.use('/order', routes_1.OrderRoutes.getInstance().router);
+        this.app.use('/payment', routes_1.PaymentRoutes.getInstance().router);
+        this.app.use('/product', routes_1.ProductRoutes.getInstance().router);
+        this.app.use('/productReview', routes_1.ProductReviewRoutes.getInstance().router);
+        this.app.use('/storeReview', routes_1.StoreReviewRoutes.getInstance().router);
+        this.app.use('/userAddress', routes_1.UserAddressRoutes.getInstance().router);
     }
     start() {
         console.log('en start');

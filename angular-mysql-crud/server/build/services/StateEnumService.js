@@ -24,6 +24,15 @@ class StateEnumService {
             return recordset;
         });
     }
+    static getStateEnum(idStateEnum) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let sql = "SELECT * FROM stateEnum WHERE ";
+            sql += idStateEnum != null ? "idStateEnum = " + idStateEnum + " AND " : "";
+            sql += "1 = 1 ";
+            const recordset = yield database_1.default.query(sql);
+            return recordset;
+        });
+    }
     static createStateEnum(stateEnum) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "INSERT INTO stateEnum (state) " +

@@ -25,6 +25,15 @@ class CityEnumService {
             return recordset;
         });
     }
+    static getCityEnum(idCityEnum) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let sql = "SELECT * FROM cityEnum WHERE ";
+            sql += idCityEnum != null ? "idCityEnum = " + idCityEnum + " AND " : "";
+            sql += "1 = 1 ";
+            const recordset = yield database_1.default.query(sql);
+            return recordset;
+        });
+    }
     static createCityEnum(CityEnum) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "INSERT INTO cityEnum (City, fkStateEnum) " +

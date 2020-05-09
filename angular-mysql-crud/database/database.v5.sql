@@ -49,7 +49,7 @@ CREATE TABLE `Address` (
   FOREIGN KEY (`fkSuburbEnum`) REFERENCES `SuburbEnum` (`idSuburbEnum`)
 );
 
-CREATE TABLE `UserAdress` (
+CREATE TABLE `UserAddress` (
     `fkUser` INT NOT NULL,
     `fkAddress` INT NOT NULL,
     FOREIGN KEY (`fkUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE,
@@ -61,13 +61,18 @@ CREATE TABLE `DeliveryMethodEnum` (
   `deliveryMethod` VARCHAR(50)
 );
 
+CREATE TABLE `StatusEnum` (
+  `idStatusEnum` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `status` VARCHAR(50)
+);
+
 CREATE TABLE `Store` (
   `idStore` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50),
   `fkAddress` INT NOT NULL,
   `isServiceStore` BOOLEAN,
   `acceptsCacao` BOOLEAN,
-  `status` ENUM('EN_ESPERA', 'ACEPTADA', 'RECHAZADA') NOT NULL,
+  `fkStatusEnum`INT NOT NULL,
   `fkVendor` INT NOT NULL,
   FOREIGN KEY (`fkAddress`) REFERENCES `Address` (`idAddress`),
   FOREIGN KEY (`fkVendor`) REFERENCES `User` (`idUser`) ON DELETE CASCADE
@@ -94,7 +99,7 @@ CREATE TABLE `Product` (
 CREATE TABLE `Order` (
   `idOrder` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `orderDate` DATE,
-  `status` ENUM('ESPERANDO_ENVIO', 'PAUSADA', 'ENVIADA', 'RECIBIDA', 'PAGADA', 'CANCELADA') NOT NULL,
+  `fkStatusEnum`INT NOT NULL,
   `comments` TEXT,
   `totalPrice` DECIMAL(13,2),
   `totalMaxCacaoPrice` DECIMAL(13,2),
@@ -125,7 +130,7 @@ CREATE TABLE `Payment` (
 );
 
 CREATE TABLE `ProductReview` (
-  `idStoreReview` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `idProductReview` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `stars` TINYINT(1) NOT NULL,
   `review` TEXT,
   `fkProduct` INT NOT NULL,
@@ -175,27 +180,23 @@ INSERT INTO `SuburbEnum` (`idSuburbEnum`,`suburb`,`postalCode`,`fkCityEnum`) VAL
 INSERT INTO `Address` (`fkAddressEnum`, `fkStateEnum`, `fkCityEnum`, `fkSuburbEnum`) VALUES 
 			(1, 1, 1, 1), (2, 1, 7, 5), (3, 1, 11, 9);
 
-INSERT INTO `UserAdress` (`fkUser`, `fkAddress`) VALUES (1, 1), (1, 3), (2, 2);
+INSERT INTO `UserAddress` (`fkUser`, `fkAddress`) VALUES (1, 1), (1, 3), (2, 2);
 
-INSERT INTO `Store` (`name`, `fkAddress`, `isServiceStore`, `acceptsCacao`, status,`fkVendor`) VALUES 
-					('Manzanas4Dayz', 3, FALSE, TRUE, 'ACEPTADA',2), ('Nutrición Milagros', 3, TRUE, FALSE, 'ACEPTADA', 2);
+INSERT INTO `Store` (`name`, `fkAddress`, `isServiceStore`, `acceptsCacao`, `fkStatusEnum`,`fkVendor`) VALUES 
+					('Manzanas4Dayz', 3, FALSE, TRUE, 7,2), ('Nutrición Milagros', 3, TRUE, FALSE, 8, 2);
 
 INSERT INTO `DeliveryMethod` (`fkStore`, `fkDeliveryMethodEnum`) VALUES (1, 3), (2, 3), (2, 4);
 
 INSERT INTO `Product` (`name`, `description`, `quantityInStock`, `buyPrice`, `maxCacaoBuyPrice`, `fkStore`) VALUES ('Manzana Roja', 'Clásica y tradicional manzana roja', 10, 3.43, 0.686, 1), ('Manzana Verde', 'La alternativa de siempre: manzana verde', 14, 2.5, 0.5, 1), ('Pera', 'Fantástica pera de máxima calidad', 7, 5.99, 1.198, 1);
 
+/*State enum*/
+INSERT INTO `StatusEnum` VALUES (1, 'ESPERANDO_ENVIO');
+INSERT INTO `StatusEnum` VALUES (2, 'PAUSADA');
+INSERT INTO `StatusEnum` VALUES (3, 'ENVIADA');
+INSERT INTO `StatusEnum` VALUES (4, 'RECIBIDA');
+INSERT INTO `StatusEnum` VALUES (5, 'PAGADA');
+INSERT INTO `StatusEnum` VALUES (6, 'CANCELADA');
+INSERT INTO `StatusEnum` VALUES (7, 'STORE_EN_ESPERA');
+INSERT INTO `StatusEnum` VALUES (8, 'STORE_ACEPTADA');
+INSERT INTO `StatusEnum` VALUES (9, 'STORE_RECHAZADA');
 
-DELIMITER //
-DROP PROCEDURE IF EXISTS createStoreProcedure;
-CREATE PROCEDURE createStoreProcedure(IN _name VARCHAR(30), IN _fkAddress INT, IN _isServiceStore BOOLEAN,
-                IN _acceptsCacao BOOLEAN, IN _status ENUM('EN_ESPERA', 'ACEPTADA', 'RECHAZADA'), IN _fkVendor INT)
-BEGIN
-    IF (EXISTS(SELECT * FROM user WHERE idUser = _fkVendor) AND EXISTS(SELECT * FROM address WHERE idAddress = _fkAddress)) THEN
-        begin
-            INSERT INTO Store(name, fkAddress, isServiceStore, acceptsCacao, status,fkVendor) VALUES
-					(_name, _fkAddress, _isServiceStore, _acceptsCacao, _status, _fkVendor);
-        end;
-
-    END IF;
-END //
-DELIMITER ;

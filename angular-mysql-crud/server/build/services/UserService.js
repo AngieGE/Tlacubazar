@@ -30,6 +30,15 @@ class UserService {
             return recordset;
         });
     }
+    static getUser(idUser) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let sql = "SELECT * FROM user WHERE ";
+            sql += idUser != null ? "idUser = " + idUser + " AND " : "";
+            sql += "1 = 1 ";
+            const recordset = yield database_1.default.query(sql);
+            return recordset;
+        });
+    }
     static createUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "INSERT INTO user (email, firstName, lastName, isVendor, phone, cacaoBalance) " +

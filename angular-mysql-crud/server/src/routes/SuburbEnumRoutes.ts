@@ -17,6 +17,7 @@ import {SuburbEnumController} from '../controllers'
 
     config():void{
         this.router.get('/', SuburbEnumController.listSuburbEnum);
+        this.router.get('/:idSuburbEnum', SuburbEnumController.getSuburbEnum);
         this.router.post('/', SuburbEnumController.createSuburbEnum);
         this.router.put('/:idSuburbEnum', SuburbEnumController.updateSuburbEnum);
         this.router.delete('/:idSuburbEnum', SuburbEnumController.deleteSuburbEnum);

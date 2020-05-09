@@ -10,6 +10,12 @@ export class StoreController {
         const _stores: Store[] = await StoreService.listStore(idStore);
         res.json({"length": _stores.length, "recordset":_stores});
     }
+
+    static async getStore (req: Request, res: Response){
+        const { idStore } = req.params; //req.body req.query req.params
+        const _store: Store[] = await StoreService.listStore(parseInt(idStore));
+        res.json({"length": _store.length, "recordset":_store});
+    }
     
     static async createStore (req: Request, res: Response) {
         let user: Store = req.body;    

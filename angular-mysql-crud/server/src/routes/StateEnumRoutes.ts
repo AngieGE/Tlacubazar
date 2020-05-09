@@ -17,6 +17,7 @@ import {StateEnumController} from '../controllers'
 
     config():void{
         this.router.get('/', StateEnumController.listStateEnum);
+        this.router.get('/:idStateEnum', StateEnumController.getStateEnum);
         this.router.post('/', StateEnumController.createStateEnum);
         this.router.put('/:idStateEnum', StateEnumController.updateStateEnum);
         this.router.delete('/:idStateEnum', StateEnumController.deleteStateEnum);

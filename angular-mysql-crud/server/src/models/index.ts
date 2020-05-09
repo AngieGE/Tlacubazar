@@ -14,3 +14,4 @@ export * from './StoreReview';
 export * from './SuburbEnum';
 export * from './User';
 export * from './UserAddress';
+export * from './StatusEnum';

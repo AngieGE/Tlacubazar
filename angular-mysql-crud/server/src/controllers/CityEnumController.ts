@@ -10,6 +10,12 @@ export class CityEnumController {
         const _citiesEnum: CityEnum[] = await CityEnumService.listCityEnum(idCityEnum, city, fkStateEnum);
         res.json({"length": _citiesEnum.length, "recordset":_citiesEnum});
     }
+
+    static async getCityEnum (req: Request, res: Response){
+        const { idCityEnum } = req.params; //req.body req.query req.params
+        const _citiesEnum: CityEnum[] = await CityEnumService.getCityEnum(parseInt(idCityEnum));
+        res.json({"length": _citiesEnum.length, "recordset":_citiesEnum});
+    }
     
     static async createCityEnum (req: Request, res: Response) {
         let cityEnum: CityEnum = req.body;    

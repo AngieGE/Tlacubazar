@@ -24,6 +24,15 @@ class AddressEnumService {
             return recordset;
         });
     }
+    static getAddressEnum(idAddressEnum) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let sql = "SELECT * FROM addressEnum WHERE ";
+            sql += idAddressEnum != null ? "idAddressEnum = " + idAddressEnum + " AND " : "";
+            sql += "1 = 1 ";
+            const recordset = yield database_1.default.query(sql);
+            return recordset;
+        });
+    }
     static createAddressEnum(addressEnum) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "INSERT INTO addressEnum (address) " +

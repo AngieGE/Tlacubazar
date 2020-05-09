@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class StoreReview {
     constructor(productReview) {
         this.idStoreReview = productReview.idStoreReview;
-        this.starts = productReview.starts;
+        this.stars = productReview.stars;
         this.review = productReview.review;
         this.fkStore = productReview.fkStore;
         this.fkUser = productReview.fkUser;

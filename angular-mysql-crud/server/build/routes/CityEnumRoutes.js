@@ -14,6 +14,7 @@ class CityEnumRoutes {
     }
     config() {
         this.router.get('/', controllers_1.CityEnumController.listCityEnum);
+        this.router.get('/:idCityEnum', controllers_1.CityEnumController.getCityEnum);
         this.router.post('/', controllers_1.CityEnumController.createCityEnum);
         this.router.put('/:idCityEnum', controllers_1.CityEnumController.updateCityEnum);
         this.router.delete('/:idCityEnum', controllers_1.CityEnumController.deleteCityEnum);

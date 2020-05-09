@@ -12,6 +12,14 @@ export class StateEnumService {
         return recordset;
     }
 
+    static async getStateEnum(idStateEnum:number): Promise<StateEnum[]>  {
+        let sql: string = "SELECT * FROM stateEnum WHERE "
+        sql += idStateEnum!=null ? "idStateEnum = " + idStateEnum + " AND " : "";
+        sql += "1 = 1 ";
+        const recordset = await pool.query(sql);
+        return recordset;
+    }
+
     static async createStateEnum(stateEnum: StateEnum): Promise<any> {
         let sql: string = "INSERT INTO stateEnum (state) " + 
                            "VALUES ('"+ stateEnum.state + "');"

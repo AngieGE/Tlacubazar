@@ -27,6 +27,15 @@ class AddressService {
             return recordset;
         });
     }
+    static getAddress(idAddress) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let sql = "SELECT * FROM address WHERE ";
+            sql += idAddress != null ? "idAddress = " + idAddress + " AND " : "";
+            sql += "1 = 1 ";
+            const recordset = yield database_1.default.query(sql);
+            return recordset;
+        });
+    }
     static createAddress(address) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "INSERT INTO address (fkAddressEnum, fkStateEnum, fkCityEnum, fkSuburbEnum) " +

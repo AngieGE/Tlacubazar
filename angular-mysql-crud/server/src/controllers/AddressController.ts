@@ -10,6 +10,12 @@ export class AddressController {
         const _addresses: Address[] = await AddressService.listAddress(idAddress, fkAddressEnum, fkStateEnum, fkCityEnum, fkSuburbEnum);
         res.json({"length": _addresses.length, "recordset":_addresses});
     }
+
+    static async getAddress (req: Request, res: Response){
+        const { idAddress} = req.params; //req.body req.query req.params
+        const _address: Address[] = await AddressService.getAddress(parseInt(idAddress));
+        res.json({"length": _address.length, "recordset":_address});
+    }
     
     static async createAddress (req: Request, res: Response) {
         let address: Address = req.body;    

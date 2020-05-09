@@ -18,6 +18,13 @@ class AddressEnumController {
             res.json({ "length": _addressesEnum.length, "recordset": _addressesEnum });
         });
     }
+    static getAddressEnum(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { idAddressEnum } = req.params; //req.body req.query req.params
+            const _addressesEnum = yield services_1.AddressEnumService.getAddressEnum(parseInt(idAddressEnum));
+            res.json({ "length": _addressesEnum.length, "recordset": _addressesEnum });
+        });
+    }
     static createAddressEnum(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let addressEnum = req.body;

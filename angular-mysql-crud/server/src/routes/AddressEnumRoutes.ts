@@ -17,6 +17,7 @@ import {AddressEnumController} from '../controllers'
 
     config():void{
         this.router.get('/', AddressEnumController.listAddressEnum);
+        this.router.get('/:idAddressEnum', AddressEnumController.getAddressEnum);
         this.router.post('/', AddressEnumController.createAddressEnum);
         this.router.put('/:idAddressEnum', AddressEnumController.updateAddressEnum);
         this.router.delete('/:idAddressEnum', AddressEnumController.deleteAddressEnum);

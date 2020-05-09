@@ -15,6 +15,7 @@ class UserRoutes {
     config() {
         this.router.get('/login', controllers_1.UserController.login);
         this.router.get('/', controllers_1.UserController.listUser);
+        this.router.get('/:idUser', controllers_1.UserController.getUser);
         this.router.post('/', controllers_1.UserController.createUser);
         this.router.put('/:idUser', controllers_1.UserController.updateUser);
         this.router.delete('/:idUser', controllers_1.UserController.deleteUser);

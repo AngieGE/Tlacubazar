@@ -13,6 +13,14 @@ export class CityEnumService {
         return recordset;
     }
 
+    static async getCityEnum(idCityEnum:number): Promise<CityEnum[]>  {
+        let sql: string = "SELECT * FROM cityEnum WHERE "
+        sql += idCityEnum!=null ? "idCityEnum = " + idCityEnum + " AND " : "";
+        sql += "1 = 1 ";
+        const recordset = await pool.query(sql);
+        return recordset;
+    }
+
     static async createCityEnum(CityEnum: CityEnum): Promise<any> {
         let sql: string = "INSERT INTO cityEnum (City, fkStateEnum) " + 
                            "VALUES ('"+ CityEnum.city + "', '" + 

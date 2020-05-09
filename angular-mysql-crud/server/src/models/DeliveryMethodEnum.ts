@@ -7,3 +7,12 @@ export class DeliveryMethodEnum {
         this.DeliveryMethod = deliveryMethod.DeliveryMethod;
     }
 }
+export namespace _DeliveryMethodEnum {
+    export type DeliveryMethodEnum ='MOTO'| 'TAXI';
+    export const DeliveryMethodEnum = {
+        MOTO: 'MOTO' as DeliveryMethodEnum,
+        TAXI: 'TAXI' as DeliveryMethodEnum,
+  
+    };
+
+}

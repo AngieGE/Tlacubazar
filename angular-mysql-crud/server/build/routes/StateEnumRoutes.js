@@ -14,6 +14,7 @@ class StateEnumRoutes {
     }
     config() {
         this.router.get('/', controllers_1.StateEnumController.listStateEnum);
+        this.router.get('/:idStateEnum', controllers_1.StateEnumController.getStateEnum);
         this.router.post('/', controllers_1.StateEnumController.createStateEnum);
         this.router.put('/:idStateEnum', controllers_1.StateEnumController.updateStateEnum);
         this.router.delete('/:idStateEnum', controllers_1.StateEnumController.deleteStateEnum);

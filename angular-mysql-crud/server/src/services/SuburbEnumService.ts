@@ -14,6 +14,14 @@ export class SuburbEnumService {
         return recordset;
     }
 
+    static async getSuburbEnum(idSuburbEnum:number): Promise<SuburbEnum[]>  {
+        let sql: string = "SELECT * FROM suburbEnum WHERE "
+        sql += idSuburbEnum!=null ? "idSuburbEnum = " + idSuburbEnum + " AND " : "";
+        sql += "1 = 1 ";
+        const recordset = await pool.query(sql);
+        return recordset;
+    }
+
     static async createSuburbEnum(suburbEnum: SuburbEnum): Promise<any> {
         let sql: string = "INSERT INTO suburbEnum (suburb, postalCode, fkCityEnum) " + 
                            "VALUES ('"+ suburbEnum.suburb + "', " + 

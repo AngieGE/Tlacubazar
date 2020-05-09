@@ -14,6 +14,7 @@ class AddressRoutes {
     }
     config() {
         this.router.get('/', controllers_1.AddressController.listAddress);
+        this.router.get('/:idAddress', controllers_1.AddressController.getAddress);
         this.router.post('/', controllers_1.AddressController.createAddress);
         this.router.put('/:idAddress', controllers_1.AddressController.updateAddress);
         this.router.delete('/:idAddress', controllers_1.AddressController.deleteAddress);

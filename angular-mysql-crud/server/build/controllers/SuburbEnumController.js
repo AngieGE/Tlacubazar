@@ -18,6 +18,13 @@ class SuburbEnumController {
             res.json({ "length": _suburbsEnum.length, "recordset": _suburbsEnum });
         });
     }
+    static getSuburbEnum(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { idSuburbEnum } = req.params; //req.body req.query req.params
+            const _suburbsEnum = yield services_1.SuburbEnumService.getSuburbEnum(parseInt(idSuburbEnum));
+            res.json({ "length": _suburbsEnum.length, "recordset": _suburbsEnum });
+        });
+    }
     static createSuburbEnum(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let suburbEnum = req.body;

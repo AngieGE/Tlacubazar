@@ -26,6 +26,15 @@ class SuburbEnumService {
             return recordset;
         });
     }
+    static getSuburbEnum(idSuburbEnum) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let sql = "SELECT * FROM suburbEnum WHERE ";
+            sql += idSuburbEnum != null ? "idSuburbEnum = " + idSuburbEnum + " AND " : "";
+            sql += "1 = 1 ";
+            const recordset = yield database_1.default.query(sql);
+            return recordset;
+        });
+    }
     static createSuburbEnum(suburbEnum) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "INSERT INTO suburbEnum (suburb, postalCode, fkCityEnum) " +

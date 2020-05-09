@@ -1,12 +1,3 @@
-export namespace _Store {
-    export type Status = 'EN_ESPERA' | 'ACEPTADA' | 'RECHAZADA';
-    export const Status = {
-        EN_ESPERA: 'EN_ESPERA' as Status,
-        ACEPTADA: 'ACEPTADA' as Status,
-        RECHAZADA: 'RECHAZADA' as Status,
-    };
-
-}
 
 export class Store {
     idStore?:number;
@@ -14,7 +5,7 @@ export class Store {
     fkAddress?:number;
     isServiceStore?:number;
     acceptsCacao?:number;
-    status?:_Store.Status;
+    fkStatusEnum?:number;
     fkVendor?:number;
     constructor(store:Store){
         this.idStore=store.idStore;
@@ -22,7 +13,7 @@ export class Store {
         this.fkAddress=store.fkAddress;
         this.isServiceStore=store.isServiceStore;
         this.acceptsCacao=store.acceptsCacao;
-        this.status=store.status;
+        this.fkStatusEnum=store.fkStatusEnum;
         this.fkVendor=store.fkVendor;
     }
 }
