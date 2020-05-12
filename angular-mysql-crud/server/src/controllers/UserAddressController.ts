@@ -11,12 +11,6 @@ export class UserAddressController {
         res.json({"length": _UserAddress.length, "recordset":_UserAddress});
     }
     
-    static async getUserAddress (req: Request, res: Response){
-        const { idUserAddress} = req.params; //req.body req.query req.params
-        const _UserAddress: UserAddress[] = await UserAddressService.getUserAddress(parseInt(idUserAddress));
-        res.json({"length": _UserAddress.length, "recordset":_UserAddress});
-    }
-    
     static async createUserAddress (req: Request, res: Response) {
         let userAddress: UserAddress = req.body;    
         const _createdUserAddress=await UserAddressService.createUserAddress(userAddress);  
@@ -33,7 +27,7 @@ export class UserAddressController {
     
     static async deleteUserAddress(req: Request, res: Response): Promise<void>{
         const { fkUser, fkAddress} = req.params;
-        const _deleteUserAddress=await UserAddressService.deleteUserAddress(fkUser, fkAddress);  
+        const _deleteUserAddress=await UserAddressService.deleteUserAddress(parseInt(fkUser), parseInt(fkAddress));  
         let suc; 
         if (_deleteUserAddress.affectedRows < 1) {
             _deleteUserAddress.message='the UserAddress was not deleted ';
