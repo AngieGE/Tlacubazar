@@ -9,7 +9,8 @@ import { LoginComponent } from './components/login/login.component';
 import { UserService } from './services/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { StartComponent } from './start/start.component';
+
+import { StartComponent } from './components/start/start.component';
 import { CatalogueComponent } from './components/catalogue/catalogue.component';
 import { StoreDetailsComponent } from './components/store-details/store-details.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
