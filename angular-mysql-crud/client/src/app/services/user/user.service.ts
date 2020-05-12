@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Users } from '../../models/Users';
+import { User } from '../../models/user/User';
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -8,7 +9,7 @@ import {Observable} from "rxjs";
 })
 export class UserService {
 
-  API_URL = 'http://localhost:3000/api';
+  API_URL = 'http://localhost:3000/user';
 
   constructor(private http: HttpClient) { }
 
@@ -25,8 +26,11 @@ export class UserService {
     return this.http.delete( `${this.API_URL}/user/${id}`);
   }
 
-  saveCuestionario(user: Users){
-    return this.http.post(  `${this.API_URL}/user`, user);
+  // saveUser(user: Users){
+  //   return this.http.post(  `${this.API_URL}`, user);
+  // }
+  saveUser(user: User){
+    return this.http.post( `${this.API_URL}`, user);
   }
 
   updateCuestionario(id: string, updateUser: Users){

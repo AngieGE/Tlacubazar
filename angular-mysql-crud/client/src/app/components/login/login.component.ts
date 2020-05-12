@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
-
+import { User } from '../../models/user/User';
 /* Google and Facebook Font Awesome logos */
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   faGoogle = faGoogle;
   faFacebook = faFacebook;
 
-  private user: SocialUser;
+  private socialUser: SocialUser;
   private loggedIn: boolean;
 
   users: any = [];
@@ -33,19 +33,32 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getCuestionarios().subscribe(
-      res => {
-        this.users = res;
-        console.log(this.users);
-      },
-      err => {
-        console.log(err);
-      }
-    );
 
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = (user != null);
+
+    this.authService.authState.subscribe((socialUser) => {
+      this.socialUser = socialUser;
+      this.loggedIn = (socialUser != null);
+
+      if (this.loggedIn) {
+        const user: User = {
+          idUser: -1,
+          email: socialUser.email,
+          firstName: socialUser.firstName,
+          lastName: socialUser.lastName,
+          isVendor: false,
+          phone: '',
+          cacaoBalance: 0.0
+        };
+
+        this.userService.saveUser(user).subscribe(
+          res => {
+            console.log('Created user!', res);
+          },
+          err => {
+            console.log('Could not create user', err);
+          }
+        );
+      }
     });
   }
 
