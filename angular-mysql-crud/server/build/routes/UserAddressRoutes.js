@@ -14,7 +14,6 @@ class UserAddressRoutes {
     }
     config() {
         this.router.get('/', controllers_1.UserAddressController.listUserAddress);
-        this.router.get('/:fkUser/:fkAddress', controllers_1.UserAddressController.getUserAddress);
         this.router.post('/', controllers_1.UserAddressController.createUserAddress);
         this.router.delete('/:idUserAddress', controllers_1.UserAddressController.deleteUserAddress);
     }

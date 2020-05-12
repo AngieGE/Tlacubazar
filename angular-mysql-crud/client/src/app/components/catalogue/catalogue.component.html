@@ -1,1 +1,12 @@
-<p>catalogue works!</p>
+
+
+  <div class="row">
+    <div *ngFor="let store of stores" class="col s3 l3 m3 center">
+      <div class="card">
+        <span class="card-title">{{store.name}}</span>
+        <p *ngIf = "store.isServiceStore elseServiceBlock">Este negocio es de servicio.</p>
+        <ng-template #elseServiceBlock>Este negocio vende productos.</ng-template>
+        <p *ngIf = "store.acceptsCacao">¡Este negocio acepta cacao!</p>
+      </div>
+    </div>
+  </div>
