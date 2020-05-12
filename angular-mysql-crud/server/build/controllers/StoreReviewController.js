@@ -15,14 +15,14 @@ class StoreReviewController {
         return __awaiter(this, void 0, void 0, function* () {
             const { idStoreReview, fkStore, fkUser } = req.body; //req.body req.query req.params
             const _StoreReview = yield services_1.StoreReviewService.listStoreReview(idStoreReview, fkStore, fkUser);
-            res.json({ "length": _StoreReview.length, "recordset": _StoreReview });
+            res.json({ length: _StoreReview.length, recordset: _StoreReview });
         });
     }
     static getStoreReview(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { idStoreReview } = req.params; //req.body req.query req.params
             const _StoreReview = yield services_1.StoreReviewService.getStoreReview(parseInt(idStoreReview));
-            res.json({ "length": _StoreReview.length, "recordset": _StoreReview });
+            res.json({ length: _StoreReview.length, recordset: _StoreReview });
         });
     }
     static createStoreReview(req, res) {

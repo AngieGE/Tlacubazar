@@ -8,13 +8,13 @@ export class PaymentController {
     static async listPayment (req: Request, res: Response){
         const { idPayment, fkClient, fkVendor, fkOrder} = req.body; //req.body req.query req.params
         const _payment: Payment[] = await PaymentService.listPayment(idPayment, fkClient, fkVendor, fkOrder);
-        res.json({"length": _payment.length, "recordset":_payment});
+        res.json({length: _payment.length, recordset:_payment});
     }
     
     static async getPayment (req: Request, res: Response){
         const { idPayment} = req.params; //req.body req.query req.params
         const _payment: Payment[] = await PaymentService.getPayment(parseInt(idPayment));
-        res.json({"length": _payment.length, "recordset":_payment});
+        res.json({length: _payment.length, recordset:_payment});
     }
     
     static async createPayment (req: Request, res: Response) {

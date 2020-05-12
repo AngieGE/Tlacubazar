@@ -15,14 +15,14 @@ class OrderDetailsController {
         return __awaiter(this, void 0, void 0, function* () {
             const { idOrderDetails, quantityOrdered, fkOrder, fkProduct } = req.body; //req.body req.query req.params
             const _orderDetails = yield services_1.OrderDetailsService.listOrderDetails(idOrderDetails, quantityOrdered, fkOrder, fkProduct);
-            res.json({ "length": _orderDetails.length, "recordset": _orderDetails });
+            res.json({ length: _orderDetails.length, recordset: _orderDetails });
         });
     }
     static getOrderDetails(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { idOrderDetails } = req.params; //req.body req.query req.params
             const _orderDetails = yield services_1.OrderDetailsService.getOrderDetails(parseInt(idOrderDetails));
-            res.json({ "length": _orderDetails.length, "recordset": _orderDetails });
+            res.json({ length: _orderDetails.length, recordset: _orderDetails });
         });
     }
     static createOrderDetails(req, res) {

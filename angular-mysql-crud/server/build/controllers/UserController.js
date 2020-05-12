@@ -27,14 +27,14 @@ class UserController {
         return __awaiter(this, void 0, void 0, function* () {
             const { idUser } = req.body; //req.body req.query req.params
             const _usuarios = yield UserService_1.UserService.listUser(idUser);
-            res.json({ "length": _usuarios.length, "recordset": _usuarios });
+            res.json({ length: _usuarios.length, recordset: _usuarios });
         });
     }
     static getUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { idUser } = req.params; //req.body req.query req.params
             const _usuario = yield UserService_1.UserService.getUser(parseInt(idUser));
-            res.json({ "recordset": _usuario });
+            res.json({ recordset: _usuario });
         });
     }
     static createUser(req, res) {

@@ -8,13 +8,13 @@ export class OrderController {
     static async listOrder (req: Request, res: Response){
         const { idOrder, fkStatusEnum,  fkUser} = req.body; //req.body req.query req.params
         const _Order: Order[] = await OrderService.listOrder(idOrder, fkStatusEnum, fkUser);
-        res.json({"length": _Order.length, "recordset":_Order});
+        res.json({length: _Order.length, recordset:_Order});
     }
 
     static async getOrder (req: Request, res: Response){
         const { idOrder } = req.params; //req.body req.query req.params
         const _Order: Order[] = await OrderService.getOrder(parseInt(idOrder));
-        res.json({"length": _Order.length, "recordset":_Order});
+        res.json({length: _Order.length, recordset:_Order});
     }
     
     static async createOrder (req: Request, res: Response) {

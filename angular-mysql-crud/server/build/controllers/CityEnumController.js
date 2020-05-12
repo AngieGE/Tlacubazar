@@ -15,14 +15,14 @@ class CityEnumController {
         return __awaiter(this, void 0, void 0, function* () {
             const { idCityEnum, city, fkStateEnum } = req.body; //req.body req.query req.params
             const _citiesEnum = yield services_1.CityEnumService.listCityEnum(idCityEnum, city, fkStateEnum);
-            res.json({ "length": _citiesEnum.length, "recordset": _citiesEnum });
+            res.json({ length: _citiesEnum.length, recordset: _citiesEnum });
         });
     }
     static getCityEnum(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { idCityEnum } = req.params; //req.body req.query req.params
             const _citiesEnum = yield services_1.CityEnumService.getCityEnum(parseInt(idCityEnum));
-            res.json({ "length": _citiesEnum.length, "recordset": _citiesEnum });
+            res.json({ length: _citiesEnum.length, recordset: _citiesEnum });
         });
     }
     static createCityEnum(req, res) {

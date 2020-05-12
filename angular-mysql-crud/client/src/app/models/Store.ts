@@ -6,7 +6,7 @@ export class Store {
   acceptsCacao?: number;
   fkStatusEnum?: number;
   fkVendor?: number;
-  constructor(store: Store){
+  constructor(store: Store) {
       this.idStore = store.idStore;
       this.name = store.name;
       this.fkAddress = store.fkAddress;

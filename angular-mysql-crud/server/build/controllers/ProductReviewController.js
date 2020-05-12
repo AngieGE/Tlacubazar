@@ -15,14 +15,14 @@ class ProductReviewController {
         return __awaiter(this, void 0, void 0, function* () {
             const { idProductReview, fkProduct, fkUser } = req.body; //req.body req.query req.params
             const _ProductReview = yield services_1.ProductReviewService.listProductReview(idProductReview, fkProduct, fkUser);
-            res.json({ "length": _ProductReview.length, "recordset": _ProductReview });
+            res.json({ length: _ProductReview.length, recordset: _ProductReview });
         });
     }
     static getProductReview(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { idProductReview } = req.params; //req.body req.query req.params
             const _ProductReview = yield services_1.ProductReviewService.getProductReview(parseInt(idProductReview));
-            res.json({ "length": _ProductReview.length, "recordset": _ProductReview });
+            res.json({ length: _ProductReview.length, recordset: _ProductReview });
         });
     }
     static createProductReview(req, res) {

@@ -15,7 +15,7 @@ class DeliveryMethodController {
         return __awaiter(this, void 0, void 0, function* () {
             const { fkStore, fkDeliveryMethodEnum } = req.body; //req.body req.query req.params
             const _deliveryMethods = yield services_1.DeliveryMethodService.listDeliveryMethod(fkStore, fkDeliveryMethodEnum);
-            res.json({ "length": _deliveryMethods.length, "recordset": _deliveryMethods });
+            res.json({ length: _deliveryMethods.length, recordset: _deliveryMethods });
         });
     }
     static createDeliveryMethod(req, res) {

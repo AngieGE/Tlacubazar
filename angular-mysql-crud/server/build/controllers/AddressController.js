@@ -15,14 +15,14 @@ class AddressController {
         return __awaiter(this, void 0, void 0, function* () {
             const { idAddress, fkAddressEnum, fkStateEnum, fkCityEnum, fkSuburbEnum } = req.body; //req.body req.query req.params
             const _addresses = yield services_1.AddressService.listAddress(idAddress, fkAddressEnum, fkStateEnum, fkCityEnum, fkSuburbEnum);
-            res.json({ "length": _addresses.length, "recordset": _addresses });
+            res.json({ length: _addresses.length, recordset: _addresses });
         });
     }
     static getAddress(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { idAddress } = req.params; //req.body req.query req.params
             const _address = yield services_1.AddressService.getAddress(parseInt(idAddress));
-            res.json({ "length": _address.length, "recordset": _address });
+            res.json({ length: _address.length, recordset: _address });
         });
     }
     static createAddress(req, res) {
