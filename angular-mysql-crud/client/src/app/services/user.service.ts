@@ -32,13 +32,7 @@ export class UserService {
     return this.http.post( `${this.API_URL}`, user);
   }
 
-<<<<<<< HEAD:angular-mysql-crud/client/src/app/services/user.service.ts
-  updateCuestionario(id: string, updateUser: User){
-    return this.http.put( `${this.API_URL}/user/${id}`, updateUser);
-  }
-=======
   //updateCuestionario(id: string, updateUser: Users){
   //  return this.http.put( `${this.API_URL}/user/${id}`, updateUser);
   //}
->>>>>>> 0169c665bc700f0490abc424163af4d722f32e11:angular-mysql-crud/client/src/app/services/user/user.service.ts
 }
