@@ -21,9 +21,12 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-  {
-    path: 'catalogue',
-    component: CatalogueComponent
+  { path: 'catalogue',
+    children: [
+        { path: 'product', component: CatalogueComponent },
+        { path: 'service', component: CatalogueComponent },
+        { path: '', component: CatalogueComponent }
+    ]
   },
   {
     path: 'store',
@@ -34,7 +37,7 @@ const routes: Routes = [
     component: SearchResultsComponent
   },
   {
-    path: 'product',
+    path: 'product/:idProduct',
     component: ProductComponent
   },
   {
@@ -57,7 +60,6 @@ const routes: Routes = [
     path: 'manage-store',
     component: ManageStoreComponent
   },
-
 ];
 
 @NgModule({

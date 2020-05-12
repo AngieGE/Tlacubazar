@@ -15,14 +15,14 @@ class OrderController {
         return __awaiter(this, void 0, void 0, function* () {
             const { idOrder, fkStatusEnum, fkUser } = req.body; //req.body req.query req.params
             const _Order = yield services_1.OrderService.listOrder(idOrder, fkStatusEnum, fkUser);
-            res.json({ "length": _Order.length, "recordset": _Order });
+            res.json({ length: _Order.length, recordset: _Order });
         });
     }
     static getOrder(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { idOrder } = req.params; //req.body req.query req.params
             const _Order = yield services_1.OrderService.getOrder(parseInt(idOrder));
-            res.json({ "length": _Order.length, "recordset": _Order });
+            res.json({ length: _Order.length, recordset: _Order });
         });
     }
     static createOrder(req, res) {

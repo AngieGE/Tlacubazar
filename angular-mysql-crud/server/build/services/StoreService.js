@@ -14,13 +14,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 class StoreService {
-    static listStore(idStore, fkStatusEnum, fkVendor) {
+    static listStore(isServiceStore, acceptsCacao, fkStatusEnum, fkVendor) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "SELECT * FROM store WHERE ";
-            sql += idStore != null ? "idStore = " + idStore + " AND " : "";
+            sql += (isServiceStore != null || isServiceStore != NaN) ? "isServiceStore = " + isServiceStore + " AND " : "";
+            sql += acceptsCacao != null ? "acceptsCacao = " + acceptsCacao + " AND " : "";
             sql += fkStatusEnum != null ? "fkStatusEnum = " + fkStatusEnum + " AND " : "";
             sql += fkVendor != null ? "fkVendor = " + fkVendor + " AND " : "";
             sql += "1 = 1 ";
+            console.log(sql);
             const recordset = yield database_1.default.query(sql);
             return recordset;
         });

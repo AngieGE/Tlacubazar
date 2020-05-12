@@ -3,12 +3,14 @@ import pool from "../database";
 
 export class StoreService {
    
-    static async listStore(idStore?:number, fkStatusEnum?: number, fkVendor?: number): Promise<Store[]>  {
+    static async listStore(isServiceStore?:number, acceptsCacao?:number, fkStatusEnum?:number, fkVendor?:number): Promise<Store[]>  {
         let sql: string = "SELECT * FROM store WHERE "
-        sql += idStore!=null ? "idStore = " + idStore + " AND " : "";
+        sql += (isServiceStore!=null || isServiceStore!=NaN) ? "isServiceStore = " + isServiceStore + " AND " : "";
+        sql += acceptsCacao!=null ? "acceptsCacao = " + acceptsCacao + " AND " : "";
         sql += fkStatusEnum!=null ? "fkStatusEnum = " + fkStatusEnum + " AND " : "";
         sql += fkVendor!=null ? "fkVendor = " + fkVendor + " AND " : "";
         sql += "1 = 1 ";
+       console.log(sql);
         const recordset = await pool.query(sql);
         return recordset;
     }

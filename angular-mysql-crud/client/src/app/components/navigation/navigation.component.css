@@ -1,0 +1,18 @@
+@import '../../app.component.css';
+#logo {
+  width: 50px;
+}
+.brand-logo{
+  margin-left:10px;
+}
+.oval{
+  background-color: white;
+  color: #EE6E73;
+  width: 40px;
+  height: 25px;
+  border-radius: 41px;
+  font-size: smaller;
+}
+.pointer{
+  cursor: pointer;
+}
