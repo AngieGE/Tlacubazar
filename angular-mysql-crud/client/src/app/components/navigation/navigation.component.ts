@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import * as M from 'materialize-css/dist/js/materialize';
 
 @Component({
   selector: 'app-navigation',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+  @ViewChild('drop') elDrop: ElementRef;
+  constructor() {
 
-  constructor() { }
+   }
 
   ngOnInit(): void {
+
   }
 
 }

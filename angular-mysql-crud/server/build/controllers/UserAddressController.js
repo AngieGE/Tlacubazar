@@ -18,13 +18,6 @@ class UserAddressController {
             res.json({ "length": _UserAddress.length, "recordset": _UserAddress });
         });
     }
-    static getUserAddress(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const { idUserAddress } = req.params; //req.body req.query req.params
-            const _UserAddress = yield services_1.UserAddressService.getUserAddress(parseInt(idUserAddress));
-            res.json({ "length": _UserAddress.length, "recordset": _UserAddress });
-        });
-    }
     static createUserAddress(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let userAddress = req.body;
@@ -44,7 +37,7 @@ class UserAddressController {
     static deleteUserAddress(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { fkUser, fkAddress } = req.params;
-            const _deleteUserAddress = yield services_1.UserAddressService.deleteUserAddress(fkUser, fkAddress);
+            const _deleteUserAddress = yield services_1.UserAddressService.deleteUserAddress(parseInt(fkUser), parseInt(fkAddress));
             let suc;
             if (_deleteUserAddress.affectedRows < 1) {
                 _deleteUserAddress.message = 'the UserAddress was not deleted ';
