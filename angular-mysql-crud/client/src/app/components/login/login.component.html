@@ -1,13 +1,45 @@
-<div class="col-md-4" *ngFor="let u of users">
-  {{u.firstName}}
+<div class="container">
+  <div class="row">
+    <div class="col s6 m6 offset-s3 offset-m3">
+      <div class="card">
+        <div class="card-content center-align">
+          <div class="col">
+            <div class="col s12 m12">
+              <span class="card-title">¡Bienvenido a TlacuBazar!</span>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="col s12 m12">
+              <p>Puedes iniciar sesión con Facebook o Google:</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12 m12">
+              <button
+                (click)="signInWithGoogle()"
+                class="waves-effect waves-light btn-large btn-block red"
+              >
+                <fa-icon [icon]="faGoogle"></fa-icon>
+                Iniciar con Google
+              </button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12 m12">
+              <button
+                (click)="signInWithFB()"
+                class="waves-effect waves-light btn-large btn-block blue darken-3"
+              >
+                <fa-icon [icon]="faFacebook"></fa-icon>
+                Iniciar con Facebook
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<button class="waves-effect waves-light btn-large social facebook">
-  <fa-icon [icon]="faFacebook"></fa-icon>
-  Iniciar sesión con Facebook
-</button>
-
-<button class="waves-effect waves-light btn-large social google">
-  <fa-icon [icon]="faGoogle"></fa-icon>
-  Iniciar sesión con Google
-</button>

@@ -4,5 +4,5 @@ export interface Users {
   lastName?: string;
   isVendor?: number;
   phone?: string;
-  cacaoBalance?: SVGAnimatedNumberList;
+  cacaoBalance?: number;
 }

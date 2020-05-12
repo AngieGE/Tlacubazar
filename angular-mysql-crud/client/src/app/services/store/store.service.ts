@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Users } from '../models/Users';
+import { Store } from '../../models/store/Store';
 import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class StoreService {
 
-  API_URL = 'http://localhost:3000/api';
+  API_URL = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
-  getCuestionarios(){
-    return this.http.get(`${this.API_URL}/user/`);
+  listStore(){
+    return this.http.get(`${this.API_URL}/store/`);
 
   }
-
+/*
   getCuestionario(id: string){
     return this.http.get(  `${this.API_URL}/user/${id}`);
   }
@@ -31,4 +31,5 @@ export class UserService {
   updateCuestionario(id: string, updateUser: Users){
     return this.http.put( `${this.API_URL}/user/${id}`, updateUser);
   }
+  */
 }
