@@ -8,13 +8,13 @@ export class StoreReviewController {
     static async listStoreReview (req: Request, res: Response){
         const { idStoreReview, fkStore, fkUser} = req.body; //req.body req.query req.params
         const _StoreReview: StoreReview[] = await StoreReviewService.listStoreReview(idStoreReview, fkStore, fkUser);
-        res.json({"length": _StoreReview.length, "recordset":_StoreReview});
+        res.json({length: _StoreReview.length, recordset:_StoreReview});
     }
     
     static async getStoreReview (req: Request, res: Response){
         const { idStoreReview} = req.params; //req.body req.query req.params
         const _StoreReview: StoreReview[] = await StoreReviewService.getStoreReview(parseInt(idStoreReview));
-        res.json({"length": _StoreReview.length, "recordset":_StoreReview});
+        res.json({length: _StoreReview.length, recordset:_StoreReview});
     }
     
     static async createStoreReview (req: Request, res: Response) {

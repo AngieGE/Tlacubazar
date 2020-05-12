@@ -8,7 +8,7 @@ export class DeliveryMethodController {
     static async listDeliveryMethod (req: Request, res: Response){
         const { fkStore, fkDeliveryMethodEnum } = req.body; //req.body req.query req.params
         const _deliveryMethods: DeliveryMethod[] = await DeliveryMethodService.listDeliveryMethod(fkStore, fkDeliveryMethodEnum);
-        res.json({"length": _deliveryMethods.length, "recordset":_deliveryMethods});
+        res.json({length: _deliveryMethods.length, recordset:_deliveryMethods});
     }
     
     static async createDeliveryMethod (req: Request, res: Response) {

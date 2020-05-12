@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user/user.service';
-import { User } from '../../models/user/User';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/User';
 /* Google and Facebook Font Awesome logos */
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
