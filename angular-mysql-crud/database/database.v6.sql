@@ -69,13 +69,17 @@ CREATE TABLE `StatusEnum` (
 CREATE TABLE `Store` (
   `idStore` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50),
+  `description` TEXT,
+  `image` VARCHAR(70),
   `fkAddress` INT NOT NULL,
   `isServiceStore` BOOLEAN,
   `acceptsCacao` BOOLEAN,
   `fkStatusEnum`INT NOT NULL,
   `fkVendor` INT NOT NULL,
+  `fkCategoryEnum` INT NOT NULL,
   FOREIGN KEY (`fkAddress`) REFERENCES `Address` (`idAddress`),
-  FOREIGN KEY (`fkVendor`) REFERENCES `User` (`idUser`) ON DELETE CASCADE
+  FOREIGN KEY (`fkVendor`) REFERENCES `User` (`idUser`) ON DELETE CASCADE,
+  FOREIGN KEY (`fkCategoryEnum`) REFERENCES `CategoryEnum` (`idCategoryEnum`) ON DELETE CASCADE
 );
 
 CREATE TABLE `DeliveryMethod` (
@@ -89,11 +93,14 @@ CREATE TABLE `Product` (
   `idProduct` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(70),
   `description` TEXT,
+  `image` VARCHAR(70),
   `quantityInStock` SMALLINT,
   `buyPrice` DECIMAL(13,2),
   `maxCacaoBuyPrice` DECIMAL(13,2),
   `fkStore` INT NOT NULL,
-  FOREIGN KEY (`fkStore`) REFERENCES `Store` (`idStore`) ON DELETE CASCADE
+  `fkCategoryEnum` INT NOT NULL,
+  FOREIGN KEY (`fkStore`) REFERENCES `Store` (`idStore`) ON DELETE CASCADE,
+  FOREIGN KEY (`fkCategoryEnum`) REFERENCES `CategoryEnum` (`idCategoryEnum`) ON DELETE CASCADE
 );
 
 CREATE TABLE `Order` (
@@ -149,6 +156,11 @@ CREATE TABLE `StoreReview` (
   FOREIGN KEY (`fkUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE
 );
 
+CREATE TABLE `CategoryEnum` (
+  `idCategoryEnum` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `category` TEXT NOT NULL
+);
+
 INSERT INTO `DeliveryMethodEnum` (`deliveryMethod`) VALUES ('En automóvil'), ('Transporte público'), ('A pie'), ('En bicicleta'), ('Recoger pedido');
 
 INSERT INTO `User` (`email`, `firstName`, `lastName`, `isVendor`, `phone`, `cacaoBalance`) VALUES ('alejandro.m@gmail.com', 'Alejandro', 'Moral', FALSE, '7771414141', 0.0), ('milagros@manzanas4dayz.com.mx', 'Milagros', 'Ramírez', TRUE, '7774004040', 0.0);
@@ -182,12 +194,16 @@ INSERT INTO `Address` (`fkAddressEnum`, `fkStateEnum`, `fkCityEnum`, `fkSuburbEn
 
 INSERT INTO `UserAddress` (`fkUser`, `fkAddress`) VALUES (1, 1), (1, 3), (2, 2);
 
-INSERT INTO `Store` (`name`, `fkAddress`, `isServiceStore`, `acceptsCacao`, `fkStatusEnum`,`fkVendor`) VALUES 
-					('Manzanas4Dayz', 3, FALSE, TRUE, 7,2), ('Nutrición Milagros', 3, TRUE, FALSE, 8, 2);
+INSERT INTO `Store` (`name`, `description`, `image`,`fkAddress`, `isServiceStore`, `acceptsCacao`, `fkStatusEnum`,`fkVendor`, `fkCategoryEnum`) VALUES 
+					('Manzanas4Dayz', "Tienda de todos tipos de manzanas", NULL, 3, FALSE, TRUE, 7,2, 2), 
+					('Nutrición Milagros', "Productos nutrimentales, bajos en grasa.", NULL, 3, TRUE, FALSE, 8, 2, 2);
 
 INSERT INTO `DeliveryMethod` (`fkStore`, `fkDeliveryMethodEnum`) VALUES (1, 3), (2, 3), (2, 4);
 
-INSERT INTO `Product` (`name`, `description`, `quantityInStock`, `buyPrice`, `maxCacaoBuyPrice`, `fkStore`) VALUES ('Manzana Roja', 'Clásica y tradicional manzana roja', 10, 3.43, 0.686, 1), ('Manzana Verde', 'La alternativa de siempre: manzana verde', 14, 2.5, 0.5, 1), ('Pera', 'Fantástica pera de máxima calidad', 7, 5.99, 1.198, 1);
+INSERT INTO `Product`(`name`, `description`, `image`, `quantityInStock`, `buyPrice`, `maxCacaoBuyPrice`, `fkStore`, `fkCategoryEnum`) VALUES 
+					('Manzana Roja', 'Clásica y tradicional manzana roja',NULL, 10, 3.43, 0.686, 1, 2), 
+					('Manzana Verde', 'La alternativa de siempre: manzana verde', NULL, 14, 2.5, 0.5, 1, 2), 
+					('Pera', 'Fantástica pera de máxima calidad', NULL, 7, 5.99, 1.198, 1, 2);
 
 /*State enum*/
 INSERT INTO `StatusEnum` VALUES (1, 'ESPERANDO_ENVIO');
@@ -200,3 +216,25 @@ INSERT INTO `StatusEnum` VALUES (7, 'STORE_EN_ESPERA');
 INSERT INTO `StatusEnum` VALUES (8, 'STORE_ACEPTADA');
 INSERT INTO `StatusEnum` VALUES (9, 'STORE_RECHAZADA');
 
+/*Category enum*/
+INSERT INTO `CategoryEnum` VALUES (1, 'Abarrotes');
+INSERT INTO `CategoryEnum` VALUES (2, 'Alimentos');
+INSERT INTO `CategoryEnum` VALUES (3, 'Arte y Artesanias');
+INSERT INTO `CategoryEnum` VALUES (4, 'Automotriz');
+INSERT INTO `CategoryEnum` VALUES (5, 'Bebé');
+INSERT INTO `CategoryEnum` VALUES (6, 'Belleza y cuidado personal');
+INSERT INTO `CategoryEnum` VALUES (7, 'Cine y TV');
+INSERT INTO `CategoryEnum` VALUES (8, 'Computación');
+INSERT INTO `CategoryEnum` VALUES (9, 'Educación');
+INSERT INTO `CategoryEnum` VALUES (10, 'Electrónica');
+INSERT INTO `CategoryEnum` VALUES (11, 'Equipaje');
+INSERT INTO `CategoryEnum` VALUES (12, 'Herramientas y mejoramiento del hogar');
+INSERT INTO `CategoryEnum` VALUES (13, 'Hogar');
+INSERT INTO `CategoryEnum` VALUES (14, 'Hogar y cocina');
+INSERT INTO `CategoryEnum` VALUES (15, 'Industrial y científico');
+INSERT INTO `CategoryEnum` VALUES (16, 'Inmuebles');
+INSERT INTO `CategoryEnum` VALUES (17, 'Insumos para mascotas');
+INSERT INTO `CategoryEnum` VALUES (18, 'Juguetes y juegos');
+INSERT INTO `CategoryEnum` VALUES (19, 'Libros');
+INSERT INTO `CategoryEnum` VALUES (20, 'Moda');
+INSERT INTO `CategoryEnum` VALUES (21, 'Videojuegos');

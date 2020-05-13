@@ -11,16 +11,11 @@ export class StoreService {
 
   constructor(private http: HttpClient) { }
 
-  //listStore() {
-  //  return this.http.get(`${this.API_URL}/store/`);
-  //}
+  public listStore(isServiceStore?: number, acceptsCacao?: number, fkStatusEnum?: number,
+                  fkVendor?: number, fkCategoryEnum?: number): Observable<any> {
 
-  public listStore(isServiceStore?: number, acceptsCacao?: number, fkStatusEnum?: number, fkVendor?: number): Observable<any> {
-    console.log('service: ');
-    // Params
-    let params = new HttpParams();
-    console.log(acceptsCacao);
-    console.log(isServiceStore);
+    let params = new HttpParams(); // Params
+
     if (isServiceStore !== undefined && isServiceStore !== null) {
       params = params.set('isServiceStore', isServiceStore.toString());
     }
@@ -33,7 +28,10 @@ export class StoreService {
     if (fkVendor !== undefined && fkVendor !== null) {
       params = params.set('fkVendor', fkVendor.toString());
     }
-    console.log(params);
+    if (fkCategoryEnum !== undefined && fkCategoryEnum !== null) {
+      params = params.set('fkCategoryEnum', fkCategoryEnum.toString());
+    }
+
     // Headers
     let headers = this.defaultHeaders;
     headers = headers.set('Accept', 'application/json');

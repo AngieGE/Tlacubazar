@@ -2,3 +2,7 @@
 .btn-block {
   width: 100%;
 }
+#bg{
+  position: absolute;
+  background-image: url(../../../assets/images/bg-tlacu.jpeg);
+}

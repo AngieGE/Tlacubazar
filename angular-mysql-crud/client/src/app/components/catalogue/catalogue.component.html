@@ -1,12 +1,29 @@
 
-
+<div class="flex-row justify-content-center ">
   <div class="row">
-    <div *ngFor="let store of stores" class="col s3 l3 m3 center">
-      <div class="card">
-        <span class="card-title">{{store.name}}</span>
-        <p *ngIf = "store.isServiceStore elseServiceBlock">Este negocio es de servicio.</p>
-        <ng-template #elseServiceBlock>Este negocio vende productos.</ng-template>
-        <p *ngIf = "store.acceptsCacao">¡Este negocio acepta cacao!</p>
-      </div>
+    <div *ngFor="let store of stores" class="s3 l3 m3 left">
+      <!--
+        <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="images/office.jpg">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+            <p><a href="#">This is a link</a></p>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+            <p>Here is some more information about this product that is only revealed once clicked on.</p>
+          </div>
+        </div>
+      -->
+
+              <div class="card">
+                <span class="card-title">{{store.name}}</span>
+                <p *ngIf = "store.isServiceStore">Este negocio es de servicio.</p>
+                <p *ngIf= "!store.isServiceStore">Este negocio vende productos.</p>
+                <p *ngIf = "store.acceptsCacao">¡Este negocio acepta cacao!</p>
+              </div>
     </div>
   </div>
+</div>

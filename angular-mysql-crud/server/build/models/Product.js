@@ -9,6 +9,7 @@ class Product {
         this.buyPrice = product.buyPrice;
         this.maxCacaoBuyPrice = product.maxCacaoBuyPrice;
         this.fkStore = product.fkStore;
+        this.fkCategoryEnum = product.fkCategoryEnum;
     }
 }
 exports.Product = Product;

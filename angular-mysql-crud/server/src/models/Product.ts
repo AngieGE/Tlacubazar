@@ -6,15 +6,18 @@ export class Product {
     buyPrice?:number;
     maxCacaoBuyPrice?:number;
     fkStore?:number;
+    fkCategoryEnum?: number;
 
     constructor(product: Product){
         this.idProduct=product.idProduct;
-        this.name=product.name;
+        this.name=product.name
         this.description=product.description;
         this.quantityInStock=product.quantityInStock;
         this.buyPrice=product.buyPrice;
         this.maxCacaoBuyPrice=product.maxCacaoBuyPrice;
         this.fkStore=product.fkStore;
+        this.fkCategoryEnum=product.fkCategoryEnum;
+
     }
 
 

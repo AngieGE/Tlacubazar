@@ -14,13 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 class StoreService {
-    static listStore(isServiceStore, acceptsCacao, fkStatusEnum, fkVendor) {
+    static listStore(isServiceStore, acceptsCacao, fkStatusEnum, fkVendor, fkCategoryEnum) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "SELECT * FROM store WHERE ";
             sql += (isServiceStore != null || isServiceStore != NaN) ? "isServiceStore = " + isServiceStore + " AND " : "";
             sql += acceptsCacao != null ? "acceptsCacao = " + acceptsCacao + " AND " : "";
             sql += fkStatusEnum != null ? "fkStatusEnum = " + fkStatusEnum + " AND " : "";
             sql += fkVendor != null ? "fkVendor = " + fkVendor + " AND " : "";
+            sql += fkCategoryEnum != null ? "fkCategoryEnum = " + fkCategoryEnum + " AND " : "";
             sql += "1 = 1 ";
             console.log(sql);
             const recordset = yield database_1.default.query(sql);
@@ -38,22 +39,15 @@ class StoreService {
     }
     static createStore(store) {
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "CALL createStoreProcedure( '" +
-                store.name + "', '" +
+            let sql = "INSERT INTO store (name, description, fkAddress, isServiceStore, acceptsCacao, fkStatusEnum, fkVendor, fkCategoryEnum) " +
+                "VALUES ('" + store.name + "', '" +
+                store.description + "', '" +
                 store.fkAddress + "', '" +
                 store.isServiceStore + "', '" +
                 store.acceptsCacao + "', '" +
                 store.fkStatusEnum + "', '" +
-                store.fkVendor + "');";
-            /*
-            let sql: string = "INSERT INTO store (name, fkAddress, isServiceStore, acceptsCacao, status, fkVendor) " +
-                                      "VALUES ('"+ store.name + "', '" +
-                                                  store.fkAddress +"', '" +
-                                                  store.isServiceStore + "', '" +
-                                                  store.acceptsCacao + "', '" +
-                                                  store.status + "', '" +
-                                                  store.fkVendor + "');"
-                                                  */
+                store.fkVendor + "', '" +
+                store.fkCategoryEnum + "');";
             const resultado = yield database_1.default.query(sql);
             console.log(resultado);
             return resultado;
@@ -67,7 +61,8 @@ class StoreService {
                 "isServiceStore = '" + store.isServiceStore + "', " +
                 "acceptsCacao = " + store.acceptsCacao + ", " +
                 "fkStatusEnum = '" + store.fkStatusEnum + "', " +
-                "fkVendor = " + store.fkVendor + " " +
+                "fkVendor = " + store.fkVendor + ", " +
+                "fkVendor = " + store.fkCategoryEnum + " " +
                 "WHERE idStore = " + idStore + ";";
             const resultado = yield database_1.default.query(sql);
             return resultado;

@@ -3,12 +3,13 @@ import pool from "../database";
 
 export class StoreService {
    
-    static async listStore(isServiceStore?:number, acceptsCacao?:number, fkStatusEnum?:number, fkVendor?:number): Promise<Store[]>  {
+    static async listStore(isServiceStore?:number, acceptsCacao?:number, fkStatusEnum?:number, fkVendor?:number, fkCategoryEnum?: number): Promise<Store[]>  {
         let sql: string = "SELECT * FROM store WHERE "
         sql += (isServiceStore!=null || isServiceStore!=NaN) ? "isServiceStore = " + isServiceStore + " AND " : "";
         sql += acceptsCacao!=null ? "acceptsCacao = " + acceptsCacao + " AND " : "";
         sql += fkStatusEnum!=null ? "fkStatusEnum = " + fkStatusEnum + " AND " : "";
         sql += fkVendor!=null ? "fkVendor = " + fkVendor + " AND " : "";
+        sql += fkCategoryEnum!=null ? "fkCategoryEnum = " + fkCategoryEnum + " AND " : "";
         sql += "1 = 1 ";
        console.log(sql);
         const recordset = await pool.query(sql);
@@ -24,22 +25,16 @@ export class StoreService {
     }
 
     static async createStore(store: Store): Promise<any> {
-        let sql: string = "CALL createStoreProcedure( '"+
-                            store.name + "', '" + 
-                            store.fkAddress +"', '" + 
-                            store.isServiceStore + "', '" + 
-                            store.acceptsCacao + "', '" + 
-                            store.fkStatusEnum + "', '" + 
-                            store.fkVendor + "');"
-      /*  
-      let sql: string = "INSERT INTO store (name, fkAddress, isServiceStore, acceptsCacao, status, fkVendor) " + 
+      let sql: string = "INSERT INTO store (name, description, fkAddress, isServiceStore, acceptsCacao, fkStatusEnum, fkVendor, fkCategoryEnum) " + 
                                 "VALUES ('"+ store.name + "', '" + 
+                                            store.description +"', '" + 
                                             store.fkAddress +"', '" + 
                                             store.isServiceStore + "', '" + 
                                             store.acceptsCacao + "', '" + 
-                                            store.status + "', '" + 
-                                            store.fkVendor + "');"
-                                            */
+                                            store.fkStatusEnum + "', '" + 
+                                            store.fkVendor + "', '" + 
+                                            store.fkCategoryEnum + "');"
+                                            
         const resultado= await pool.query(sql);
         console.log(resultado);
         return resultado;
@@ -52,7 +47,8 @@ export class StoreService {
                                 "isServiceStore = '" + store.isServiceStore +"', " + 
                                 "acceptsCacao = " + store.acceptsCacao +", " +  
                                 "fkStatusEnum = '" + store.fkStatusEnum +"', " +  
-                                "fkVendor = " + store.fkVendor + " " +
+                                "fkVendor = " + store.fkVendor + ", " +
+                                "fkVendor = " + store.fkCategoryEnum + " " +
                                 "WHERE idStore = " + idStore + ";";
         const resultado= await pool.query(sql);
         return resultado;
