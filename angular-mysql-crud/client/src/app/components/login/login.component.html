@@ -2,13 +2,19 @@
 
 <div class="row">
   <div class="col-sm-6 col-md-6 col-lg-6 offset-sm-3 offset-md-3 offset-lg-3">
-    <div class="text-center">
-      <img src="../../../assets/images/tlacubazar.png" id="logo">
+    <div class="text-center" id="login-box">
+      <!--Logo-->
+      <img routerLink="/" src="../../../assets/images/tlacubazar.png" id="logo" class="cursor-hand">
 
-      <h2 class="text-white">¡Bienvenido a TlacuBazar!</h2>
+      <!--wecome message-->
+      <div id="message">
+        <h2 class="cursor-arrow">¡Bienvenido a TlacuBazar!</h2>
 
-      <h5 class="text-white">Puedes iniciar sesión con Facebook o Google:</h5>
+        <h5 class="text-black cursor-arrow">Puedes iniciar sesión con Facebook o Google:</h5>
+      </div>
 
+
+      <!--google login-->
       <div class="row">
         <div class="col p-1">
           <button
@@ -21,6 +27,7 @@
         </div>
       </div>
 
+      <!--facebook login-->
       <div class="row">
         <div class="col p-1">
           <button

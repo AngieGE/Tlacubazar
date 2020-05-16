@@ -1,11 +1,9 @@
 @import '../../app.component.css';
 #logo {
-  width: 50px;
+  width: 40px;
+
 }
-.brand-logo{
-  margin-left:10px;
-}
-.oval{
+.oval-inactive{
   background-color: white;
   color: #EE6E73;
   width: 40px;
@@ -13,6 +11,28 @@
   border-radius: 41px;
   font-size: smaller;
 }
+.oval-active{
+  background-color: #EE6E73;
+  color: white;
+  width: 40px;
+  height: 25px;
+  border-radius: 41px;
+  font-size: smaller;
+}
 .pointer{
   cursor: pointer;
+}
+#nav{
+ background-color: #EE6E73;
+}
+.active{
+  background-color: white;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+}
+.text-black{
+  color:black !important;
+}
+.nav-tabs .nav-link:hover {
+  border-color: #EE6E73 #EE6E73 #EE6E73 !important; /*#e9ecef #e9ecef #dee2e6;*/
 }
