@@ -6,21 +6,20 @@ export class User {
   lastName?: string;
   password?: string;
   isVendor?: boolean;
-  phone?:string;
+  phone?: string;
   cacaoBalance?: number;
 
-  // Has many
 
-  // Belongs to
-
-  constructor(user: User) {
-      this.idUser=user.idUser;
-      this.email=user.email;
-      this.firstName=user.firstName;
-      this.lastName=user.lastName;
-      this.password=user.password;
-      this.isVendor=user.isVendor;
-      this.phone=user.phone;
-      this.cacaoBalance=user.cacaoBalance;
+  constructor(user?: User) {
+    if (user != null) {
+      this.idUser = user.idUser;
+      this.email = user.email;
+      this.firstName = user.firstName;
+      this.lastName = user.lastName;
+      this.password = user.password;
+      this.isVendor = user.isVendor;
+      this.phone = user.phone;
+      this.cacaoBalance = user.cacaoBalance;
+    }
   }
 }
