@@ -40,21 +40,48 @@ export class StoreService {
     // Request
     return this.http.get<Store[]>(`${this.API_URL}/store`, { params, headers });
   }
-/*
-  getCuestionario(id: string){
-    return this.http.get(  `${this.API_URL}/user/${id}`);
+
+  public getStore(idStore: number): Observable<any> {
+    // Headers
+    let headers = this.defaultHeaders;
+    headers = headers.set('Accept', 'application/json');
+    headers = headers.set('Content-Type', 'application/json');
+
+    // Request
+    return this.http.get<Store[]>(`${this.API_URL}/store//${idStore}`, { headers });
   }
 
-  deleteCuestionario(id: string){
-    return this.http.delete( `${this.API_URL}/user/${id}`);
+  public createStore(store: Store): Observable<any> {
+
+    // Headers
+    let headers = this.defaultHeaders;
+    headers = headers.set('Accept', 'application/json');
+    headers = headers.set('Content-Type', 'application/json');
+
+
+    // Request
+    return  this.http.post<Store>(`${this.API_URL}/store`, store, { headers } );
   }
 
-  saveCuestionario(user: Users){
-    return this.http.post(  `${this.API_URL}/user`, user);
+  public updateStore(idStore: number, store: Store): Observable<any> {
+    // Headers
+    let headers = this.defaultHeaders;
+    headers = headers.set('Accept', 'application/json');
+    headers = headers.set('Content-Type', 'application/json');
+
+    // Request
+    return this.http.put<Store>(`${this.API_URL}/store/${idStore}`, store,  { headers } );
   }
 
-  updateCuestionario(id: string, updateUser: Users){
-    return this.http.put( `${this.API_URL}/user/${id}`, updateUser);
+  public deleteStore(idStore: number): Observable<any> {
+    // Headers
+    let headers = this.defaultHeaders;
+    headers = headers.set('Accept', 'application/json');
+    headers = headers.set('Content-Type', 'application/json');
+
+
+    // Request
+    return this.http.delete(`${this.API_URL}/store/${idStore}`, { headers } );
+
   }
-  */
 }
