@@ -1,4 +1,4 @@
-import { Component, Title } from '@angular/core';
+import { Component } from '@angular/core';
 import {ActivationStart, Router} from '@angular/router';
 @Component({
   selector: 'app-root',
