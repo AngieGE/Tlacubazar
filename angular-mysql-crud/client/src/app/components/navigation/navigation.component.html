@@ -8,7 +8,7 @@
 
   <!--Shopping cart-->
   <li [ngbNavItem]="1" class="flex-row center-vertically h-100">
-    <a ngbNavLink class="flex-row center-vertically h-100">
+    <a ngbNavLink class="flex-row center-vertically h-100" (click)="goCart()" >
       <div>
         <i class="material-icons text-black">shopping_cart</i>
       </div>
@@ -24,8 +24,8 @@
       Catálogo
     </a>
     <div ngbDropdownMenu>
-      <button (click)="irServicios()" ngbDropdownItem>Servicios</button>
-      <button (click)="irProductos()" ngbDropdownItem>Productos</button>
+      <button (click)="goService()" ngbDropdownItem>Servicios</button>
+      <button (click)="goProduct()" ngbDropdownItem>Productos</button>
     </div>
   </li>
 
@@ -45,47 +45,3 @@
 </ul>
 
 <div [ngbNavOutlet]="nav" class="mt-2"></div>
-<!--
-
-  <nav>
-    <div class="nav-wrapper">
-    <div class="brand-logo flex-row center-vertically justify-content-center h-100 ml-1 pointer" routerLink="/">
-      <img src="../../../assets/images/tlacubazar.png" alt="logo" id="logo">
-    </div>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-
-
-      <li><a class="dropdown-trigger" data-target="dropdown2">
-        Catálogo<i class="material-icons right">arrow_drop_down</i>
-      </a></li>
-
-      <li><a *ngIf="false" (click)="irMisTiendas()">Mis Tiendas</a></li>
-
-      <li><a class="flex-row center-vertically h-100" (click)="irCarrito()">
-        <i class="material-icons">shopping_cart</i>
-        <div class="oval flex-row center-vertically justify-content-center">
-          0
-        </div>
-      </a></li>
-
-      <li><a  routerLink="/login">Iniciar sesión</a></li>
-
-      <li *ngIf="false"><a class="dropdown-trigger" data-target="dropdown1">Mi cuenta
-        <i class="material-icons right">arrow_drop_down</i>
-      </a></li>
-
-    </ul>
-  </div>
-</nav>
-
-<ul id="dropdown1" class="dropdown-content">
-  <li><a (click)="miPerfil()">Mi Perfil</a></li>
-  <li class="divider"></li>
-  <li><a (click)="cerrarSesion()">Cerrar sesión</a></li>
-</ul>
-<ul id="dropdown2" class="dropdown-content">
-  <li><a (click)="irServicios()">Servicios</a></li>
-  <li><a (click)="irProductos()">Productos</a></li>
-</ul>
-
--->

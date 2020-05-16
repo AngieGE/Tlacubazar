@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { TlacuServices } from 'src/app/services/index';
 import { User } from '../../models/User';
 /* Google and Facebook Font Awesome logos */
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
   users: any = [];
 
   constructor(
-    private userService: UserService,
+    private tlacu: TlacuServices,
     private authService: AuthService
   ) { }
 
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
           cacaoBalance: 0.0
         };
 
-        this.userService.saveUser(user).subscribe(
+        this.tlacu.user.saveUser(user).subscribe(
           res => {
             console.log('Created user!', res);
           },
@@ -66,10 +67,6 @@ export class LoginComponent implements OnInit {
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  }
-
-  signOut(): void {
-    this.authService.signOut();
   }
 
 }

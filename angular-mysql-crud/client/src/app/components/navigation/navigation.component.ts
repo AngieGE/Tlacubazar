@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {Router} from '@angular/router';
-
+import { AuthService } from 'angularx-social-login';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
   active = 0;
-  constructor( private router: Router) {
+  constructor(private authService: AuthService, private router: Router) {
 
    }
 
@@ -16,30 +16,27 @@ export class NavigationComponent implements OnInit {
 
   }
 
-  irCarrito() {
-
+  goCart() {
+    this.router.navigate(['/cart']);
   }
 
-  irMisTiendas() {
-
-  }
-
-  irServicios() {
+  goService() {
     this.active = 2;
     this.router.navigate(['/catalogue/service/']);
   }
 
-  irProductos() {
+  goProduct() {
     this.active = 2;
     this.router.navigate(['/catalogue/product/']);
   }
 
   myProfile() {
-
+    this.router.navigate(['/profile']);
   }
 
-  logout() {
-
+  logout(): void {
+    this.authService.signOut();
+    this.router.navigate(['/login']);
   }
 
   login() {

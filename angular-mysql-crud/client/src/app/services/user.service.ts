@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { User } from '../models/User';
+import { User } from '../models/index';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,6 +11,10 @@ export class UserService {
   API_URL = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
+
+  saveUser(u: User) {
+    return this.http.post( `${this.API_URL}`, u);
+  }
 
   public listUser(idUser?: number, isVendor?: number, firstName?: string, lastName?: string) {
     let params = new HttpParams();
