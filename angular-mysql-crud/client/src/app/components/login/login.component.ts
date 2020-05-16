@@ -33,8 +33,6 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-
     this.authService.authState.subscribe((socialUser) => {
       this.socialUser = socialUser;
       this.loggedIn = (socialUser != null);

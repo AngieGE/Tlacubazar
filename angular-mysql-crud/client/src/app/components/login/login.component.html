@@ -1,44 +1,35 @@
 <div id="bg" class="w-100 h-100"></div>
-<div class="container  p-4">
-  <div class="row">
-    <div class="col s6 m6 offset-s3 offset-m3">
-      <div class="card">
-        <div class="card-content center-align">
-          <div class="col">
-            <div class="col s12 m12">
-              <span class="card-title">¡Bienvenido a TlacuBazar!</span>
-            </div>
-          </div>
 
-          <div class="col">
-            <div class="col s12 m12">
-              <p>Puedes iniciar sesión con Facebook o Google:</p>
-            </div>
-          </div>
+<div class="row">
+  <div class="col-sm-6 col-md-6 col-lg-6 offset-sm-3 offset-md-3 offset-lg-3">
+    <div class="text-center">
+      <img src="../../../assets/images/tlacubazar.png" id="logo">
 
-          <div class="row">
-            <div class="col s12 m12">
-              <button
-                (click)="signInWithGoogle()"
-                class="waves-effect waves-light btn-large btn-block red"
-              >
-                <fa-icon [icon]="faGoogle"></fa-icon>
-                Iniciar con Google
-              </button>
-            </div>
-          </div>
+      <h2 class="text-white">¡Bienvenido a TlacuBazar!</h2>
 
-          <div class="row">
-            <div class="col s12 m12">
-              <button
-                (click)="signInWithFB()"
-                class="waves-effect waves-light btn-large btn-block blue darken-3"
-              >
-                <fa-icon [icon]="faFacebook"></fa-icon>
-                Iniciar con Facebook
-              </button>
-            </div>
-          </div>
+      <h5 class="text-white">Puedes iniciar sesión con Facebook o Google:</h5>
+
+      <div class="row">
+        <div class="col p-1">
+          <button
+            (click)="signInWithGoogle()"
+            class="btn btn-danger btn-block btn-google"
+          >
+            <fa-icon [icon]="faGoogle"></fa-icon>
+            Iniciar con Google
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col p-1">
+          <button
+            (click)="signInWithFB()"
+            class="btn btn-primary btn-block"
+          >
+            <fa-icon [icon]="faFacebook"></fa-icon>
+            Iniciar con Facebook
+          </button>
         </div>
       </div>
     </div>
