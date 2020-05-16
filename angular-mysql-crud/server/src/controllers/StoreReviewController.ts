@@ -6,8 +6,8 @@ import {StoreReview} from '../models';
 export class StoreReviewController {
 
     static async listStoreReview (req: Request, res: Response){
-        const { idStoreReview, fkStore, fkUser} = req.body; //req.body req.query req.params
-        const _StoreReview: StoreReview[] = await StoreReviewService.listStoreReview(idStoreReview, fkStore, fkUser);
+        const { fkStore, fkUser} = req.body; //req.body req.query req.params
+        const _StoreReview: StoreReview[] = await StoreReviewService.listStoreReview( fkStore, fkUser);
         res.json({length: _StoreReview.length, recordset:_StoreReview});
     }
     

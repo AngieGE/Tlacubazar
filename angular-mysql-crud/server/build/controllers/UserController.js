@@ -25,8 +25,8 @@ class UserController {
     }
     static listUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idUser } = req.body; //req.body req.query req.params
-            const _usuarios = yield UserService_1.UserService.listUser(idUser);
+            const { idUser, isVendor, firsName, lastName } = req.body; //req.body req.query req.params
+            const _usuarios = yield UserService_1.UserService.listUser(idUser, isVendor, firsName, lastName);
             res.json({ length: _usuarios.length, recordset: _usuarios });
         });
     }

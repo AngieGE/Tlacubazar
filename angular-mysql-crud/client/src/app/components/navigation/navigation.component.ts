@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import * as Mat from 'materialize-css/dist/js/materialize';
-// declare var M: any;
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-  constructor() {
+  active = 0;
+  constructor( private router: Router) {
 
    }
 
@@ -24,19 +25,25 @@ export class NavigationComponent implements OnInit {
   }
 
   irServicios() {
-
+    this.active = 2;
+    this.router.navigate(['/catalogue/service/']);
   }
 
   irProductos() {
+    this.active = 2;
+    this.router.navigate(['/catalogue/product/']);
+  }
+
+  myProfile() {
 
   }
 
-  miPerfil() {
+  logout() {
 
   }
 
-  cerrarSesion() {
-
+  login() {
+    this.router.navigate(['/login']);
   }
 
 }
