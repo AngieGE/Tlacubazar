@@ -3,9 +3,8 @@ import pool from "../database";
 
 export class StoreReviewService {
    
-    static async listStoreReview(idStoreReview?:number, fkStore?:number, fkUser?:number): Promise<StoreReview[]>  {
+    static async listStoreReview(fkStore?:number, fkUser?:number): Promise<StoreReview[]>  {
         let sql: string = "SELECT * FROM storeReview WHERE "
-        sql += idStoreReview!=null ? "idStoreReview = " + idStoreReview + " AND " : "";
         sql += fkStore!=null ? "fkStore = '" + fkStore + "' AND " : "";
         sql += fkUser!=null ? "fkUser = " + fkUser + " AND " : "";
         sql += "1 = 1 ";

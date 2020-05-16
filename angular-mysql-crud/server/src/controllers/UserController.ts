@@ -16,8 +16,8 @@ export class UserController {
     }
 
     static async listUser (req: Request, res: Response){
-        const { idUser } = req.body; //req.body req.query req.params
-        const _usuarios: User[] = await UserService.listUser(idUser);
+        const { idUser, isVendor, firsName, lastName } = req.body; //req.body req.query req.params
+        const _usuarios: User[] = await UserService.listUser(idUser,  isVendor, firsName, lastName);
         res.json({length: _usuarios.length, recordset:_usuarios});
     }
 

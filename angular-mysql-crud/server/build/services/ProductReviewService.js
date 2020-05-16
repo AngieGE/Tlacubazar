@@ -14,10 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 class ProductReviewService {
-    static listProductReview(idProductReview, fkProduct, fkUser) {
+    static listProductReview(fkProduct, fkUser) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "SELECT * FROM productReview WHERE ";
-            sql += idProductReview != null ? "idProductReview = " + idProductReview + " AND " : "";
             sql += fkProduct != null ? "fkProduct = '" + fkProduct + "' AND " : "";
             sql += fkUser != null ? "fkUser = " + fkUser + " AND " : "";
             sql += "1 = 1 ";

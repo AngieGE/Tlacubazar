@@ -9,9 +9,12 @@ export class UserService {
         return recordset.recordset[0];
     }
 
-    static async listUser(idUser?:number): Promise<User[]>  {
+    static async listUser(idUser?:number, isVendor?:number, firsName?:string, lastName?:string): Promise<User[]>  {
         let sql: string = "SELECT * FROM user WHERE "
         sql += idUser!=null ? "idUser = " + idUser + " AND " : "";
+        sql += isVendor!=null ? "isVendor = " + isVendor + " AND " : "";
+        sql += firsName!=null ? "firsName = " + firsName + " AND " : "";
+        sql += lastName!=null ? "lastName = " + lastName + " AND " : "";
         sql += "1 = 1 ";
         const recordset = await pool.query(sql);
         return recordset;

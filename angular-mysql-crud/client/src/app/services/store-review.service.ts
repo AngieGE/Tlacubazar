@@ -1,62 +1,56 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { User } from '../models/User';
+import { StoreReview } from '../models/StoreReview';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class StoreReviewService {
   public defaultHeaders = new HttpHeaders();
   API_URL = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
-  public listUser(idUser?: number, isVendor?: number, firstName?: string, lastName?: string) {
+  public listStoreReview(fkStore?: number, fkUser?: number) {
     let params = new HttpParams();
 
-    if (idUser !== undefined && idUser !== null) {
-      params = params.set('idUser', idUser.toString());
+    if (fkStore !== undefined && fkStore !== null) {
+      params = params.set('fkStore', fkStore.toString());
     }
-    if (isVendor !== undefined && isVendor !== null) {
-      params = params.set('isVendor', isVendor.toString());
-    }
-    if (firstName !== undefined && firstName !== null) {
-      params = params.set('firstName', firstName);
-    }
-    if (lastName !== undefined && lastName !== null) {
-      params = params.set('lastName', lastName);
+    if (fkUser !== undefined && fkUser !== null) {
+      params = params.set('fkUser', fkUser.toString());
     }
 
     let headers = this.defaultHeaders;
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.get<User[]>(`${this.API_URL}/user`, { params, headers });
+    return this.http.get<StoreReview[]>(`${this.API_URL}/storeReview`, { params, headers });
   }
 
-  public getUser(idUser: number): Observable<any> {
+  public getStoreReview(idStoreReview: number): Observable<any> {
     let headers = this.defaultHeaders;
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.get<User[]>(`${this.API_URL}/sser/${idUser}`, { headers });
+    return this.http.get<StoreReview[]>(`${this.API_URL}/storeReview/${idStoreReview}`, { headers });
   }
 
-  public createUser(user: User): Observable<any> {
+  public createStoreReview(storeReview: StoreReview): Observable<any> {
     let headers = this.defaultHeaders;
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.post<User>(`${this.API_URL}/user`, user, { headers });
+    return this.http.post<StoreReview>(`${this.API_URL}/storeReview`, storeReview, { headers });
   }
 
-  public updateUser(idUser: number, user: User): Observable<any> {
+  public updateStoreReview(idStoreReview: number, storeReview: StoreReview): Observable<any> {
     let headers = this.defaultHeaders;
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.put<User>(`${this.API_URL}/user/${idUser}`, user, { headers });
+    return this.http.put<StoreReview>(`${this.API_URL}/storeReview/${idStoreReview}`, storeReview, { headers });
   }
 
   public deleteStore(idStore: number): Observable<any> {
@@ -64,6 +58,6 @@ export class UserService {
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.delete(`${this.API_URL}/user/${idStore}`, { headers });
+    return this.http.delete(`${this.API_URL}/storeReview/${idStore}`, { headers });
   }
 }

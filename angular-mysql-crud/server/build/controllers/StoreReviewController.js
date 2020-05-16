@@ -13,8 +13,8 @@ const services_1 = require("../services");
 class StoreReviewController {
     static listStoreReview(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idStoreReview, fkStore, fkUser } = req.body; //req.body req.query req.params
-            const _StoreReview = yield services_1.StoreReviewService.listStoreReview(idStoreReview, fkStore, fkUser);
+            const { fkStore, fkUser } = req.body; //req.body req.query req.params
+            const _StoreReview = yield services_1.StoreReviewService.listStoreReview(fkStore, fkUser);
             res.json({ length: _StoreReview.length, recordset: _StoreReview });
         });
     }
