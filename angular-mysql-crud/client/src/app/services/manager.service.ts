@@ -2,7 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models';
-import { SocialUser } from 'angularx-social-login';
+import {
+  AuthService,
+  SocialUser,
+  FacebookLoginProvider,
+  GoogleLoginProvider
+} from 'angularx-social-login';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,4 +32,16 @@ export class ManagerService {
       localStorage.setItem('tlacu-user', null);
       localStorage.setItem('tlacu-social-user', null);
   }
+
+  isLogged(): boolean {
+    if (this.user === null || this.user === undefined) {
+      return false;
+    }
+    if (this.socialUser === null || this.socialUser === undefined) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

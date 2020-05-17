@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { TlacuServices } from 'src/app/services/index';
 import { User } from '../../models/User';
+import {Router} from '@angular/router';
+
 /* Google and Facebook Font Awesome logos */
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
@@ -12,6 +14,7 @@ import {
   FacebookLoginProvider,
   GoogleLoginProvider
 } from 'angularx-social-login';
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-login',
@@ -30,26 +33,21 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private tlacu: TlacuServices,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    // nos suscribimos al estado de autentificacion
     this.authService.authState.subscribe((socialUser) => {
       this.socialUser = socialUser;
-      this.loggedIn = (socialUser != null);
+      console.log(this.socialUser);
+      if (this.socialUser === null) {
+        return;
+      }
+      this.tlacu.manager.setItems( this.socialUser, this.getUser(this.socialUser));
 
-      if (this.loggedIn) {
-        const user: User = {
-          idUser: -1,
-          email: socialUser.email,
-          firstName: socialUser.firstName,
-          lastName: socialUser.lastName,
-          isVendor: false,
-          phone: '',
-          cacaoBalance: 0.0
-        };
-
-        this.tlacu.user.saveUser(user).subscribe(
+      this.tlacu.user.createUser(this.getUser(this.socialUser)).subscribe(
           res => {
             console.log('Created user!', res);
           },
@@ -57,7 +55,11 @@ export class LoginComponent implements OnInit {
             console.log('Could not create user', err);
           }
         );
+
+      if (localStorage.getItem('tlacu-user') != null) {
+        this.router.navigate(['/profile']);
       }
+
     });
   }
 
@@ -67,6 +69,14 @@ export class LoginComponent implements OnInit {
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    }
+
+    getUser(socialUser: SocialUser): User {
+      const user = new User();
+      user.email = socialUser.email;
+      user.firstName = socialUser.firstName;
+      user.lastName = socialUser.lastName;
+      return user;
   }
 
 }

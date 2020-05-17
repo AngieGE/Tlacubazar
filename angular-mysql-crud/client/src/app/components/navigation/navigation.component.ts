@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {Router} from '@angular/router';
-import { AuthService } from 'angularx-social-login';
+import { AuthService, SocialUser } from 'angularx-social-login';
+import {TlacuServices} from '../../services/index'
+import { User } from 'src/app/models';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -8,8 +10,11 @@ import { AuthService } from 'angularx-social-login';
 })
 export class NavigationComponent implements OnInit {
   active = 0;
-  constructor(private authService: AuthService, private router: Router) {
-
+  user: User = null;
+  socialUser: SocialUser = null;
+  constructor(private authService: AuthService, private tlacu: TlacuServices, private router: Router) {
+    this.user = this.tlacu.manager.user;
+    this.socialUser = this.tlacu.manager.socialUser;
    }
 
   ngOnInit(): void {
@@ -35,8 +40,10 @@ export class NavigationComponent implements OnInit {
   }
 
   logout(): void {
-    this.authService.signOut();
-    this.router.navigate(['/login']);
+    this.tlacu.manager.unsetItems();
+    this.authService.signOut().then( res => {
+      this.router.navigate(['/login']);
+    });
   }
 
   login() {

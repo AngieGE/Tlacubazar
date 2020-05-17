@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from '../models/index';
 import { Observable } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,10 +12,6 @@ export class UserService {
   API_URL = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
-
-  saveUser(u: User) {
-    return this.http.post( `${this.API_URL}`, u);
-  }
 
   public listUser(idUser?: number, isVendor?: number, firstName?: string, lastName?: string) {
     let params = new HttpParams();
@@ -44,7 +41,7 @@ export class UserService {
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.get<User[]>(`${this.API_URL}/sser/${idUser}`, { headers });
+    return this.http.get<User[]>(`${this.API_URL}/user/${idUser}`, { headers });
   }
 
   public createUser(user: User): Observable<any> {
