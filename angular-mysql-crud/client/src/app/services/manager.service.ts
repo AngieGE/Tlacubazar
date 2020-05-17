@@ -33,15 +33,5 @@ export class ManagerService {
       localStorage.setItem('tlacu-social-user', null);
   }
 
-  isLogged(): boolean {
-    if (this.user === null || this.user === undefined) {
-      return false;
-    }
-    if (this.socialUser === null || this.socialUser === undefined) {
-      return false;
-    }
-
-    return true;
-  }
 
 }
