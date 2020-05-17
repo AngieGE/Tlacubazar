@@ -1,42 +1,53 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import * as Mat from 'materialize-css/dist/js/materialize';
-// declare var M: any;
+import {Router} from '@angular/router';
+import { AuthService, SocialUser } from 'angularx-social-login';
+import {TlacuServices} from '../../services/index'
+import { User } from 'src/app/models';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-  constructor() {
-
+  active = 0;
+  user: User = null;
+  socialUser: SocialUser = null;
+  constructor(private authService: AuthService, private tlacu: TlacuServices, private router: Router) {
+    this.user = this.tlacu.manager.user;
+    this.socialUser = this.tlacu.manager.socialUser;
    }
 
   ngOnInit(): void {
 
   }
 
-  irCarrito() {
-
+  goCart() {
+    this.router.navigate(['/cart']);
   }
 
-  irMisTiendas() {
-
+  goService() {
+    this.active = 2;
+    this.router.navigate(['/catalogue/service/']);
   }
 
-  irServicios() {
-
+  goProduct() {
+    this.active = 2;
+    this.router.navigate(['/catalogue/product/']);
   }
 
-  irProductos() {
-
+  myProfile() {
+    this.router.navigate(['/profile']);
   }
 
-  miPerfil() {
-
+  logout(): void {
+    this.tlacu.manager.unsetItems();
+    this.authService.signOut().then( res => {
+      this.router.navigate(['/login']);
+    });
   }
 
-  cerrarSesion() {
-
+  login() {
+    this.router.navigate(['/login']);
   }
 
 }

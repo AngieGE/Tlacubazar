@@ -8,14 +8,14 @@ import { Observable } from 'rxjs';
 })
 export class AddressService {
   public defaultHeaders = new HttpHeaders();
-  API_URL = 'http://localhost:3000';
+  API_URL = 'http://localhost:3000/address';
 
   constructor(private http: HttpClient) { }
 
   public listAddress(
     idAddress?: number, fkAddressEnum?: number, fkStateEnum?: number,
     fkCityEnum?: number, fkSuburbEnum?: number
-  ) {
+  ): Observable<any> {
     let params = new HttpParams();
 
     if (idAddress !== undefined && idAddress !== null) {
@@ -54,7 +54,7 @@ export class AddressService {
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.post<Address>(`${this.API_URL}/address`, address, { headers });
+    return this.http.post<Address>(`${this.API_URL}`, address, { headers });
   }
 
   public updateAddress(idAddress: number, address: Address): Observable<any> {
@@ -65,11 +65,11 @@ export class AddressService {
     return this.http.put<Address>(`${this.API_URL}/address/${idAddress}`, address, { headers });
   }
 
-  public deleteStore(idStore: number): Observable<any> {
+  public deleteAddress(idAddress: number): Observable<any> {
     let headers = this.defaultHeaders;
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.delete(`${this.API_URL}/address/${idStore}`, { headers });
+    return this.http.delete(`${this.API_URL}/address/${idAddress}`, { headers });
   }
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { User } from '../models/User';
+import { User } from '../models/index';
 import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class UserService {
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.get<User[]>(`${this.API_URL}/sser/${idUser}`, { headers });
+    return this.http.get<User[]>(`${this.API_URL}/user/${idUser}`, { headers });
   }
 
   public createUser(user: User): Observable<any> {

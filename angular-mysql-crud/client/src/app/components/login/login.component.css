@@ -1,19 +1,26 @@
 @import '../../app.component.css';
 
 p, h2 {
-  text-shadow: 0 -1px 0 #000000;
+  text-shadow: 0 -1px 0 #34cdf7;
+  color: #b0478a;
 }
 
 .btn-block {
   width: 100%;
 }
-
+#message{
+  color: black;
+}
+#login-box{
+  background-color: ghostwhite;
+  padding: 20px;
+}
 #bg {
   position: fixed;
   left: 0px;
   top: 0px;
   background-image: url(../../../assets/images/bg-tlacu.jpeg);
-  filter: brightness(75%);
+  filter: brightness(95%);
 }
 
 #logo {
