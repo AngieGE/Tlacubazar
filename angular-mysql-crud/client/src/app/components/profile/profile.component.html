@@ -1,3 +1,38 @@
-<p>profile works!</p>
-
-<img *ngIf="loggedIn" [src]="user.photoUrl" alt="">
+<div class="row justify-content-md-center">
+  <div class="col-4">
+    <div class="card text-center bg-light text-dark"><!--Profile pic and name-->
+      <div class="card-body ">
+        <img *ngIf="loggedIn" [src]="user.photoUrl" alt="" class="rounded-circle">
+        <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
+      </div>
+    </div>
+    <h4 class="text-center">Información básica</h4><!--Basic info-->
+    <div class="card text-center bg-light text-dark">
+      <div class="card-body">
+        <h5 class="card-title">Teléfono:</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{7774968039}}</h6>
+        <h5 class="card-title">Correo:</h5>
+        <h6 class="card-subtitle mb-2 text-muted">kike.fvla@gmail.com</h6>
+        <h5 class="card-title">Miembro vendedor:</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Miembro vendedor</h6>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card text-center bg-light text-dark"> <!-- Cacao balance-->
+      <div class="card-body">
+        <h5 class="card-title">Balance de cacao</h5>
+        <h6 class="card-subtitle mb-2 text-muted">100</h6>
+      </div>
+    </div>
+    <h4 class="text-center">Negocios registrados</h4> <!--Registered stores-->
+    <div class="card text-center bg-light text-dark">
+      <div class="card-body">
+        <a href=""><h5 class="card-title">Ferreteria Julio</h5></a>
+        <a href=""><h5 class="card-title">Florería Luz</h5></a>
+        <a href=""><h5 class="card-title">Tintorería Dry Clean Service</h5></a>
+        <h6 class="card-subtitle mb-2 text-muted"></h6>
+      </div>
+    </div>
+  </div>
+</div>
