@@ -12,7 +12,7 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  public listProduct(name: string, fkStore: number, fkCategoryEnum: number) {
+  public listProduct(name?: string, fkStore?: number, fkCategoryEnum?: number) {
     let params = new HttpParams();
 
     if (name !== undefined && name !== null) {

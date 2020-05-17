@@ -12,7 +12,7 @@ export class PaymentService {
 
   constructor(private http: HttpClient) { }
 
-  public listPayment(idPayment: number, fkClient: number, fkVendor: number, fkOrder: number) {
+  public listPayment(idPayment?: number, fkClient?: number, fkVendor?: number, fkOrder?: number) {
     let params = new HttpParams();
 
     if (idPayment !== undefined && idPayment !== null){

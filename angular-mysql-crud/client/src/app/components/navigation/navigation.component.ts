@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {Router} from '@angular/router';
 import { AuthService, SocialUser } from 'angularx-social-login';
-import {TlacuServices} from '../../services/index'
+import {TlacuServices} from '../../services/index';
 import { User } from 'src/app/models';
 @Component({
   selector: 'app-navigation',
