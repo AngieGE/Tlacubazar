@@ -50,7 +50,7 @@ export class OrderDetailsService {
     return this.http.post<OrderDetails>(`${this.API_URL}/orderDetails`, orderDetails, { headers });
   }
 
-  public updateStoreReview(idOrderDetails: number, orderDetails: OrderDetails): Observable<any>{
+  public updateStoreReview(idOrderDetails: number, orderDetails: OrderDetails): Observable<any> {
     let headers = this.defaultHeaders;
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
