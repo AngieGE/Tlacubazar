@@ -8,3 +8,9 @@
 .small{
   font-size: x-small;
 }
+#filtros{
+  background-color: hotpink;
+}
+.lista{
+  background-color: green;
+}

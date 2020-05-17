@@ -36,3 +36,15 @@
 .nav-tabs .nav-link:hover {
   border-color: #EE6E73 #EE6E73 #EE6E73 !important; /*#e9ecef #e9ecef #dee2e6;*/
 }
+.second-nav{
+  background-color: #f0bb2d;
+  margin-top: -1px;
+}
+.mb-less{
+  margin-bottom: -8px !important;
+}
+.small-text{
+  font-size: small;
+  color:gray;
+  font-weight: bold;
+}

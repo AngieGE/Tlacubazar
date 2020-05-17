@@ -1,6 +1,12 @@
 
-<div class="flex-row justify-content-center ">
-  <div class="row" *ngIf="!isServiceStore">
+<div class="flex-row  ">
+  <!--filtros-->
+  <div class="col-md-3" id="filtros">
+    columna
+  </div>
+
+  <!--productos-->
+  <div class="row lista" *ngIf="!isServiceStore">
     <div *ngFor="let store of stores" class="s3 l3 m3 left">
 
               <div class="card" style="width: 18rem;">
@@ -11,7 +17,9 @@
               </div>
     </div>
   </div>
-  <div class="row" *ngIf="isServiceStore">
+
+  <!--Servicios-->
+  <div class="row row-md-9 lista" *ngIf="isServiceStore">
     <div *ngFor="let store of stores" class="s3 l3 m3 left">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
@@ -35,10 +43,11 @@
       </div>
     </div>
   </div>
+
 </div>
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+    <h4 class="modal-title" id="modal-basic-title">Queremos escucharte</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>

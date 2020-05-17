@@ -9,7 +9,9 @@ CREATE TABLE `User` (
   `lastName` VARCHAR(100),
   `isVendor` BOOLEAN,
   `phone` VARCHAR(50),
-  `cacaoBalance` DECIMAL(13,2)
+  `cacaoBalance` DECIMAL(13,2),
+  `fkAddress` DECIMAL(13,2),
+  FOREIGN KEY (`fkAddress`) REFERENCES `Address` (`fkAddress`)
 );
 
 CREATE TABLE `AddressEnum` (
@@ -111,7 +113,7 @@ CREATE TABLE `Order` (
   `totalPrice` DECIMAL(13,2),
   `totalMaxCacaoPrice` DECIMAL(13,2),
   `fkUser` INT NOT NULL,
-  FOREIGN KEY (`fkUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE
+  FOREIGN KEY (`fkUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE,
   FOREIGN KEY (`fkStatusEnum`) REFERENCES `StatusEnum` (`idStatusEnum`) ON DELETE CASCADE
 );
 

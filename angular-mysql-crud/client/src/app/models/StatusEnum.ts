@@ -11,7 +11,7 @@ export class StatusEnum {
 }
 
   export namespace _StatusEnum {
-
+    export type StatusEnum  =  1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
       export const StatusEnum = {
           ESPERANDO_ENVIO: 1,
           PAUSADA: 2,

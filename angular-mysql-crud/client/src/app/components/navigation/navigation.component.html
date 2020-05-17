@@ -44,4 +44,28 @@
 
 </ul>
 
-<div [ngbNavOutlet]="nav" class="mt-2"></div>
+<div [ngbNavOutlet]="nav" class=" pl-4 pr-4"></div>
+<div class="second-nav flex-row pl-4 pr-4">
+  <div class="flex-row mr-auto cursor-hand">
+    <div class="flex-row center-vertically justify-content-center">
+      <i class="material-icons text-black">location_on</i>
+    </div>
+    <div class="flex-col" *ngIf="user == null">
+        <div class="mb-less small-text" (click)="login()">
+          Hola
+        </div>
+        <div class="" (click)="login()">
+          Elige tu dirección
+        </div>
+    </div>
+
+    <div class="flex-col" *ngIf="user != null">
+      <div class="mb-less small-text">
+        Hola
+      </div>
+      <div class="">
+        Elige tu dirección
+      </div>
+  </div>
+  </div>
+</div>
