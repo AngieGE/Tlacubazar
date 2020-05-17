@@ -1,24 +1,9 @@
 
 <div class="flex-row justify-content-center ">
-  <div class="row">
+  <div class="row" *ngIf="!isServiceStore">
     <div *ngFor="let store of stores" class="s3 l3 m3 left">
-      <!--
-        <div class="card">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="images/office.jpg">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-            <p><a href="#">This is a link</a></p>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-            <p>Here is some more information about this product that is only revealed once clicked on.</p>
-          </div>
-        </div>
-      -->
 
-              <div class="card">
+              <div class="card" style="width: 18rem;">
                 <span class="card-title">{{store.name}}</span>
                 <p *ngIf = "store.isServiceStore">Este negocio es de servicio.</p>
                 <p *ngIf= "!store.isServiceStore">Este negocio vende productos.</p>
@@ -26,4 +11,42 @@
               </div>
     </div>
   </div>
+  <div class="row" *ngIf="isServiceStore">
+    <div *ngFor="let store of stores" class="s3 l3 m3 left">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{store.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Ofrece servicios</h6>
+          <p class="card-text">{{store.description}}</p>
+          <p><i class="material-icons">star</i> <b>4.5 de 5</b> </p>
+          <p  (click)="store.isCollapsed = !store.isCollapsed" [attr.aria-expanded]="!store.isCollapsed"
+              aria-controls="collapseExample"  class="small text-blue cursor-hand">
+              Ver/Ocultar todas las reseñas
+          </p>
+          <p  class="card-link text-blue cursor-hand" (click)="open(content)" >Escribir mi opinión</p>
+          <div id="collapseExample" [ngbCollapse]="store.isCollapsed">
+            <div class="card">
+              <div class="card-body">
+                Reseñas...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Hello, World!</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+  </div>
+</ng-template>

@@ -6,7 +6,7 @@ import {Order} from '../models';
 export class OrderController {
 
     static async listOrder (req: Request, res: Response){
-        const { idOrder, fkStatusEnum,  fkUser} = req.body; //req.body req.query req.params
+        const { idOrder, fkStatusEnum,  fkUser} = req.query; //req.body req.query req.params
         const _Order: Order[] = await OrderService.listOrder(idOrder, fkStatusEnum, fkUser);
         res.json({length: _Order.length, recordset:_Order});
     }

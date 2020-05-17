@@ -13,7 +13,7 @@
         <i class="material-icons text-black">shopping_cart</i>
       </div>
       <div class=" flex-row center-vertically justify-content-center"  [ngClass]="{'oval-inactive': active !== 1, 'oval-active': active ===1}">
-        <b>{{active}}</b>
+        <b>{{cartProducts}}</b>
       </div>
     </a>
   </li>
@@ -30,7 +30,7 @@
   </li>
 
   <!--My account-->
-  <li ngbDropdown [ngbNavItem]="3" class="h-100" >
+  <li ngbDropdown [ngbNavItem]="3" class="h-100"  *ngIf="user != null" >
     <a href (click)="false" class="nav-link text-black" ngbDropdownToggle>Mi cuenta</a>
     <div ngbDropdownMenu>
       <button (click)="myProfile()" ngbDropdownItem>Mi Perfil</button>

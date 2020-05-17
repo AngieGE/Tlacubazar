@@ -1,1 +1,8 @@
-<p>cart works!</p>
+<div *ngIf="user != null">
+  <p>tus ordenes</p>
+</div>
+
+<div *ngIf="user == null" class="">
+  <p>Oops, su carrito de TlacuBazar esta vacio.</p>
+  <button type="button" class="btn" (click)="login()">Iniciar sesión en tu cuenta</button>
+</div>

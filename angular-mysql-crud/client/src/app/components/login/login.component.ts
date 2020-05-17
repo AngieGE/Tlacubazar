@@ -55,13 +55,13 @@ export class LoginComponent implements OnInit {
             this.tlacu.user.createUser(this.getUser(this.socialUser)).subscribe( newUser => {
               this.tlacu.user.getUser(newUser.createdUser.insertId).subscribe( res => {
                 this.tlacu.manager.setItems( this.socialUser, new User(res.recordset[0]));
-                this.router.navigate(['/profile']);
+                this.router.navigate(['/']);
               });
             });
           } else { // el usuario ya existe
             console.log("si hubo users con ese mail, tomo el usuario");
             this.tlacu.manager.setItems( this.socialUser, new User(users.recordset[0]));
-            this.router.navigate(['/profile']);
+            this.router.navigate(['/']);
           }
       });
     });

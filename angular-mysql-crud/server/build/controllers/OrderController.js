@@ -13,7 +13,7 @@ const services_1 = require("../services");
 class OrderController {
     static listOrder(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idOrder, fkStatusEnum, fkUser } = req.body; //req.body req.query req.params
+            const { idOrder, fkStatusEnum, fkUser } = req.query; //req.body req.query req.params
             const _Order = yield services_1.OrderService.listOrder(idOrder, fkStatusEnum, fkUser);
             res.json({ length: _Order.length, recordset: _Order });
         });
