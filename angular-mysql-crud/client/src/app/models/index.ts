@@ -3,7 +3,7 @@ export * from './AddressEnum';
 export * from './CityEnum';
 export * from './DeliveryMethod';
 export * from './DeliveryMethodEnum';
-export * from './OderDetails';
+export * from './OrderDetails';
 export * from './Order';
 export * from './Payment';
 export * from './Product';
