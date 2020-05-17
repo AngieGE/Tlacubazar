@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {Router} from '@angular/router';
 import { AuthService, SocialUser } from 'angularx-social-login';
-import {TlacuServices} from '../../services/index'
+import {TlacuServices} from '../../services/index';
 import { User } from 'src/app/models';
 @Component({
   selector: 'app-navigation',
@@ -15,6 +15,8 @@ export class NavigationComponent implements OnInit {
   constructor(private authService: AuthService, private tlacu: TlacuServices, private router: Router) {
     this.user = this.tlacu.manager.user;
     this.socialUser = this.tlacu.manager.socialUser;
+    console.log(this.user);
+    console.log(this.socialUser);
    }
 
   ngOnInit(): void {

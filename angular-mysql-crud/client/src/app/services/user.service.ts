@@ -13,7 +13,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  public listUser(idUser?: number, isVendor?: number, firstName?: string, lastName?: string) {
+  public listUser(idUser?: number, isVendor?: number, firstName?: string, lastName?: string, email?: string): Observable<any>{
     let params = new HttpParams();
 
     if (idUser !== undefined && idUser !== null) {
@@ -28,7 +28,11 @@ export class UserService {
     if (lastName !== undefined && lastName !== null) {
       params = params.set('lastName', lastName);
     }
-
+    if (email !== undefined && email !== null) {
+      params = params.set('email', email);
+    }
+    console.log(email);
+    console.log(params);
     let headers = this.defaultHeaders;
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
