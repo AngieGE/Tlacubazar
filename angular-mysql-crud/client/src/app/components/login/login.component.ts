@@ -45,21 +45,25 @@ export class LoginComponent implements OnInit {
       if (this.socialUser === null) {
         return;
       }
-      this.tlacu.manager.setItems( this.socialUser, this.getUser(this.socialUser));
 
-      this.tlacu.user.createUser(this.getUser(this.socialUser)).subscribe(
-          res => {
-            console.log('Created user!', res);
-          },
-          err => {
-            console.log('Could not create user', err);
+      // si ya esta el correo en la BD lo tomo y seteo
+      // si no esta el correo creo el usuario
+      this.tlacu.user.listUser(null, null, null, null, this.socialUser.email).subscribe(
+        users => {
+          if (users.length < 1) { // aun no existe el usuario
+            console.log("no hubo users con ese mail, lo creo");
+            this.tlacu.user.createUser(this.getUser(this.socialUser)).subscribe( newUser => {
+              this.tlacu.user.getUser(newUser.createdUser.insertId).subscribe( res => {
+                this.tlacu.manager.setItems( this.socialUser, new User(res.recordset[0]));
+                this.router.navigate(['/profile']);
+              });
+            });
+          } else { // el usuario ya existe
+            console.log("si hubo users con ese mail, tomo el usuario");
+            this.tlacu.manager.setItems( this.socialUser, new User(users.recordset[0]));
+            this.router.navigate(['/profile']);
           }
-        );
-
-      if (localStorage.getItem('tlacu-user') != null) {
-        this.router.navigate(['/profile']);
-      }
-
+      });
     });
   }
 
@@ -72,10 +76,9 @@ export class LoginComponent implements OnInit {
     }
 
     getUser(socialUser: SocialUser): User {
-      const user = new User();
-      user.email = socialUser.email;
-      user.firstName = socialUser.firstName;
-      user.lastName = socialUser.lastName;
+      const user = new User({ email: socialUser.email,
+                              firstName: socialUser.firstName, lastName: socialUser.lastName,
+                              cacaoBalance: 0, isVendor: 0});
       return user;
   }
 

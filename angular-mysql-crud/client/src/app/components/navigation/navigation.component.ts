@@ -15,6 +15,8 @@ export class NavigationComponent implements OnInit {
   constructor(private authService: AuthService, private tlacu: TlacuServices, private router: Router) {
     this.user = this.tlacu.manager.user;
     this.socialUser = this.tlacu.manager.socialUser;
+    console.log(this.user);
+    console.log(this.socialUser);
    }
 
   ngOnInit(): void {

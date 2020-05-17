@@ -21,14 +21,17 @@ class UserService {
             return recordset.recordset[0];
         });
     }
-    static listUser(idUser, isVendor, firsName, lastName) {
+    static listUser(idUser, isVendor, firsName, lastName, email) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "SELECT * FROM user WHERE ";
             sql += idUser != null ? "idUser = " + idUser + " AND " : "";
             sql += isVendor != null ? "isVendor = " + isVendor + " AND " : "";
-            sql += firsName != null ? "firsName = " + firsName + " AND " : "";
-            sql += lastName != null ? "lastName = " + lastName + " AND " : "";
+            sql += firsName != null ? "firsName = '" + firsName + "' AND " : "";
+            sql += lastName != null ? "lastName = '" + lastName + "' AND " : "";
+            sql += email != null ? "email = '" + email + "' AND " : "";
             sql += "1 = 1 ";
+            console.log(email);
+            console.log(sql);
             const recordset = yield database_1.default.query(sql);
             return recordset;
         });
@@ -44,14 +47,14 @@ class UserService {
     }
     static createUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "INSERT INTO user (email, firstName, lastName, isVendor, phone, cacaoBalance) " +
+            let sql = "INSERT INTO user (email, firstName, lastName, isVendor, cacaoBalance) " +
                 "VALUES ('" + user.email + "', '" +
                 user.firstName + "', '" +
                 user.lastName + "', '" +
                 //user.password + "', '" + 
                 user.isVendor + "', '" +
-                user.phone + "', '" +
                 user.cacaoBalance + "');";
+            console.log(sql);
             const resultado = yield database_1.default.query(sql);
             return resultado;
         });

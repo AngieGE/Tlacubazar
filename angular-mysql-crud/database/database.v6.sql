@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS TlacuBazar;
 USE TlacuBazar;
 
 CREATE TABLE `User` (
-  `idUser` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `idUser` INT(50) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(50) UNIQUE,
   `firstName` VARCHAR(50),
   `lastName` VARCHAR(100),
@@ -163,7 +163,9 @@ CREATE TABLE `CategoryEnum` (
 
 INSERT INTO `DeliveryMethodEnum` (`deliveryMethod`) VALUES ('En automóvil'), ('Transporte público'), ('A pie'), ('En bicicleta'), ('Recoger pedido');
 
-INSERT INTO `User` (`email`, `firstName`, `lastName`, `isVendor`, `phone`, `cacaoBalance`) VALUES ('alejandro.m@gmail.com', 'Alejandro', 'Moral', FALSE, '7771414141', 0.0), ('milagros@manzanas4dayz.com.mx', 'Milagros', 'Ramírez', TRUE, '7774004040', 0.0);
+INSERT INTO `User` (`idUser`, `email`, `firstName`, `lastName`, `isVendor`, `phone`, `cacaoBalance`) VALUES 
+	('1', 'alejandro.m@gmail.com', 'Alejandro', 'Moral', FALSE, '7771414141', 0.0), 
+	('2', 'milagros@manzanas4dayz.com.mx', 'Milagros', 'Ramírez', TRUE, '7774004040', 0.0);
 
 INSERT INTO `AddressEnum` (`address`) VALUES ('Revolución 42'), ('Caudillo del Sur 500'), ('Avenida Universidad 404');
 

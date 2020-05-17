@@ -5,7 +5,7 @@ export class User {
   firstName?:	string;
   lastName?: string;
   password?: string;
-  isVendor?: boolean;
+  isVendor?: number;
   phone?: string;
   cacaoBalance?: number;
 

@@ -17,7 +17,9 @@ export class ManagerService {
   user: User;
   socialUser: SocialUser;
 
-  constructor() { }
+  constructor() {
+    this.getTokenItems()
+  }
 
   setItems(socialUser: SocialUser, user: User) {
     this.user = new User(user);
@@ -32,6 +34,16 @@ export class ManagerService {
       localStorage.setItem('tlacu-user', null);
       localStorage.setItem('tlacu-social-user', null);
   }
-
+  getTokenItems() {
+    try {
+        this.user = JSON.parse(localStorage.getItem('tlacu-user'));
+        this.socialUser = JSON.parse(localStorage.getItem('tlacu-social-user'));
+        if (this.socialUser as any === 'null' || this.user as any === 'null') {
+            this.unsetItems();
+        }
+    } catch {
+        this.unsetItems();
+    }
+  }
 
 }

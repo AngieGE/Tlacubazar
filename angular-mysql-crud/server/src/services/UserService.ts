@@ -9,13 +9,16 @@ export class UserService {
         return recordset.recordset[0];
     }
 
-    static async listUser(idUser?:number, isVendor?:number, firsName?:string, lastName?:string): Promise<User[]>  {
+    static async listUser(idUser?:number, isVendor?:number, firsName?:string, lastName?:string, email?: string): Promise<User[]>  {
         let sql: string = "SELECT * FROM user WHERE "
         sql += idUser!=null ? "idUser = " + idUser + " AND " : "";
         sql += isVendor!=null ? "isVendor = " + isVendor + " AND " : "";
-        sql += firsName!=null ? "firsName = " + firsName + " AND " : "";
-        sql += lastName!=null ? "lastName = " + lastName + " AND " : "";
+        sql += firsName!=null ? "firsName = '" + firsName + "' AND " : "";
+        sql += lastName!=null ? "lastName = '" + lastName + "' AND " : "";
+        sql += email!=null ? "email = '" + email + "' AND " : "";
         sql += "1 = 1 ";
+        console.log(email);
+        console.log(sql);
         const recordset = await pool.query(sql);
         return recordset;
     }
@@ -28,14 +31,14 @@ export class UserService {
         return recordset;
     }
     static async createUser(user: User): Promise<any> {
-        let sql: string = "INSERT INTO user (email, firstName, lastName, isVendor, phone, cacaoBalance) " + 
+        let sql: string = "INSERT INTO user (email, firstName, lastName, isVendor, cacaoBalance) " + 
                                 "VALUES ('"+ user.email + "', '" + 
                                             user.firstName +"', '" + 
                                             user.lastName + "', '" + 
                                             //user.password + "', '" + 
                                             user.isVendor + "', '" + 
-                                            user.phone + "', '" + 
-                                            user.cacaoBalance + "');"
+                                            user.cacaoBalance + "');";
+        console.log(sql);
         const resultado= await pool.query(sql);
         return resultado;
     }
