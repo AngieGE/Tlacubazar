@@ -5,6 +5,8 @@ class Store {
         this.idStore = store.idStore;
         this.name = store.name;
         this.description = store.description;
+        this.phone = store.phone;
+        this.link = store.link;
         this.fkAddress = store.fkAddress;
         this.isServiceStore = store.isServiceStore;
         this.acceptsCacao = store.acceptsCacao;

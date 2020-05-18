@@ -69,16 +69,19 @@
             </div>
 
             <!--stars-->
-
             <li ngbDropdown  class="h-100" >
               <p ngbDropdownToggle><i class="material-icons">star</i> <b>4.5 de 5</b> (3 calificaciones)</p>
               <div ngbDropdownMenu>
                 <div  ngbDropdownItem >
-                  <i class="material-icons inline-block">star</i>
-                  <i class="material-icons inline-block">star</i>
-                  <i class="material-icons inline-block">star</i>
-                  <i class="material-icons inline-block">star</i>
-                  <i class="material-icons inline-block">star</i>
+                  <ngb-rating [(rate)]="selected" (hover)="hovered=$event" (leave)="hovered=0" [readonly]="readonly"></ngb-rating>
+                  <hr>
+                  <pre>
+                  Selected: <b>{{selected}}</b>
+                  Hovered: <b>{{hovered}}</b>
+                  </pre>
+                  <button class="btn btn-sm btn-outline-{{readonly ? 'danger' : 'success'}}" (click)="readonly = !readonly">
+                    {{ readonly ? "readonly" : "editable"}}
+                  </button>
                 </div>
               </div>
             </li>
@@ -86,18 +89,17 @@
             <!--reseñas boton-->
             <p  (click)="store.isCollapsed = !store.isCollapsed" [attr.aria-expanded]="!store.isCollapsed"
                 aria-controls="collapseExample"  class="small text-blue cursor-hand">
-                Ver/Ocultar todas las reseñas
+                Ver/Ocultar todas las reseñas ({{store.storeReviews.length}})
             </p>
             <div>
               <textarea class="mr-2" cols="50" rows="1" placeholder="Querémos escucharte"></textarea>
             </div>
-
             <button type="button" class="btn mb-3" >Compartir mi opinión</button>
-
+            <!--reseñas-->
             <div id="collapseExample" [ngbCollapse]="store.isCollapsed">
               <div class="card pt-3">
-                <div class="card-body review-box" *ngIf="store.storeReviews.length == 0">
-                  Se el primero en escribir tu reseña.
+                <div class="card-body review-box mb-2" *ngIf="store.storeReviews.length == 0">
+                  Se el primero en compartir tu opinión.
                 </div>
                 <div class="card-body review-box" *ngFor="let review of store.storeReviews">
                   <p class="inline-block"><b>{{review.user.firstName}}: </b> {{review.review}}</p>
@@ -108,26 +110,39 @@
         </div>
     </div>
   </div>
-
-
 </div>
+
+<!--MODAL-->
 <ng-template #content let-c="close" let-d="dismiss">
+  <!--HEADER-->
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">{{selectedStore.name}}</h4>
+    <div class="flex-column">
+      <!--titulo-->
+      <h4 class="modal-title" id="modal-basic-title">{{selectedStore.name}}</h4>
+      <!--Servicio y cacao icon-->
+      <div *ngIf="selectedStore.acceptsCacao" class="mt-2 m-neg">
+        <h6 class="card-subtitle mb-2 text-muted inline-block cursor-hand">Ofrece servicios en {{selectedStore.categoryEnum.category}}</h6>
+        <img src="../../../assets/images/vegetariano.png" alt="cacao img" class="inline-block ml-2">
+      </div >
+      <div *ngIf="selectedStore.acceptsCacao == 0" class="mt-2 m-neg">
+        <h6 class="card-subtitle mb-2 text-muted cursor-hand">Ofrece servicios en {{selectedStore.categoryEnum.category}}</h6>
+      </div>
+    </div>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+  <!--BODY-->
   <div class="modal-body">
     <div class="flex-row">
       <i class="material-icons text-black">location_on</i>
       <p class="inline-block">direccion</p>
       <i class="material-icons text-black ml-3">phone</i>
-      <p class="inline-block">telefono</p>
+      <p class="inline-block">{{selectedStore.phone}}</p>
       <i class="material-icons text-black ml-3">person</i>
-      <p class="inline-block">dueño</p>
+      <p class="inline-block">{{selectedStore.vendor.firstName}} {{selectedStore.vendor.lastName}}</p>
       <i class="material-icons text-black ml-3">insert_link</i>
-      <p class="inline-block">sitio oficial</p>
+      <p class="inline-block">{{selectedStore.link}}</p>
     </div>
     <p>{{selectedStore.description}}</p>
     <p>MAPA DE GOOGLE</p>

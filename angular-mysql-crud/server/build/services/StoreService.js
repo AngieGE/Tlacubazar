@@ -39,9 +39,11 @@ class StoreService {
     }
     static createStore(store) {
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "INSERT INTO store (name, description, fkAddress, isServiceStore, acceptsCacao, fkStatusEnum, fkVendor, fkCategoryEnum) " +
+            let sql = "INSERT INTO store (name, description, phone, link, fkAddress, isServiceStore, acceptsCacao, fkStatusEnum, fkVendor, fkCategoryEnum) " +
                 "VALUES ('" + store.name + "', '" +
                 store.description + "', '" +
+                store.phone + "', '" +
+                store.link + "', '" +
                 store.fkAddress + "', '" +
                 store.isServiceStore + "', '" +
                 store.acceptsCacao + "', '" +
@@ -57,6 +59,8 @@ class StoreService {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "UPDATE store SET " +
                 "name = '" + store.name + "', " +
+                "description = '" + store.description + "', " +
+                "link = '" + store.link + "', " +
                 "fkAddress = '" + store.fkAddress + "', " +
                 "isServiceStore = '" + store.isServiceStore + "', " +
                 "acceptsCacao = " + store.acceptsCacao + ", " +
