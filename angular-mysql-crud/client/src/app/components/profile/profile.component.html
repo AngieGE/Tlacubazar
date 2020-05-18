@@ -2,7 +2,7 @@
   <div class="col-4">
     <div class="card text-center bg-light text-dark"><!--Profile pic and name-->
       <div class="card-body ">
-        <img *ngIf="loggedIn" [src]="user.photoUrl" alt="" class="rounded-circle">
+        <img *ngIf="loggedIn" [src]="socialUser.photoUrl" alt="" class="rounded-circle">
         <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
       </div>
     </div>
@@ -10,11 +10,10 @@
     <div class="card text-center bg-light text-dark">
       <div class="card-body">
         <h5 class="card-title">Teléfono:</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{7774968039}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{user.phone}}</h6>
         <h5 class="card-title">Correo:</h5>
-        <h6 class="card-subtitle mb-2 text-muted">kike.fvla@gmail.com</h6>
-        <h5 class="card-title">Miembro vendedor:</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Miembro vendedor</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
+        <h5 class="card-subtitle mb-2 text-muted" *ngIf="user.isVendor">Miembro vendedor</h5>
       </div>
     </div>
   </div>
@@ -22,7 +21,7 @@
     <div class="card text-center bg-light text-dark"> <!-- Cacao balance-->
       <div class="card-body">
         <h5 class="card-title">Balance de cacao</h5>
-        <h6 class="card-subtitle mb-2 text-muted">100</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{user.cacaoBalance | number}}</h6>
       </div>
     </div>
     <h4 class="text-center">Negocios registrados</h4> <!--Registered stores-->
