@@ -17,6 +17,11 @@ export class CatalogueComponent implements OnInit {
   categories: CategoryEnum[];
   onlyCacaoStores = false;
   selectedStore: Store;
+  // rating config
+  selected = 0;
+  hovered = 0;
+  readonly = false;
+
   constructor(private tlacu: TlacuServices, private router: Router,
               config: NgbModalConfig, private modalService: NgbModal ) {
 
