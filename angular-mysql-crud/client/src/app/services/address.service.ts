@@ -38,7 +38,7 @@ export class AddressService {
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.get<Address[]>(`${this.API_URL}/address`, { params, headers });
+    return this.http.get<Address[]>(`${this.API_URL}`, { params, headers });
   }
 
   public getAddress(idAddress: number): Observable<any> {
@@ -46,7 +46,7 @@ export class AddressService {
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.get<Address[]>(`${this.API_URL}/address/${idAddress}`, { headers });
+    return this.http.get<Address[]>(`${this.API_URL}/${idAddress}`, { headers });
   }
 
   public createAddress(address: Address): Observable<any> {
@@ -62,7 +62,7 @@ export class AddressService {
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.put<Address>(`${this.API_URL}/address/${idAddress}`, address, { headers });
+    return this.http.put<Address>(`${this.API_URL}/${idAddress}`, address, { headers });
   }
 
   public deleteAddress(idAddress: number): Observable<any> {
@@ -70,6 +70,6 @@ export class AddressService {
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.delete(`${this.API_URL}/address/${idAddress}`, { headers });
+    return this.http.delete(`${this.API_URL}/${idAddress}`, { headers });
   }
 }
