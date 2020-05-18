@@ -1,51 +1,62 @@
 <div class="row justify-content-md-center">
   <div class="col-4">
     <!--Profile pic and name-->
-    <div class="card text-center bg-light text-dark mb-4">
+    <div class="card text-center bg-secondary text-dark mb-4">
       <div class="card-body ">
-        <img *ngIf="loggedIn" [src]="socialUser.photoUrl" alt="" class="rounded-circle mb-2">
-        <h5 class="card-subtitle mb-2 text-muted">{{user.firstName}} {{user.lastName}}</h5>
+        <img *ngIf="loggedIn" [src]="socialUser.photoUrl" alt="" class="rounded-circle mb-3">
+        <h5 class="card-subtitle mb-2 text-white">{{user.firstName}} {{user.lastName}}</h5>
       </div>
     </div>
     <!--Basic info-->
     <div class="card text-center bg-light text-dark">
-
-      <div class="card-body">
+      <div class="card-header">
         <h4 class="card-title text-center">Información básica</h4>
+      </div>
+      <div class="card-body">
         <h5 class="card-title">Teléfono:</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{user.phone}}7774968039</h6>
         <h5 class="card-title">Correo:</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
         <h5 class="card-subtitle mb-2 text-muted" *ngIf="user.isVendor">Miembro vendedor</h5>
+        <h5 class="card-title text-center">Balance de cacao</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{user.cacaoBalance | number}}100</h6>
       </div>
     </div>
   </div>
   <p></p>
   <div class="col-6">
-    <!-- Cacao balance-->
-    <div class="card text-center bg-light text-dark mb-4">
-      <div class="card-body">
-        <h4 class="card-title text-center">Balance de cacao</h4>
-        <h6 class="card-subtitle mb-2 text-muted">{{user.cacaoBalance | number}}100</h6>
-      </div>
-    </div>
+
     <!--Registered address-->
     <div class="card text-center bg-light text-dark mb-4">
-      <div class="card-body">
+      <div class="card-header">
         <h4 class="card-title text-center">Direcciones registradas</h4>
-        <h6 class="card-subtitle mb-2 text-muted">Direccion1</h6>
-        <h6 class="card-subtitle mb-2 text-muted">Direccion2</h6>
-        <h6 class="card-subtitle mb-2 text-muted">Direccion3</h6>
+      </div>
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Calle 12 de octubre no. 1 col. Vicente E, P.O. Box: 62460</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Calle panorámica #5152, P.O. Box: 44250</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Av. Pablo Livas No. 2103-G, Col. La Quinta</h6>
+      </div>
+      <div class="card-footer">
+        <a href="#" class="card-link">Añadir dirección</a>
+        <a href="#" class="card-link">Editar dirección</a>
+        <a href="#" class="card-link">Eliminar dirección</a>
       </div>
     </div>
     <!--Registered stores-->
     <div class="card text-center bg-light text-dark">
+      <div class="card-header">
+        <h4 class="text-center">Negocios registrados</h4>
+      </div>
       <div class="card-body">
-      <h4 class="text-center">Negocios registrados</h4>
         <a href=""><h5 class="card-title">Ferreteria Julio</h5></a>
         <a href=""><h5 class="card-title">Florería Luz</h5></a>
         <a href=""><h5 class="card-title">Tintorería Dry Clean Service</h5></a>
         <h6 class="card-subtitle mb-2 text-muted"></h6>
+      </div>
+      <div class="card-footer">
+        <a href="#" class="card-link">Añadir negocio</a>
+        <a href="#" class="card-link">Editar negocio</a>
+        <a href="#" class="card-link">Eliminar negocio</a>
       </div>
     </div>
   </div>
