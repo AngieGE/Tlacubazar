@@ -30,7 +30,7 @@
   </li>
 
   <!--My account-->
-  <li ngbDropdown [ngbNavItem]="3" class="h-100"  *ngIf="user != null" >
+  <li ngbDropdown [ngbNavItem]="3" class="h-100"  [ngClass]="{'active': active === 3}" *ngIf="user != null" >
     <a href (click)="false" class="nav-link text-black" ngbDropdownToggle>Mi cuenta</a>
     <div ngbDropdownMenu>
       <button (click)="myProfile()" ngbDropdownItem>Mi Perfil</button>

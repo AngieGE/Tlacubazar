@@ -18,3 +18,4 @@ __export(require("./ProductRoutes"));
 __export(require("./ProductReviewRoutes"));
 __export(require("./StoreReviewRoutes"));
 __export(require("./UserAddressRoutes"));
+__export(require("./CategoryEnumRoutes"));

@@ -13,3 +13,4 @@ export * from './ProductController';
 export * from './ProductReviewController';
 export * from './StoreReviewController';
 export * from './UserAddressController';
+export * from './CategoryEnumController';

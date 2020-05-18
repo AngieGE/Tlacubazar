@@ -1,61 +1,133 @@
 
-<div class="flex-row  ">
+<div class="flex-row " id="catalogo">
   <!--filtros-->
-  <div class="col-md-3" id="filtros">
-    columna
+  <div class="col-md-4 flex-col justify-content-left m-2" id="filtros">
+    <h3 class="mt-2">Filtra tu busqueda</h3>
+    <!--cacao filter-->
+    <h5>Cacao</h5>
+    <div class="ml-4">
+      <input class="form-check-input" type="checkbox"  [attr.checked]="onlyCacaoStores ? 'checked' : null" id="defaultCheck1" (click)="onlyCacaoStores = !onlyCacaoStores; applyFiler()">
+      <label class="form-check-label" (click)="onlyCacaoStores = !onlyCacaoStores; applyFiler()">
+        Acepta cacao
+      </label>
+    </div>
+    <!--category filter-->
+    <h5>Categorías</h5>
+    <!--category buttons-->
+    <div class="flex-row" id="category-bottons">
+      <p  class="card-link text-blue cursor-hand" (click)="setAllCategories(true); applyFiler();" >Todas</p>
+      <p  class="card-link text-blue cursor-hand" (click)="setAllCategories(false);  applyFiler();" >Ninguna</p>
+    </div>
+    <!--categories-->
+    <div class="y-scroll" id="categories-box">
+      <div *ngFor="let cat of categories">
+        <div class="">
+          <input  type="checkbox" [attr.checked]="cat.selected ? 'checked' : null" (click)="cat.selected = !cat.selected; applyFiler()">
+          <label  (click)="cat.selected = !cat.selected; applyFiler()" class="ml-1">
+            {{cat.category}}
+          </label>
+        </div>
+      </div>
+    </div>
+    <div>
+
+    </div>
   </div>
 
   <!--productos-->
-  <div class="row lista" *ngIf="!isServiceStore">
+  <div class="row list w-100"  *ngIf="!isServiceStore">
     <div *ngFor="let store of stores" class="s3 l3 m3 left">
 
-              <div class="card" style="width: 18rem;">
-                <span class="card-title">{{store.name}}</span>
-                <p *ngIf = "store.isServiceStore">Este negocio es de servicio.</p>
-                <p *ngIf= "!store.isServiceStore">Este negocio vende productos.</p>
-                <p *ngIf = "store.acceptsCacao">¡Este negocio acepta cacao!</p>
-              </div>
+                <div class="card" style="width: 18rem;">
+                  <span class="card-title">{{store.name}}</span>
+                  <p *ngIf = "store.isServiceStore">Este negocio es de servicio.</p>
+                  <p *ngIf= "!store.isServiceStore">Este negocio vende productos.</p>
+                  <p *ngIf = "store.acceptsCacao">¡Este negocio acepta cacao!</p>
+                </div>
     </div>
   </div>
 
   <!--Servicios-->
-  <div class="row row-md-9 lista" *ngIf="isServiceStore">
-    <div *ngFor="let store of stores" class="s3 l3 m3 left">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{store.name}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Ofrece servicios</h6>
-          <p class="card-text">{{store.description}}</p>
-          <p><i class="material-icons">star</i> <b>4.5 de 5</b> </p>
-          <p  (click)="store.isCollapsed = !store.isCollapsed" [attr.aria-expanded]="!store.isCollapsed"
-              aria-controls="collapseExample"  class="small text-blue cursor-hand">
-              Ver/Ocultar todas las reseñas
-          </p>
-          <p  class="card-link text-blue cursor-hand" (click)="open(content)" >Escribir mi opinión</p>
-          <div id="collapseExample" [ngbCollapse]="store.isCollapsed">
-            <div class="card">
-              <div class="card-body">
-                Reseñas...
+  <div class="row flex-row justify-content-center list w-100 " *ngIf="isServiceStore">
+    <p class="text-muted m-neg">{{stores.length}} resultados encontrados. </p>
+    <div *ngFor="let store of stores" class="w-100">
+        <div class="card m-3 ml-4">
+          <div class="card-body">
+            <!--Boton para ver detalles-->
+            <div class="cursor-hand" (click)="setSelectedStore(store); open(content)">
+              <h5 class="card-title cursor-hand">{{store.name}}</h5>
+              <!--Servicio y cacao icon-->
+              <div *ngIf="store.acceptsCacao" class="cursor-hand">
+                <h6 class="card-subtitle mb-2 text-muted inline-block cursor-hand">Ofrece servicios</h6>
+                <img src="../../../assets/images/vegetariano.png" alt="cacao img" class="inline-block ml-2">
+              </div >
+              <div class="cursor-hand" *ngIf="store.acceptsCacao == 0">
+                <h6 class="card-subtitle mb-2 text-muted cursor-hand">Ofrece servicios</h6>
+              </div>
+              <!--description-->
+              <p class="card-text">{{store.description}}</p>
+            </div>
+
+            <!--stars-->
+
+            <li ngbDropdown  class="h-100" >
+              <p ngbDropdownToggle><i class="material-icons">star</i> <b>4.5 de 5</b> (3 calificaciones)</p>
+              <div ngbDropdownMenu>
+                <div  ngbDropdownItem >
+                  <i class="material-icons inline-block">star</i>
+                  <i class="material-icons inline-block">star</i>
+                  <i class="material-icons inline-block">star</i>
+                  <i class="material-icons inline-block">star</i>
+                  <i class="material-icons inline-block">star</i>
+                </div>
+              </div>
+            </li>
+
+            <!--reseñas boton-->
+            <p  (click)="store.isCollapsed = !store.isCollapsed" [attr.aria-expanded]="!store.isCollapsed"
+                aria-controls="collapseExample"  class="small text-blue cursor-hand">
+                Ver/Ocultar todas las reseñas
+            </p>
+            <div>
+              <textarea class="mr-2" cols="50" rows="1" placeholder="Querémos escucharte"></textarea>
+            </div>
+
+            <button type="button" class="btn mb-3" >Compartir mi opinión</button>
+
+            <div id="collapseExample" [ngbCollapse]="store.isCollapsed">
+              <div class="card">
+                <div class="card-body">
+                  Reseñas...
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
+
 
 </div>
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Queremos escucharte</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{selectedStore.name}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p>Hello, World!</p>
+    <div class="flex-row">
+      <i class="material-icons text-black">location_on</i>
+      <p class="inline-block">direccion</p>
+      <i class="material-icons text-black ml-3">phone</i>
+      <p class="inline-block">telefono</p>
+      <i class="material-icons text-black ml-3">person</i>
+      <p class="inline-block">dueño</p>
+      <i class="material-icons text-black ml-3">insert_link</i>
+      <p class="inline-block">sitio oficial</p>
+    </div>
+    <p>{{selectedStore.description}}</p>
+    <p>MAPA DE GOOGLE</p>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
-  </div>
+
 </ng-template>

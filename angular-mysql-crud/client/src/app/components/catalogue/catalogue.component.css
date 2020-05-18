@@ -9,8 +9,28 @@
   font-size: x-small;
 }
 #filtros{
-  background-color: hotpink;
+  background-color: ghostwhite;
 }
-.lista{
-  background-color: green;
+.list{
+  overflow-y: scroll;
+  height: 80vh;
+}
+#catalogo{
+  height: 80vh;
+}
+#category-bottons{
+  margin-bottom: -13px;
+}
+.y-scroll{
+  overflow-y: scroll;
+}
+#categories-box{
+  height: 65%;
+}
+.m-neg{
+  margin-bottom: -13px;
+}
+
+*{
+  list-style: none
 }

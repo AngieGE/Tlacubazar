@@ -3,7 +3,7 @@ import { UserRoutes, StoreRoutes, AddressRoutes,
         AddressEnumRoutes, StateEnumRoutes, CityEnumRoutes,
         SuburbEnumRoutes, DeliveryMethodRoutes, OrderDetailsRoutes,
         OrderRoutes, PaymentRoutes, ProductRoutes, ProductReviewRoutes,
-        StoreReviewRoutes, UserAddressRoutes } from './routes';
+        StoreReviewRoutes, UserAddressRoutes, CategoryEnumRoutes } from './routes';
 import morgan from 'morgan';
 import cors from 'cors';
 
@@ -44,6 +44,8 @@ class Server{
         this.app.use('/productReview', ProductReviewRoutes.getInstance().router);
         this.app.use('/storeReview', StoreReviewRoutes.getInstance().router);
         this.app.use('/userAddress', UserAddressRoutes.getInstance().router);
+
+        this.app.use('/categoryEnum', CategoryEnumRoutes.getInstance().router);
     }
 
     start(): void{

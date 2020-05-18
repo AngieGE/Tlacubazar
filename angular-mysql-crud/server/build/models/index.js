@@ -20,3 +20,4 @@ __export(require("./SuburbEnum"));
 __export(require("./User"));
 __export(require("./UserAddress"));
 __export(require("./StatusEnum"));
+__export(require("./CategoryEnum"));

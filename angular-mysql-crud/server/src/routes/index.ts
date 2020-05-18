@@ -13,3 +13,4 @@ export * from './ProductRoutes';
 export * from './ProductReviewRoutes';
 export * from './StoreReviewRoutes';
 export * from './UserAddressRoutes';
+export * from './CategoryEnumRoutes';
