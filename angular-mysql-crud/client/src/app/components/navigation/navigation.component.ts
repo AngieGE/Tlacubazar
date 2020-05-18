@@ -55,6 +55,7 @@ export class NavigationComponent implements OnInit {
   }
 
   myProfile() {
+    this.active = 3;
     this.router.navigate(['/profile']);
   }
 

@@ -18,3 +18,4 @@ __export(require("./ProductController"));
 __export(require("./ProductReviewController"));
 __export(require("./StoreReviewController"));
 __export(require("./UserAddressController"));
+__export(require("./CategoryEnumController"));

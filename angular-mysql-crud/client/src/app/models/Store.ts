@@ -9,6 +9,7 @@ export class Store {
   acceptsCacao?: number;
   fkStatusEnum?: number;
   fkVendor?: number;
+  fkCategoryEnum?: number;
 
   // has
   address: Address;
@@ -16,18 +17,19 @@ export class Store {
   vendor: User;
 
   // extra
-  isCollapsed = false;
+  isCollapsed = true;
 
   constructor(store?: Store) {
     if (store != null) {
       this.idStore = store.idStore;
       this.name = store.name;
-      this.description = this.description;
+      this.description = store.description;
       this.fkAddress = store.fkAddress;
       this.isServiceStore = store.isServiceStore;
       this.acceptsCacao = store.acceptsCacao;
       this.fkStatusEnum = store.fkStatusEnum;
       this.fkVendor = store.fkVendor;
+      this.fkCategoryEnum = store.fkCategoryEnum;
     }
   }
 }

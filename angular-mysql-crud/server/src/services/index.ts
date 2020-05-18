@@ -13,3 +13,4 @@ export * from './ProductService';
 export * from './ProductReviewService';
 export * from './StoreReviewService';
 export * from './UserAddressService';
+export * from './CategoryEnumService';

@@ -46,3 +46,13 @@
 .cursor-arrow{
   cursor: context-menu;
 }
+.inline-block{
+  display: inline-block;
+}
+.opinion-box{
+  width: 70%;
+}
+.btn{
+  background-color: #EE6E73;
+  color: black;
+}

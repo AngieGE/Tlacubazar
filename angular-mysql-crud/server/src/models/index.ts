@@ -15,3 +15,4 @@ export * from './SuburbEnum';
 export * from './User';
 export * from './UserAddress';
 export * from './StatusEnum';
+export * from './CategoryEnum';

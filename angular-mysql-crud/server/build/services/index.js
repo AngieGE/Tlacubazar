@@ -18,3 +18,4 @@ __export(require("./ProductService"));
 __export(require("./ProductReviewService"));
 __export(require("./StoreReviewService"));
 __export(require("./UserAddressService"));
+__export(require("./CategoryEnumService"));
