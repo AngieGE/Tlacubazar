@@ -1,32 +1,47 @@
 <div class="row justify-content-md-center">
   <div class="col-4">
-    <div class="card text-center bg-light text-dark"><!--Profile pic and name-->
+    <!--Profile pic and name-->
+    <div class="card text-center bg-light text-dark mb-4">
       <div class="card-body ">
-        <img *ngIf="loggedIn" [src]="socialUser.photoUrl" alt="" class="rounded-circle">
-        <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
+        <img *ngIf="loggedIn" [src]="socialUser.photoUrl" alt="" class="rounded-circle mb-2">
+        <h5 class="card-subtitle mb-2 text-muted">{{user.firstName}} {{user.lastName}}</h5>
       </div>
     </div>
-    <h4 class="text-center">Información básica</h4><!--Basic info-->
+    <!--Basic info-->
     <div class="card text-center bg-light text-dark">
+
       <div class="card-body">
+        <h4 class="card-title text-center">Información básica</h4>
         <h5 class="card-title">Teléfono:</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{user.phone}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{user.phone}}7774968039</h6>
         <h5 class="card-title">Correo:</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
         <h5 class="card-subtitle mb-2 text-muted" *ngIf="user.isVendor">Miembro vendedor</h5>
       </div>
     </div>
   </div>
-  <div class="col-4">
-    <div class="card text-center bg-light text-dark"> <!-- Cacao balance-->
+  <p></p>
+  <div class="col-6">
+    <!-- Cacao balance-->
+    <div class="card text-center bg-light text-dark mb-4">
       <div class="card-body">
-        <h5 class="card-title">Balance de cacao</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{user.cacaoBalance | number}}</h6>
+        <h4 class="card-title text-center">Balance de cacao</h4>
+        <h6 class="card-subtitle mb-2 text-muted">{{user.cacaoBalance | number}}100</h6>
       </div>
     </div>
-    <h4 class="text-center">Negocios registrados</h4> <!--Registered stores-->
+    <!--Registered address-->
+    <div class="card text-center bg-light text-dark mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center">Direcciones registradas</h4>
+        <h6 class="card-subtitle mb-2 text-muted">Direccion1</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Direccion2</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Direccion3</h6>
+      </div>
+    </div>
+    <!--Registered stores-->
     <div class="card text-center bg-light text-dark">
       <div class="card-body">
+      <h4 class="text-center">Negocios registrados</h4>
         <a href=""><h5 class="card-title">Ferreteria Julio</h5></a>
         <a href=""><h5 class="card-title">Florería Luz</h5></a>
         <a href=""><h5 class="card-title">Tintorería Dry Clean Service</h5></a>
