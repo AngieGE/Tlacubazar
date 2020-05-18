@@ -6,13 +6,13 @@ import {StateEnum} from '../models';
 export class StateEnumController {
 
     static async listStateEnum (req: Request, res: Response){
-        const { idStateEnum, state } = req.body; //req.body req.query req.params
+        const { idStateEnum, state } = req.query; //req.body req.query req.params
         const _statesEnum: StateEnum[] = await StateEnumService.listStateEnum(idStateEnum, state);
         res.json({length: _statesEnum.length, recordset:_statesEnum});
     }
     
     static async getStateEnum (req: Request, res: Response){
-        const { idStateEnum} = req.params; //req.body req.query req.params
+        const { idStateEnum} = req.query; //req.body req.query req.params
         const _statesEnum: StateEnum[] = await StateEnumService.getStateEnum(parseInt(idStateEnum));
         res.json({length: _statesEnum.length, recordset:_statesEnum});
     }

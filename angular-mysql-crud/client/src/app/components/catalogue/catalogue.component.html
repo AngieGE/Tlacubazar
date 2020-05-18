@@ -58,11 +58,11 @@
               <h5 class="card-title cursor-hand">{{store.name}}</h5>
               <!--Servicio y cacao icon-->
               <div *ngIf="store.acceptsCacao" class="cursor-hand">
-                <h6 class="card-subtitle mb-2 text-muted inline-block cursor-hand">Ofrece servicios</h6>
+                <h6 class="card-subtitle mb-2 text-muted inline-block cursor-hand">Ofrece servicios en {{store.categoryEnum.category}}</h6>
                 <img src="../../../assets/images/vegetariano.png" alt="cacao img" class="inline-block ml-2">
               </div >
               <div class="cursor-hand" *ngIf="store.acceptsCacao == 0">
-                <h6 class="card-subtitle mb-2 text-muted cursor-hand">Ofrece servicios</h6>
+                <h6 class="card-subtitle mb-2 text-muted cursor-hand">Ofrece servicios en {{store.categoryEnum.category}}</h6>
               </div>
               <!--description-->
               <p class="card-text">{{store.description}}</p>
@@ -95,9 +95,12 @@
             <button type="button" class="btn mb-3" >Compartir mi opinión</button>
 
             <div id="collapseExample" [ngbCollapse]="store.isCollapsed">
-              <div class="card">
-                <div class="card-body">
-                  Reseñas...
+              <div class="card pt-3">
+                <div class="card-body review-box" *ngIf="store.storeReviews.length == 0">
+                  Se el primero en escribir tu reseña.
+                </div>
+                <div class="card-body review-box" *ngFor="let review of store.storeReviews">
+                  <p class="inline-block"><b>{{review.user.firstName}}: </b> {{review.review}}</p>
                 </div>
               </div>
             </div>

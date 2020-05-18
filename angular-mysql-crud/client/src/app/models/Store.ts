@@ -1,4 +1,5 @@
-import { Address, StatusEnum, User } from './index';
+import { Address, StatusEnum, User, StoreReview } from './index';
+import { CategoryEnum } from './CategoryEnum';
 
 export class Store {
   idStore?: number;
@@ -12,9 +13,12 @@ export class Store {
   fkCategoryEnum?: number;
 
   // has
-  address: Address;
-  statusEnum: StatusEnum;
-  vendor: User;
+  address: Address = new Address();
+  statusEnum: StatusEnum = new StatusEnum();
+  vendor: User = new User();
+  categoryEnum: CategoryEnum = new CategoryEnum();
+  storeReviews: StoreReview[] = new Array();
+
 
   // extra
   isCollapsed = true;

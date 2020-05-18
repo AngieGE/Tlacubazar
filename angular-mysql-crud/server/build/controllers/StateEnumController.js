@@ -13,14 +13,14 @@ const services_1 = require("../services");
 class StateEnumController {
     static listStateEnum(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idStateEnum, state } = req.body; //req.body req.query req.params
+            const { idStateEnum, state } = req.query; //req.body req.query req.params
             const _statesEnum = yield services_1.StateEnumService.listStateEnum(idStateEnum, state);
             res.json({ length: _statesEnum.length, recordset: _statesEnum });
         });
     }
     static getStateEnum(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idStateEnum } = req.params; //req.body req.query req.params
+            const { idStateEnum } = req.query; //req.body req.query req.params
             const _statesEnum = yield services_1.StateEnumService.getStateEnum(parseInt(idStateEnum));
             res.json({ length: _statesEnum.length, recordset: _statesEnum });
         });

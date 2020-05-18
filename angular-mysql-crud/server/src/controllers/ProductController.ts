@@ -6,13 +6,13 @@ import {Product} from '../models';
 export class ProductController {
 
     static async listProduct (req: Request, res: Response){
-        const { name, fkStore, fkCategoryEnum} = req.body; //req.body req.query req.params
+        const { name, fkStore, fkCategoryEnum} = req.query; //req.body req.query req.params
         const _Product: Product[] = await ProductService.listProduct(name, fkStore, fkCategoryEnum);
         res.json({length: _Product.length, recordset:_Product});
     }
     
     static async getProduct (req: Request, res: Response){
-        const { idProduct} = req.params; //req.body req.query req.params
+        const { idProduct} = req.query; //req.body req.query req.params
         const _Product: Product[] = await ProductService.getProduct(parseInt(idProduct));
         res.json({length: _Product.length, recordset:_Product});
     }

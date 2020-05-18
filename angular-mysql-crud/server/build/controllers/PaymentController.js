@@ -13,14 +13,14 @@ const services_1 = require("../services");
 class PaymentController {
     static listPayment(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idPayment, fkClient, fkVendor, fkOrder } = req.body; //req.body req.query req.params
+            const { idPayment, fkClient, fkVendor, fkOrder } = req.query; //req.body req.query req.params
             const _payment = yield services_1.PaymentService.listPayment(idPayment, fkClient, fkVendor, fkOrder);
             res.json({ length: _payment.length, recordset: _payment });
         });
     }
     static getPayment(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idPayment } = req.params; //req.body req.query req.params
+            const { idPayment } = req.query; //req.body req.query req.params
             const _payment = yield services_1.PaymentService.getPayment(parseInt(idPayment));
             res.json({ length: _payment.length, recordset: _payment });
         });

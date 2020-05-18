@@ -17,7 +17,7 @@ class StoreService {
     static listStore(isServiceStore, acceptsCacao, fkStatusEnum, fkVendor, fkCategoryEnum) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "SELECT * FROM store WHERE ";
-            sql += (isServiceStore != null || isServiceStore != NaN) ? "isServiceStore = " + isServiceStore + " AND " : "";
+            sql += isServiceStore != null ? "isServiceStore = " + isServiceStore + " AND " : "";
             sql += acceptsCacao != null ? "acceptsCacao = " + acceptsCacao + " AND " : "";
             sql += fkStatusEnum != null ? "fkStatusEnum = " + fkStatusEnum + " AND " : "";
             sql += fkVendor != null ? "fkVendor = " + fkVendor + " AND " : "";

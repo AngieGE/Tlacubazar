@@ -8,8 +8,8 @@ export class StoreReview {
     fkUser?: number;
 
     // has
-    store: Store;
-    user: User;
+    store: Store = new Store();
+    user: User = new User();
 
     constructor(productReview?: StoreReview) {
       if (productReview != null) {

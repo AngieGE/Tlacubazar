@@ -12,7 +12,7 @@ export class StoreController {
     }
 
     static async getStore (req: Request, res: Response){
-        const { idStore } = req.params; //req.body req.query req.params
+        const { idStore } = req.query; //req.body req.query req.params
         const _store: Store[] = await StoreService.listStore(parseInt(idStore));
         res.json({length: _store.length, recordset:_store});
     }

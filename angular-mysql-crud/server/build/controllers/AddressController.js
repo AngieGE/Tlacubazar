@@ -13,14 +13,14 @@ const services_1 = require("../services");
 class AddressController {
     static listAddress(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idAddress, fkAddressEnum, fkStateEnum, fkCityEnum, fkSuburbEnum } = req.body; //req.body req.query req.params
+            const { idAddress, fkAddressEnum, fkStateEnum, fkCityEnum, fkSuburbEnum } = req.query; //req.body req.query req.params
             const _addresses = yield services_1.AddressService.listAddress(idAddress, fkAddressEnum, fkStateEnum, fkCityEnum, fkSuburbEnum);
             res.json({ length: _addresses.length, recordset: _addresses });
         });
     }
     static getAddress(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idAddress } = req.params; //req.body req.query req.params
+            const { idAddress } = req.query; //req.body req.query req.params
             const _address = yield services_1.AddressService.getAddress(parseInt(idAddress));
             res.json({ length: _address.length, recordset: _address });
         });
@@ -43,7 +43,7 @@ class AddressController {
     }
     static updateAddress(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idAddress } = req.params;
+            const { idAddress } = req.query;
             let address = req.body;
             const _updateAddress = yield services_1.AddressService.updateAddress(parseInt(idAddress), address);
             let suc;
@@ -60,7 +60,7 @@ class AddressController {
     }
     static deleteAddress(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idAddress } = req.params;
+            const { idAddress } = req.query;
             const _deleteAddress = yield services_1.AddressService.deleteAddress(parseInt(idAddress));
             let suc;
             if (_deleteAddress.affectedRows < 1) {

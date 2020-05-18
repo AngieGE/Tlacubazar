@@ -5,7 +5,7 @@ export class StoreService {
    
     static async listStore(isServiceStore?:number, acceptsCacao?:number, fkStatusEnum?:number, fkVendor?:number, fkCategoryEnum?: number): Promise<Store[]>  {
         let sql: string = "SELECT * FROM store WHERE "
-        sql += (isServiceStore!=null || isServiceStore!=NaN) ? "isServiceStore = " + isServiceStore + " AND " : "";
+        sql += isServiceStore!=null ? "isServiceStore = " + isServiceStore + " AND " : "";
         sql += acceptsCacao!=null ? "acceptsCacao = " + acceptsCacao + " AND " : "";
         sql += fkStatusEnum!=null ? "fkStatusEnum = " + fkStatusEnum + " AND " : "";
         sql += fkVendor!=null ? "fkVendor = " + fkVendor + " AND " : "";

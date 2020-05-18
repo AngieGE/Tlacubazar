@@ -13,14 +13,14 @@ const services_1 = require("../services");
 class AddressEnumController {
     static listAddressEnum(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idAddressEnum, address } = req.body; //req.body req.query req.params
+            const { idAddressEnum, address } = req.query; //req.body req.query req.params
             const _addressesEnum = yield services_1.AddressEnumService.listAddressEnum(idAddressEnum, address);
             res.json({ length: _addressesEnum.length, recordset: _addressesEnum });
         });
     }
     static getAddressEnum(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idAddressEnum } = req.params; //req.body req.query req.params
+            const { idAddressEnum } = req.query; //req.body req.query req.params
             const _addressesEnum = yield services_1.AddressEnumService.getAddressEnum(parseInt(idAddressEnum));
             res.json({ length: _addressesEnum.length, recordset: _addressesEnum });
         });
@@ -43,7 +43,7 @@ class AddressEnumController {
     }
     static updateAddressEnum(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idAddressEnum } = req.params;
+            const { idAddressEnum } = req.query;
             let addressEnum = req.body;
             const _updateAddressEnum = yield services_1.AddressEnumService.updateAddressEnum(parseInt(idAddressEnum), addressEnum);
             let suc;
@@ -60,7 +60,7 @@ class AddressEnumController {
     }
     static deleteAddressEnum(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idAddressEnum } = req.params;
+            const { idAddressEnum } = req.query;
             const _deleteAddressEnum = yield services_1.AddressEnumService.deleteAddressEnum(parseInt(idAddressEnum));
             let suc;
             if (_deleteAddressEnum.affectedRows < 1) {

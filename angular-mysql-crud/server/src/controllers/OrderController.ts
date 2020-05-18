@@ -12,7 +12,7 @@ export class OrderController {
     }
 
     static async getOrder (req: Request, res: Response){
-        const { idOrder } = req.params; //req.body req.query req.params
+        const { idOrder } = req.query; //req.body req.query req.params
         const _Order: Order[] = await OrderService.getOrder(parseInt(idOrder));
         res.json({length: _Order.length, recordset:_Order});
     }

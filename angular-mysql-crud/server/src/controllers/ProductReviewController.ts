@@ -6,13 +6,13 @@ import {ProductReview} from '../models';
 export class ProductReviewController {
 
     static async listProductReview (req: Request, res: Response){
-        const { fkProduct, fkUser} = req.body; //req.body req.query req.params
+        const { fkProduct, fkUser} = req.query; //req.body req.query req.params
         const _ProductReview: ProductReview[] = await ProductReviewService.listProductReview( fkProduct, fkUser);
         res.json({length: _ProductReview.length, recordset:_ProductReview});
     }
     
     static async getProductReview (req: Request, res: Response){
-        const { idProductReview} = req.params; //req.body req.query req.params
+        const { idProductReview} = req.query; //req.body req.query req.params
         const _ProductReview: ProductReview[] = await ProductReviewService.getProductReview(parseInt(idProductReview));
         res.json({length: _ProductReview.length, recordset:_ProductReview});
     }

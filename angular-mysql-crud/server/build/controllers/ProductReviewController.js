@@ -13,14 +13,14 @@ const services_1 = require("../services");
 class ProductReviewController {
     static listProductReview(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { fkProduct, fkUser } = req.body; //req.body req.query req.params
+            const { fkProduct, fkUser } = req.query; //req.body req.query req.params
             const _ProductReview = yield services_1.ProductReviewService.listProductReview(fkProduct, fkUser);
             res.json({ length: _ProductReview.length, recordset: _ProductReview });
         });
     }
     static getProductReview(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idProductReview } = req.params; //req.body req.query req.params
+            const { idProductReview } = req.query; //req.body req.query req.params
             const _ProductReview = yield services_1.ProductReviewService.getProductReview(parseInt(idProductReview));
             res.json({ length: _ProductReview.length, recordset: _ProductReview });
         });

@@ -25,7 +25,7 @@ export class UserController {
     static async getUser (req: Request, res: Response){
         const { idUser } =  req.params; //req.body req.query req.params
         const _usuario: User[] = await UserService.getUser(parseInt(idUser));
-        res.json({recordset:_usuario});
+        res.json({recordset:_usuario[0]});
     }
     
     static async createUser (req: Request, res: Response) {

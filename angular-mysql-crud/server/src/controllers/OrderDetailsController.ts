@@ -6,13 +6,13 @@ import {OrderDetails} from '../models';
 export class OrderDetailsController {
 
     static async listOrderDetails (req: Request, res: Response){
-        const { idOrderDetails, quantityOrdered, fkOrder, fkProduct} = req.body; //req.body req.query req.params
+        const { idOrderDetails, quantityOrdered, fkOrder, fkProduct} = req.query; //req.body req.query req.params
         const _orderDetails: OrderDetails[] = await OrderDetailsService.listOrderDetails(idOrderDetails, quantityOrdered, fkOrder, fkProduct);
         res.json({length: _orderDetails.length, recordset:_orderDetails});
     }
 
     static async getOrderDetails (req: Request, res: Response){
-        const { idOrderDetails } = req.params; //req.body req.query req.params
+        const { idOrderDetails } = req.query; //req.body req.query req.params
         const _orderDetails: OrderDetails[] = await OrderDetailsService.getOrderDetails(parseInt(idOrderDetails));
         res.json({length: _orderDetails.length, recordset:_orderDetails});
     }

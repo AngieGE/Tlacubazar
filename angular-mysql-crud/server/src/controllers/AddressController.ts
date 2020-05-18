@@ -6,13 +6,13 @@ import {Address} from '../models';
 export class AddressController {
 
     static async listAddress (req: Request, res: Response){
-        const { idAddress, fkAddressEnum, fkStateEnum, fkCityEnum, fkSuburbEnum } = req.body; //req.body req.query req.params
+        const { idAddress, fkAddressEnum, fkStateEnum, fkCityEnum, fkSuburbEnum } = req.query; //req.body req.query req.params
         const _addresses: Address[] = await AddressService.listAddress(idAddress, fkAddressEnum, fkStateEnum, fkCityEnum, fkSuburbEnum);
         res.json({length: _addresses.length, recordset:_addresses});
     }
 
     static async getAddress (req: Request, res: Response){
-        const { idAddress} = req.params; //req.body req.query req.params
+        const { idAddress} = req.query; //req.body req.query req.params
         const _address: Address[] = await AddressService.getAddress(parseInt(idAddress));
         res.json({length: _address.length, recordset:_address});
     }
@@ -32,7 +32,7 @@ export class AddressController {
     }
     
     static async updateAddress(req: Request, res: Response): Promise<void>{
-        const { idAddress} = req.params;
+        const { idAddress} = req.query;
         let address: Address = req.body;    
         const _updateAddress=await AddressService.updateAddress(parseInt(idAddress), address);  
         let suc;
@@ -47,7 +47,7 @@ export class AddressController {
     }
     
     static async deleteAddress(req: Request, res: Response): Promise<void>{
-        const { idAddress} = req.params;
+        const { idAddress} = req.query;
         const _deleteAddress=await AddressService.deleteAddress(parseInt(idAddress));  
         let suc; 
         if (_deleteAddress.affectedRows < 1) {

@@ -6,13 +6,13 @@ import {StoreReview} from '../models';
 export class StoreReviewController {
 
     static async listStoreReview (req: Request, res: Response){
-        const { fkStore, fkUser} = req.body; //req.body req.query req.params
+        const { fkStore, fkUser} = req.query; //req.body req.query req.params
         const _StoreReview: StoreReview[] = await StoreReviewService.listStoreReview( fkStore, fkUser);
         res.json({length: _StoreReview.length, recordset:_StoreReview});
     }
     
     static async getStoreReview (req: Request, res: Response){
-        const { idStoreReview} = req.params; //req.body req.query req.params
+        const { idStoreReview} = req.query; //req.body req.query req.params
         const _StoreReview: StoreReview[] = await StoreReviewService.getStoreReview(parseInt(idStoreReview));
         res.json({length: _StoreReview.length, recordset:_StoreReview});
     }
