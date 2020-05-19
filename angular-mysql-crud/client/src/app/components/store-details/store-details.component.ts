@@ -39,6 +39,8 @@ export class StoreDetailsComponent implements OnInit {
     this.setCategory(this.store);
     // set the reviews and score
     this.setReviewsAndScore(this.store);
+    // set the address
+
   }
 
   async setVendor(store: Store) {
