@@ -4,7 +4,7 @@ import { Store } from '../../models/Store';
 import {Router} from '@angular/router';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryEnum, User, StoreReview } from 'src/app/models';
-import { ToastsContainerComponent } from '../toasts-container.component';
+
 @Component({
   selector: 'app-catalogue',
   templateUrl: './catalogue.component.html',
@@ -137,7 +137,7 @@ export class CatalogueComponent implements OnInit {
     this.selectedStore = store;
   }
 
-  createReviewText(store: Store, reviewText: string, dangerTpl) {
+  createReviewText(store: Store, reviewText: string) {
     if (reviewText.length > 0) {
       const storeReview = new StoreReview({stars: 0, review: reviewText, fkStore: store.idStore, fkUser: this.idUser});
       console.log(storeReview);
@@ -196,11 +196,11 @@ export class CatalogueComponent implements OnInit {
 
   // https://ng-bootstrap.github.io/#/components/toast/examples
   showSuccess(dangerTpl) {
-    this.tlacu.toastService.show(dangerTpl, { classname: 'bg-success text-light', delay: 10000 });
+    //this.tlacu.toastService.show(dangerTpl, { classname: 'bg-success text-light', delay: 10000 });
   }
 
   showDanger(dangerTpl) {
-    this.tlacu.toastService.show(dangerTpl, { classname: 'bg-danger text-light', delay: 15000 });
+    //this.tlacu.toastService.show(dangerTpl, { classname: 'bg-danger text-light', delay: 15000 });
   }
 
 }
