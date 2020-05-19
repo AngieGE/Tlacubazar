@@ -24,7 +24,6 @@ export class Product {
         this.maxCacaoBuyPrice = product.maxCacaoBuyPrice;
         this.fkStore = product.fkStore;
         this.fkCategoryEnum = product.fkCategoryEnum;
-
     }
 
 

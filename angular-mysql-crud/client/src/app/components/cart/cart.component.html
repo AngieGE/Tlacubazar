@@ -1,8 +1,24 @@
-<div *ngIf="user != null">
-  <p>tus ordenes</p>
+
+<!--User logged in and products in cart-->
+<div *ngIf="user !== null && cartProducts >= 1 " class="row justify-content-md-center">
+  <div class="col flex-column justify-content-center center-vertically">
+    <h3>Su carrito</h3>
+  </div>
 </div>
 
-<div *ngIf="user == null" class="">
-  <p>Oops, su carrito de TlacuBazar esta vacio.</p>
-  <button type="button" class="btn" (click)="login()">Iniciar sesión en tu cuenta</button>
+<!--No user loged in-->
+<div *ngIf="user == null" class="row justify-content-md-center contenedor-cart">
+  <div class="col flex-column justify-content-center center-vertically">
+    <h3>Oops, su carrito de TlacuBazar esta vacio.</h3>
+    <img src="../../../assets/images/tlacu-cart.png" alt="imagen de tlacu" width="60%">
+    <button type="button" class="btn" (click)="login()">Iniciar sesión en tu cuenta</button>
+  </div>
+</div>
+
+<!--User logged in but No products in cart-->
+<div *ngIf="user !== null && cartProducts <= 0" class="row justify-content-md-center contenedor-cart">
+  <div class="col flex-column justify-content-center center-vertically">
+    <h3>Oops, su carrito de TlacuBazar esta vacio.</h3>
+    <img src="../../../assets/images/tlacu-cart.png" alt="imagen de tlacu" width="60%">
+  </div>
 </div>

@@ -68,3 +68,6 @@
 .icon-red{
   color: darkred;
 }
+.details:hover{
+  background-color: ghostwhite;
+}

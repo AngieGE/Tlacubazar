@@ -1,4 +1,4 @@
-import { Store, User } from './index';
+import {  User } from './User';
 
 export class StoreReview {
     idStoreReview?: number;
@@ -8,7 +8,7 @@ export class StoreReview {
     fkUser?: number;
 
     // has
-    store?: Store = new Store();
+    // store?: Store = new Store();
     user?: User = new User();
 
     constructor(storeReview?: StoreReview) {

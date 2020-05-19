@@ -34,7 +34,7 @@
   color:black !important;
 }
 .nav-tabs .nav-link:hover {
-  border-color: #EE6E73 #EE6E73 #EE6E73 !important; /*#e9ecef #e9ecef #dee2e6;*/
+  border-color: rgba(red, green, blue, 255) !important; /* #EE6E73 #EE6E73 #EE6E73 !important; /*#e9ecef #e9ecef #dee2e6;*/
 }
 .second-nav{
   background-color: #f0bb2d;

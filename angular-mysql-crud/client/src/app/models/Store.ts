@@ -1,4 +1,7 @@
-import { Address, StatusEnum, User, StoreReview } from './index';
+import { Address } from './Address';
+import { StatusEnum} from './StatusEnum';
+import { User } from './User';
+import { StoreReview } from './StoreReview';
 import { CategoryEnum } from './CategoryEnum';
 
 export class Store {

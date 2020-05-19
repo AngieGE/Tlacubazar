@@ -45,7 +45,7 @@ export class CatalogueComponent implements OnInit {
     this.stores = Array();
     this.categories = Array();
     this.selectedStore = null;
-    this.idUser = this.tlacu.manager.user.idUser;
+    this.idUser = (this.tlacu.manager.user != null) ? this.tlacu.manager.user.idUser : null;
 
     // start all
     this.getCategories();
@@ -100,7 +100,10 @@ export class CatalogueComponent implements OnInit {
         // set user
         this.tlacu.user.getUser(rev.fkUser).subscribe( user => {
           rev.user = new User(user.recordset);
-          storeReviews.push(rev);
+          console.log(rev);
+          if (rev.review !== 'null' && rev.review !== 'undefined' && rev.review.length) {
+            storeReviews.push(rev);
+          }
         });
         // get starts
         if (rev.stars != null && rev.stars > 0 && rev.stars < 6) {
@@ -165,7 +168,6 @@ export class CatalogueComponent implements OnInit {
   }
 
  async  createReviewScore(store: Store, score: number) {
-    console.log('new rate ' + score);
     // check if the suer had prevviously evaluate to remove that rate
     const pastReviewRes = await this.tlacu.storeReview.listStoreReview(store.idStore, this.idUser).toPromise();
     if (pastReviewRes.length > 0) {
@@ -177,7 +179,7 @@ export class CatalogueComponent implements OnInit {
       });
     }
     // create new rate, alert
-    const storeReview = new StoreReview({stars: score, review: null, fkStore: store.idStore, fkUser: this.idUser});
+    const storeReview = new StoreReview({stars: score,  fkStore: store.idStore, fkUser: this.idUser});
     this.tlacu.storeReview.createStoreReview(storeReview).subscribe( res => {
       console.log(res);
       if (res.success) {
@@ -192,6 +194,10 @@ export class CatalogueComponent implements OnInit {
 
   open(content) {
     this.modalService.open(content);
+  }
+
+  seeStoreDetails(store: Store) {
+    this.router.navigate(['/store/' + store.idStore]);
   }
 
   // https://ng-bootstrap.github.io/#/components/toast/examples
