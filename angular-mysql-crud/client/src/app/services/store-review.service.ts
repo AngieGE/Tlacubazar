@@ -53,11 +53,11 @@ export class StoreReviewService {
     return this.http.put<StoreReview>(`${this.API_URL}/storeReview/${idStoreReview}`, storeReview, { headers });
   }
 
-  public deleteStore(idStore: number): Observable<any> {
+  public deleteStoreReview(idStoreTeview: number): Observable<any> {
     let headers = this.defaultHeaders;
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.delete(`${this.API_URL}/storeReview/${idStore}`, { headers });
+    return this.http.delete(`${this.API_URL}/storeReview/${idStoreTeview}`, { headers });
   }
 }

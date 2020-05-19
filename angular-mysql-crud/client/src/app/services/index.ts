@@ -15,6 +15,7 @@ export * from './user-address.service';
 export * from './user.service';
 export * from './manager.service';
 export * from './category-enum.service';
+export * from './toast-service';
 
 import { AddressEnumService } from './address-enum.service';
 import { AddressService } from './address.service';
@@ -33,6 +34,7 @@ import { SuburbEnumService } from './suburb-enum.service';
 import { UserAddressService } from './user-address.service';
 import { CategoryEnumService } from './category-enum.service';
 import { UserService } from './user.service';
+import { ToastService } from './toast-service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -59,6 +61,7 @@ export class TlacuServices {
         public product: ProductService,
         public stateEnum: StateEnumService,
         public categoryEnum: CategoryEnumService,
+        public toastService: ToastService
     ) { }
 
 }

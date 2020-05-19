@@ -153,7 +153,7 @@ CREATE TABLE `ProductReview` (
 
 CREATE TABLE `StoreReview` (
   `idStoreReview` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `stars` TINYINT(1) NOT NULL,
+  `stars` TINYINT(1) NOT NULL DEFAULT '0',
   `review` TEXT,
   `fkStore` INT NOT NULL,
   `fkUser` INT NOT NULL,
@@ -168,7 +168,9 @@ CREATE TABLE `CategoryEnum` (
 
 INSERT INTO `DeliveryMethodEnum` (`deliveryMethod`) VALUES ('En automóvil'), ('Transporte público'), ('A pie'), ('En bicicleta'), ('Recoger pedido');
 
-INSERT INTO `User` (`email`, `firstName`, `lastName`, `isVendor`, `phone`, `cacaoBalance`) VALUES ('alejandro.m@gmail.com', 'Alejandro', 'Moral', FALSE, '7771414141', 0.0), ('milagros@manzanas4dayz.com.mx', 'Milagros', 'Ramírez', TRUE, '7774004040', 0.0);
+INSERT INTO `User` (`email`, `firstName`, `lastName`, `isVendor`, `phone`, `cacaoBalance`) VALUES 
+					('alejandro.m@gmail.com', 'Alejandro', 'Moral', FALSE, '7771414141', 0.0), 
+					('milagros@manzanas4dayz.com.mx', 'Milagros', 'Ramírez', TRUE, '7774004040', 0.0);
 
 INSERT INTO `AddressEnum` (`address`) VALUES ('Revolución 42'), ('Caudillo del Sur 500'), ('Avenida Universidad 404');
 
@@ -214,8 +216,8 @@ INSERT INTO `DeliveryMethod` (`fkStore`, `fkDeliveryMethodEnum`) VALUES (1, 3), 
 INSERT INTO `StoreReview` (`stars`, `review`,`fkStore`, `fkUser` ) VALUES 
 						(3, 'Super buen servicio, habia algunas manzanas muy maduras pero buen servicio.', 1, 1),
 						(5, '¡Excelente! Habia limite de 5 personas dentro de la tienda. Los empleados llevaban mascarilla', 2, 1),
-						(4, 'Super rápidos, y a buen precio. Fueron puntuales.', 3, 1),
-						(5, 'Muy buen servicio', 2, 1),
+						(4, 'Super rápidos, y a buen precio. Fueron puntuales.', 3, 2),
+						(5, 'Muy buen servicio', 2, 2),
 						(3, 'Respetan la susana distancia y hay alcohol a la entrada. Pero les faltaba surtido', 2, 1);
 
 INSERT INTO `Product`(`name`, `description`, `image`, `quantityInStock`, `buyPrice`, `maxCacaoBuyPrice`, `fkStore`, `fkCategoryEnum`) VALUES 

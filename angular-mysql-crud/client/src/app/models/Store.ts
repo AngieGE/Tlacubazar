@@ -24,6 +24,9 @@ export class Store {
 
   // extra
   isCollapsed = true;
+  score: number;
+  scoreLenght: number;
+  currentRate = 5;
 
   constructor(store?: Store) {
     if (store != null) {
@@ -38,6 +41,8 @@ export class Store {
       this.fkStatusEnum = store.fkStatusEnum;
       this.fkVendor = store.fkVendor;
       this.fkCategoryEnum = store.fkCategoryEnum;
+      this.score = 0;
+      this.scoreLenght = 0;
     }
   }
 }

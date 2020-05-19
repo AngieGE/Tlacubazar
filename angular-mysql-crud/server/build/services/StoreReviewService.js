@@ -58,7 +58,7 @@ class StoreReviewService {
     }
     static deleteStoreReview(idStoreReview) {
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "DELETE FROM storeReview WHERE idStoreReview = " + idStoreReview;
+            let sql = "DELETE FROM storeReview WHERE idStoreReview = " + idStoreReview + ";";
             const resultado = yield database_1.default.query(sql);
             return resultado;
         });

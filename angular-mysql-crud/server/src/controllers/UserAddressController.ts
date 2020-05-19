@@ -6,7 +6,7 @@ import {UserAddress} from '../models';
 export class UserAddressController {
 
     static async listUserAddress (req: Request, res: Response){
-        const { fkUser, fkAddress} = req.body; //req.body req.query req.params
+        const { fkUser, fkAddress} = req.query; //req.body req.query req.params
         const _UserAddress: UserAddress[] = await UserAddressService.listUserAddress(fkUser, fkAddress);
         res.json({length: _UserAddress.length, recordset:_UserAddress});
     }

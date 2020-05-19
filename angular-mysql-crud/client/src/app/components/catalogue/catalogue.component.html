@@ -1,5 +1,13 @@
 
 <div class="flex-row " id="catalogo">
+
+  <ng-template #dangerTpl>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M10.872 6.831l1.695 3.904 3.654-1.561-1.79 3.426 3.333.954-3.417 1.338 2.231 4.196-4.773-2.582-2.869 2.287.413-3.004-3.792-.726 2.93-1.74-1.885-2.512 3.427.646.843-4.626zm-.786-6.831l-1.665 9.119-6.512-1.228 3.639 4.851-5.548 3.294 7.108 1.361-.834 6.076 5.742-4.577 9.438 5.104-4.288-8.064 6.834-2.677-6.661-1.907 3.25-6.22-6.98 2.982-3.523-8.114z"/></svg>
+    Danger Danger !
+  </ng-template>
+  <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+
   <!--filtros-->
   <div class="col-md-4 flex-col justify-content-left m-2" id="filtros">
     <h3 class="mt-2">Filtra tu busqueda</h3>
@@ -49,7 +57,7 @@
 
   <!--Servicios-->
   <div class="row flex-row justify-content-center list w-100 " *ngIf="isServiceStore">
-    <p class="text-muted m-neg">{{stores.length}} resultados encontrados. </p>
+    <p class="text-muted m-neg cursor-arrow">{{stores.length}} resultados encontrados. </p>
     <div *ngFor="let store of stores" class="w-100">
         <div class="card m-3 ml-4">
           <div class="card-body">
@@ -70,18 +78,14 @@
 
             <!--stars-->
             <li ngbDropdown  class="h-100" >
-              <p ngbDropdownToggle><i class="material-icons">star</i> <b>4.5 de 5</b> (3 calificaciones)</p>
+              <p ngbDropdownToggle class="cursor-arrow"><i class="material-icons cursor-arrow">star</i> <b>{{store.score}} de 5</b> ({{store.scoreLenght}} calificaciones)</p>
               <div ngbDropdownMenu>
-                <div  ngbDropdownItem >
-                  <ngb-rating [(rate)]="selected" (hover)="hovered=$event" (leave)="hovered=0" [readonly]="readonly"></ngb-rating>
-                  <hr>
-                  <pre>
-                  Selected: <b>{{selected}}</b>
-                  Hovered: <b>{{hovered}}</b>
-                  </pre>
-                  <button class="btn btn-sm btn-outline-{{readonly ? 'danger' : 'success'}}" (click)="readonly = !readonly">
-                    {{ readonly ? "readonly" : "editable"}}
-                  </button>
+                <div  ngbDropdownItem>
+                  <ngb-rating [(rate)]="store.currentRate"  [max]="5">
+                    <ng-template let-fill="fill" let-index="index">
+                      <span class="star" [class.filled]="fill === 100"(click)="createReviewScore(store, index+1)" [class.coloring]="index < 5">&#9733;</span>
+                    </ng-template>
+                  </ngb-rating>
                 </div>
               </div>
             </li>
@@ -92,17 +96,20 @@
                 Ver/Ocultar todas las reseñas ({{store.storeReviews.length}})
             </p>
             <div>
-              <textarea class="mr-2" cols="50" rows="1" placeholder="Querémos escucharte"></textarea>
+              <textarea #textArea class="mr-2" cols="50" rows="1" placeholder="Querémos escucharte"></textarea>
             </div>
-            <button type="button" class="btn mb-3" >Compartir mi opinión</button>
+            <button type="button" class="btn mb-3" (click)="createReviewText(store, textArea.value, dangerTpl); textArea.value = '';" ngbTooltip="Will disappear in 15s">
+              Compartir mi opinión
+            </button>
+
             <!--reseñas-->
             <div id="collapseExample" [ngbCollapse]="store.isCollapsed">
-              <div class="card pt-3">
+              <div class="card pt-3 hide-scroll" id="reviews">
                 <div class="card-body review-box mb-2" *ngIf="store.storeReviews.length == 0">
                   Se el primero en compartir tu opinión.
                 </div>
-                <div class="card-body review-box" *ngFor="let review of store.storeReviews">
-                  <p class="inline-block"><b>{{review.user.firstName}}: </b> {{review.review}}</p>
+                <div class="flex-row ml-2" *ngFor="let review of store.storeReviews">
+                  <i *ngIf="idUser === review.fkUser" class="material-icons icon-red cursor-hand" (click)="deleteReview(store, review.idStoreReview)" >delete</i><p class="cursor-arrow"><b>{{review.user.firstName}}: </b> {{review.review}}</p>
                 </div>
               </div>
             </div>
@@ -118,14 +125,14 @@
   <div class="modal-header">
     <div class="flex-column">
       <!--titulo-->
-      <h4 class="modal-title" id="modal-basic-title">{{selectedStore.name}}</h4>
+      <h4 class="modal-title cursor-arrow" id="modal-basic-title">{{selectedStore.name}}</h4>
       <!--Servicio y cacao icon-->
       <div *ngIf="selectedStore.acceptsCacao" class="mt-2 m-neg">
-        <h6 class="card-subtitle mb-2 text-muted inline-block cursor-hand">Ofrece servicios en {{selectedStore.categoryEnum.category}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted inline-block cursor-arrow">Ofrece servicios en {{selectedStore.categoryEnum.category}}</h6>
         <img src="../../../assets/images/vegetariano.png" alt="cacao img" class="inline-block ml-2">
       </div >
       <div *ngIf="selectedStore.acceptsCacao == 0" class="mt-2 m-neg">
-        <h6 class="card-subtitle mb-2 text-muted cursor-hand">Ofrece servicios en {{selectedStore.categoryEnum.category}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted cursor-arrow">Ofrece servicios en {{selectedStore.categoryEnum.category}}</h6>
       </div>
     </div>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">

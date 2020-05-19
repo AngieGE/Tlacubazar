@@ -32,6 +32,8 @@ import { ClientCourseComponent } from './components/client-course/client-course.
 import { VendorCourseComponent } from './components/vendor-course/vendor-course.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ManageStoreComponent } from './components/manage-store/manage-store.component';
+import { ToastsContainerComponent } from './components/toasts-container.component';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const config = new AuthServiceConfig([
@@ -65,7 +67,8 @@ export function provideConfig() {
     ClientCourseComponent,
     VendorCourseComponent,
     ProfileComponent,
-    ManageStoreComponent
+    ManageStoreComponent,
+    ToastsContainerComponent
   ],
   imports: [
     BrowserModule,
