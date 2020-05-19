@@ -33,7 +33,7 @@ const routes: Routes = [
     component: StoreDetailsComponent
   },
   {
-    path: 'search',
+    path: 'search/:query',
     component: SearchResultsComponent
   },
   {
