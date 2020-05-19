@@ -2,20 +2,6 @@ DROP DATABASE IF EXISTS TlacuBazar;
 CREATE DATABASE IF NOT EXISTS TlacuBazar;
 USE TlacuBazar;
 
-CREATE TABLE `User` (
-  `idUser` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(50) UNIQUE,
-  `firstName` VARCHAR(50),
-  `lastName` VARCHAR(100),
-  `isVendor` BOOLEAN DEFAULT FALSE,
-  `phone` VARCHAR(50),
-  `cacaoBalance` DECIMAL(13,2),
-  `readUserCourse` BOOLEAN DEFAULT FALSE,
-  `readVendorCourse` BOOLEAN DEFAULT FALSE,
-  `fkAddress` DECIMAL(13,2),
-  FOREIGN KEY (`fkAddress`) REFERENCES `Address` (`fkAddress`)
-);
-
 CREATE TABLE `AddressEnum` (
     `idAddressEnum` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `address` VARCHAR(50)
@@ -53,6 +39,20 @@ CREATE TABLE `Address` (
   FOREIGN KEY (`fkSuburbEnum`) REFERENCES `SuburbEnum` (`idSuburbEnum`)
 );
 
+CREATE TABLE `User` (
+  `idUser` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(50) UNIQUE,
+  `firstName` VARCHAR(50),
+  `lastName` VARCHAR(100),
+  `isVendor` BOOLEAN DEFAULT FALSE,
+  `phone` VARCHAR(50),
+  `cacaoBalance` DECIMAL(13,2),
+  `readUserCourse` BOOLEAN DEFAULT FALSE,
+  `readVendorCourse` BOOLEAN DEFAULT FALSE,
+  `fkAddress` INT,
+  FOREIGN KEY (`fkAddress`) REFERENCES `Address` (`idAddress`)
+);
+
 CREATE TABLE `UserAddress` (
     `fkUser` INT NOT NULL,
     `fkAddress` INT NOT NULL,
@@ -71,14 +71,17 @@ CREATE TABLE `StatusEnum` (
   `status` VARCHAR(50)
 );
 
+CREATE TABLE `CategoryEnum` (
+  `idCategoryEnum` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `category` TEXT NOT NULL
+);
+
 CREATE TABLE `Store` (
   `idStore` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50),
   `description` TEXT,
   `image` VARCHAR(70),
   `fkAddress` INT NOT NULL,
-  `phone` VARCHAR(50),
-  `link` VARCHAR(50),
   `isServiceStore` BOOLEAN,
   `acceptsCacao` BOOLEAN,
   `fkStatusEnum`INT NOT NULL,
@@ -156,7 +159,7 @@ CREATE TABLE `ProductReview` (
 
 CREATE TABLE `StoreReview` (
   `idStoreReview` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `stars` TINYINT(1) NOT NULL DEFAULT '0',
+  `stars` TINYINT(1) NOT NULL,
   `review` TEXT,
   `fkStore` INT NOT NULL,
   `fkUser` INT NOT NULL,
@@ -164,80 +167,45 @@ CREATE TABLE `StoreReview` (
   FOREIGN KEY (`fkUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE
 );
 
-CREATE TABLE `CategoryEnum` (
-  `idCategoryEnum` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `category` TEXT NOT NULL
-);
-
 INSERT INTO `DeliveryMethodEnum` (`deliveryMethod`) VALUES ('En automóvil'), ('Transporte público'), ('A pie'), ('En bicicleta'), ('Recoger pedido');
 
-INSERT INTO `User` (`email`, `firstName`, `lastName`, `isVendor`, `phone`, `cacaoBalance`) VALUES 
-					('alejandro.m@gmail.com', 'Alejandro', 'Moral', FALSE, '7771414141', 0.0), 
-					('milagros@manzanas4dayz.com.mx', 'Milagros', 'Ramírez', TRUE, '7774004040', 0.0);
+INSERT INTO `User` (`email`, `firstName`, `lastName`, `isVendor`, `phone`, `cacaoBalance`) VALUES ('alejandro.m@gmail.com', 'Alejandro', 'Moral', FALSE, '7771414141', 0.0), ('milagros@manzanas4dayz.com.mx', 'Milagros', 'Ramírez', TRUE, '7774004040', 0.0);
 
 INSERT INTO `AddressEnum` (`address`) VALUES ('Revolución 42'), ('Caudillo del Sur 500'), ('Avenida Universidad 404');
-
 
 /*STATES*/
 INSERT INTO `StateEnum` (`idStateEnum`,`state`) VALUES (1, 'Morelos');
 
 /*CITIES*/
 INSERT INTO `CityEnum` (`idCityEnum`, `city`, `fkStateEnum`) VALUES 
-			(1, 'Amacuzac',1), (2, 'Atlatlahuacan', 1), (3,'Axochiapan',1), (4,'Ayala',1),
-			(5,'Coatlán del río',1), (6,'Cuautla',1), (7,'Cuernavaca',1), (8,'Emiliano Zapata',1),
-			(9,'Jantetelco',1), (10,'Jiutepec',1), (11,'Jojutla de juarez',1), (12,'Jonacatepec',1),
-			(13,'Mazatepec',1), (14,'Miacatlán',1), (15,'Ocuituco',1), (16,'Puente de Ixtla',1),
-			(17,'Temixco',1), (18,'Temoac',1), (19,'Tepalcingo',1), (20,'Tepoztlan',1),
-			(21,'Tetecala',1), (22,'Tetela del volcán',1), (23,'Tlalnepantla',1), (24,'Tlaltizapán',1),
-			(25,'Tlaquiltenango',1), (26,'Tlayacapan',1), (27,'Totolapan',1), (28,'Xochitepec',1),
-			(29,'Yautepec',1), (30,'Yecapixtla',1), (31,'Zacatepec de hidalgo',1), (32,'Zacualpan de amilpas',1);
+    (1, 'Amacuzac',1), (2, 'Atlatlahuacan', 1), (3,'Axochiapan',1), (4,'Ayala',1),
+    (5,'Coatlán del río',1), (6,'Cuautla',1), (7,'Cuernavaca',1), (8,'Emiliano Zapata',1),
+    (9,'Jantetelco',1), (10,'Jiutepec',1), (11,'Jojutla de juarez',1), (12,'Jonacatepec',1),
+    (13,'Mazatepec',1), (14,'Miacatlán',1), (15,'Ocuituco',1), (16,'Puente de Ixtla',1),
+    (17,'Temixco',1), (18,'Temoac',1), (19,'Tepalcingo',1), (20,'Tepoztlan',1),
+    (21,'Tetecala',1), (22,'Tetela del volcán',1), (23,'Tlalnepantla',1), (24,'Tlaltizapán',1),
+    (25,'Tlaquiltenango',1), (26,'Tlayacapan',1), (27,'Totolapan',1), (28,'Xochitepec',1),
+    (29,'Yautepec',1), (30,'Yecapixtla',1), (31,'Zacatepec de hidalgo',1), (32,'Zacualpan de amilpas',1);
 
 /*SUBURBS & POSTAL CODE*/
 INSERT INTO `SuburbEnum` (`idSuburbEnum`,`suburb`,`postalCode`,`fkCityEnum`) VALUES
-		 	(1,'Amacuzac',62640, 1), (2, 'Barreal',62643, 1), (3, 'Benito Juarez',62654, 1),
-			(4,'Acapatzingo', 62493, 7), (5, 'Adolfo Lopez Mateos', 62115, 7), (6, 'Adolfo Ruiz Cortines',62159, 7),
-			(7,'Álamos',62905, 11), (8, 'Azuchilera',62914, 11), (9, 'Benito Juarez',62900, 11);
+    (1,'Amacuzac',62640, 1),
+    (2, 'Barreal',62643, 1),
+    (3, 'Benito Juarez',62654, 1),
+    (4,'Acapatzingo', 62493, 7),
+    (5, 'Adolfo Lopez Mateos', 62115, 7),
+    (6, 'Adolfo Ruiz Cortines',62159, 7),
+    (7,'Álamos',62905, 11),
+    (8, 'Azuchilera',62914, 11),
+    (9, 'Benito Juarez',62900, 11);
 
-/*ADDRESS*/
+			
 INSERT INTO `Address` (`fkAddressEnum`, `fkStateEnum`, `fkCityEnum`, `fkSuburbEnum`) VALUES 
-			(1, 1, 1, 1), (2, 1, 7, 5), (3, 1, 11, 9);
+    (1, 1, 1, 1),
+    (2, 1, 7, 5),
+    (3, 1, 11, 9);
 
-/*USER ADDRESS*/
 INSERT INTO `UserAddress` (`fkUser`, `fkAddress`) VALUES (1, 1), (1, 3), (2, 2);
-
-/*STORE*/
-INSERT INTO `Store` (`name`, `description`, `image`,`fkAddress`, `phone`,`link`, `isServiceStore`, `acceptsCacao`, `fkStatusEnum`,`fkVendor`, `fkCategoryEnum`) VALUES 
-					('Manzanas4Dayz', 'Tienda de todos tipos de manzanas', NULL, 1, '7775623222', 'manzanitas.com', FALSE, TRUE, 7,2, 2), 
-					('Nutrición Milagros', 'Productos nutrimentales, bajos en grasa.', NULL, 2, '4425436754', 'nutrim.com', TRUE, FALSE, 8, 1, 2),
-					('Plomeria Juarez', 'Destapamos baños y muchas cosas mas, llamanos!', NULL, 3, '3225639', 'www.plomeria.com', TRUE, TRUE, 8, 2, 13);
-
-/*DELIVERY METHOD*/
-INSERT INTO `DeliveryMethod` (`fkStore`, `fkDeliveryMethodEnum`) VALUES (1, 3), (2, 3), (2, 4);
-
-
-/*STORE REVIEW*/
-INSERT INTO `StoreReview` (`stars`, `review`,`fkStore`, `fkUser` ) VALUES 
-						(3, 'Super buen servicio, habia algunas manzanas muy maduras pero buen servicio.', 1, 1),
-						(5, '¡Excelente! Habia limite de 5 personas dentro de la tienda. Los empleados llevaban mascarilla', 2, 1),
-						(4, 'Super rápidos, y a buen precio. Fueron puntuales.', 3, 2),
-						(5, 'Muy buen servicio', 2, 2),
-						(3, 'Respetan la susana distancia y hay alcohol a la entrada. Pero les faltaba surtido', 2, 1);
-
-INSERT INTO `Product`(`name`, `description`, `image`, `quantityInStock`, `buyPrice`, `maxCacaoBuyPrice`, `fkStore`, `fkCategoryEnum`) VALUES 
-					('Manzana Roja', 'Clásica y tradicional manzana roja',NULL, 10, 3.43, 0.686, 1, 2), 
-					('Manzana Verde', 'La alternativa de siempre: manzana verde', NULL, 14, 2.5, 0.5, 1, 2), 
-					('Pera', 'Fantástica pera de máxima calidad', NULL, 7, 5.99, 1.198, 1, 2);
-					
-/*Status enum*/
-INSERT INTO `StatusEnum` VALUES (1, 'ESPERANDO_ENVIO');
-INSERT INTO `StatusEnum` VALUES (2, 'PAUSADA');
-INSERT INTO `StatusEnum` VALUES (3, 'ENVIADA');
-INSERT INTO `StatusEnum` VALUES (4, 'RECIBIDA');
-INSERT INTO `StatusEnum` VALUES (5, 'PAGADA');
-INSERT INTO `StatusEnum` VALUES (6, 'CANCELADA');
-INSERT INTO `StatusEnum` VALUES (7, 'STORE_EN_ESPERA');
-INSERT INTO `StatusEnum` VALUES (8, 'STORE_ACEPTADA');
-INSERT INTO `StatusEnum` VALUES (9, 'STORE_RECHAZADA');
 
 /*Category enum*/
 INSERT INTO `CategoryEnum` VALUES (1, 'Abarrotes');
@@ -261,4 +229,26 @@ INSERT INTO `CategoryEnum` VALUES (18, 'Juguetes y juegos');
 INSERT INTO `CategoryEnum` VALUES (19, 'Libros');
 INSERT INTO `CategoryEnum` VALUES (20, 'Moda');
 INSERT INTO `CategoryEnum` VALUES (21, 'Videojuegos');
-INSERT INTO `CategoryEnum` VALUES (22, 'Otros');
+
+/*Status enum*/
+INSERT INTO `StatusEnum` VALUES
+    (1, 'ESPERANDO_ENVIO'),
+    (2, 'PAUSADA'),
+    (3, 'ENVIADA'),
+    (4, 'RECIBIDA'),
+    (5, 'PAGADA'),
+    (6, 'CANCELADA'),
+    (7, 'STORE_EN_ESPERA'),
+    (8, 'STORE_ACEPTADA'),
+    (9, 'STORE_RECHAZADA');
+
+INSERT INTO `Store` (`name`, `description`, `image`,`fkAddress`, `isServiceStore`, `acceptsCacao`, `fkStatusEnum`,`fkVendor`, `fkCategoryEnum`) VALUES 
+    ('Manzanas4Dayz', 'Tienda de todos tipos de manzanas', NULL, 3, FALSE, TRUE, 7, 2, 2),
+    ('Nutrición Milagros', 'Productos nutrimentales, bajos en grasa.', NULL, 3, TRUE, FALSE, 8, 2, 2);
+
+INSERT INTO `DeliveryMethod` (`fkStore`, `fkDeliveryMethodEnum`) VALUES (1, 3), (2, 3), (2, 4);
+
+INSERT INTO `Product`(`name`, `description`, `image`, `quantityInStock`, `buyPrice`, `maxCacaoBuyPrice`, `fkStore`, `fkCategoryEnum`) VALUES 
+    ('Manzana Roja', 'Clásica y tradicional manzana roja', NULL, 10, 3.43, 0.686, 1, 2),
+    ('Manzana Verde', 'La alternativa de siempre: manzana verde', NULL, 14, 2.5, 0.5, 1, 2),
+    ('Pera', 'Fantástica pera de máxima calidad', NULL, 7, 5.99, 1.198, 1, 2);
