@@ -41,7 +41,7 @@
   height: 100% !important;
 }
 .cursor-hand{
-  cursor: pointer;
+  cursor: pointer !important;
 }
 .cursor-arrow{
   cursor: context-menu;

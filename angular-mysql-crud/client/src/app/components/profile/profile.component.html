@@ -3,23 +3,25 @@
     <!--Profile pic and name-->
     <div class="card text-center bg-secondary text-dark mb-4">
       <div class="card-body ">
-        <img *ngIf="loggedIn" [src]="socialUser.photoUrl" alt="" class="rounded-circle mb-3">
         <h5 class="card-subtitle mb-2 text-white">{{user.firstName}} {{user.lastName}}</h5>
+        <img *ngIf="socialUser != null" [src]="socialUser.photoUrl" alt="" class="rounded-circle mb-3">
       </div>
     </div>
     <!--Basic info-->
     <div class="card text-center bg-light text-dark">
       <div class="card-header">
-        <h4 class="card-title text-center">Información básica</h4>
+        <h4 class="card-title text-center cursor-arrow">Información básica <fa-icon (click)="editInfo()" class="cursor-hand" [icon]="faEdit"></fa-icon></h4>
       </div>
       <div class="card-body">
         <h5 class="card-title">Teléfono:</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{user.phone}}7774968039</h6>
+        <h6 class="card-subtitle mb-2 text-muted" *ngIf="user.phone != null">{{user.phone}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted" *ngIf="user.phone == null">---</h6>
         <h5 class="card-title">Correo:</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
         <h5 class="card-subtitle mb-2 text-muted" *ngIf="user.isVendor">Miembro vendedor</h5>
         <h5 class="card-title text-center">Balance de cacao</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{user.cacaoBalance | number}}100</h6>
+        <h6 class="card-subtitle mb-2 text-muted" *ngIf="user.cacaoBalance > 0">{{user.cacaoBalance | number}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted" *ngIf="user.cacaoBalance <= 0">0.00</h6>
       </div>
     </div>
   </div>
@@ -31,23 +33,28 @@
       <div class="card-header">
         <h4 class="card-title text-center">Direcciones registradas</h4>
       </div>
+      <!--addresses list-->
       <div class="card-body">
-        <div class="row" *ngFor="let store of stores">
-          <div class="col-9">
-            <h6 class="card-subtitle mb-2 text-muted">Calle 12 de octubre no. 1 col. Vicente E, P.O. Box: 62460</h6>
+        <div class="row" *ngFor="let uAddress of userAddresses">
+          <div class="col-9 mb-3">
+            <h6 class="card-subtitle mb-2 text-muted">{{uAddress.address.addressEnum.address}}, {{uAddress.address.suburbEnum.suburb}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{uAddress.address.cityEnum.city}}, {{uAddress.address.stateEnum.state}} {{uAddress.address.suburbEnum.postalCode}}.</h6>
+
           </div>
           <div class="col-3">
-            <a (click)="editUserAddress(store.idStore)" class="btn btn-link"><fa-icon [icon]="faEdit"></fa-icon></a>
-            <a (click)="editUserAddress(store.idStore)" class="btn btn-link"><fa-icon [icon]="faTrashAlt"></fa-icon></a>
+            <a (click)="deleteUserAddress(uAddress.address)" class="btn btn-link"><fa-icon [icon]="faTrashAlt"></fa-icon></a>
           </div>
         </div>
-
+        <div class="flex-row center-vertically justify-content-center" *ngIf="userAddresses.length <= 0">
+          <h6>Aun no tiene direcciones en TlacuBazar.</h6>
+        </div>
       </div>
+
       <div class="card-footer">
         <a href="#" class="card-link">Añadir dirección</a>
-
       </div>
     </div>
+
     <!--Registered stores-->
     <div class="card text-center bg-light text-dark">
       <div class="card-header">

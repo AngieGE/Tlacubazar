@@ -11,7 +11,7 @@ export class AddressEnumController {
         res.json({length: _addressesEnum.length, recordset:_addressesEnum});
     }
     static async getAddressEnum (req: Request, res: Response){
-        const { idAddressEnum } = req.query; //req.body req.query req.params
+        const { idAddressEnum } = req.params; //req.body req.query req.params
         const _addressesEnum: AddressEnum[] = await AddressEnumService.getAddressEnum(parseInt(idAddressEnum));
         res.json({length: _addressesEnum.length, recordset:_addressesEnum});
     }

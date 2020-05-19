@@ -20,7 +20,7 @@ class CityEnumController {
     }
     static getCityEnum(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idCityEnum } = req.query; //req.body req.query req.params
+            const { idCityEnum } = req.params; //req.body req.query req.params
             const _citiesEnum = yield services_1.CityEnumService.getCityEnum(parseInt(idCityEnum));
             res.json({ length: _citiesEnum.length, recordset: _citiesEnum });
         });

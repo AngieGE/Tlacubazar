@@ -1,4 +1,4 @@
-import { User, Address } from './index';
+import { User, Address} from './index';
 
 export class UserAddress {
     fkUser?: number;

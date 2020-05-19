@@ -12,7 +12,7 @@ export class StateEnumController {
     }
     
     static async getStateEnum (req: Request, res: Response){
-        const { idStateEnum} = req.query; //req.body req.query req.params
+        const { idStateEnum} = req.params; //req.body req.query req.params
         const _statesEnum: StateEnum[] = await StateEnumService.getStateEnum(parseInt(idStateEnum));
         res.json({length: _statesEnum.length, recordset:_statesEnum});
     }

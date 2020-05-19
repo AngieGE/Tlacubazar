@@ -12,7 +12,7 @@ export class AddressController {
     }
 
     static async getAddress (req: Request, res: Response){
-        const { idAddress} = req.query; //req.body req.query req.params
+        const { idAddress} = req.params; //req.body req.query req.params
         const _address: Address[] = await AddressService.getAddress(parseInt(idAddress));
         res.json({length: _address.length, recordset:_address});
     }

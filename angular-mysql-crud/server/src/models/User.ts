@@ -4,10 +4,12 @@ export class User {
     email?: number;
     firstName?:	string;
     lastName?: string;
-    password?: string;
     isVendor?: boolean;
     phone?:string;
     cacaoBalance?: number;
+    readUserCourse?: boolean;
+    readVendorCourse?: boolean;
+    fkAddress?: number;
 
     // Has many
 
@@ -18,9 +20,12 @@ export class User {
         this.email=user.email;
         this.firstName=user.firstName;
         this.lastName=user.lastName;
-        this.password=user.password;
         this.isVendor=user.isVendor;
         this.phone=user.phone;
         this.cacaoBalance=user.cacaoBalance;
+        this.readUserCourse=user.readUserCourse;
+        this.readVendorCourse=user.readVendorCourse;
+        this.fkAddress=user.fkAddress;
+
     }
 }

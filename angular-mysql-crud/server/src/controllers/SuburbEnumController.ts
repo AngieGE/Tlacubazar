@@ -12,7 +12,7 @@ export class SuburbEnumController {
     }
 
     static async getSuburbEnum (req: Request, res: Response){
-        const { idSuburbEnum} = req.query; //req.body req.query req.params
+        const { idSuburbEnum} = req.params; //req.body req.query req.params
         const _suburbsEnum: SuburbEnum[] = await SuburbEnumService.getSuburbEnum(parseInt(idSuburbEnum));
         res.json({length: _suburbsEnum.length, recordset:_suburbsEnum});
     }

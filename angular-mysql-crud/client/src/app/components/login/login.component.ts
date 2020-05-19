@@ -54,7 +54,8 @@ export class LoginComponent implements OnInit {
             console.log("no hubo users con ese mail, lo creo");
             this.tlacu.user.createUser(this.getUser(this.socialUser)).subscribe( newUser => {
               this.tlacu.user.getUser(newUser.createdUser.insertId).subscribe( res => {
-                this.tlacu.manager.setItems( this.socialUser, new User(res.recordset[0]));
+                const u = new User(res.recordset);
+                this.tlacu.manager.setItems( this.socialUser, u);
                 this.router.navigate(['/']);
               });
             });

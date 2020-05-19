@@ -48,10 +48,12 @@ export class UserService {
                                 "email = '" + user.email +"', " +  
                                 "firstName = '" + user.firstName + "', " +
                                 "lastName = '" + user.lastName +"', " + 
-                                //"password = '" + user.password +"', '" +  
                                 "isVendor = " + user.isVendor +", " +  
                                 "phone = '" + user.phone +"', " +  
                                 "cacaoBalance = " + user.cacaoBalance + " " +
+                                "readUserCourse = " + user.readUserCourse + " " +
+                                "readVendorCourse = " + user.readVendorCourse + " " +
+                                "fkAddress = " + user.fkAddress + " " +
                                 "WHERE idUser = " + idUser + ";";
         const resultado= await pool.query(sql);
         return resultado;

@@ -36,7 +36,8 @@
             <tr *ngFor="let product of products">
               <td>{{product.name}}</td>
               <td>{{product.description}}</td>
-              <td>{{product.quantityInStock}}</td>
+              <td *ngIf="product.quantityInStock > 0">{{product.quantityInStock}}</td>
+              <td *ngIf="product.quantityInStock <= 0" style="color: red;">AGOTADO</td>
               <td>${{product.buyPrice}}</td>
               <td *ngIf="store.acceptsCacao">${{product.maxCacaoBuyPrice}}</td>
             </tr>

@@ -7,9 +7,11 @@ CREATE TABLE `User` (
   `email` VARCHAR(50) UNIQUE,
   `firstName` VARCHAR(50),
   `lastName` VARCHAR(100),
-  `isVendor` BOOLEAN,
+  `isVendor` BOOLEAN DEFAULT FALSE,
   `phone` VARCHAR(50),
   `cacaoBalance` DECIMAL(13,2),
+  `readUserCourse` BOOLEAN DEFAULT FALSE,
+  `readVendorCourse` BOOLEAN DEFAULT FALSE,
   `fkAddress` DECIMAL(13,2),
   FOREIGN KEY (`fkAddress`) REFERENCES `Address` (`fkAddress`)
 );
@@ -54,6 +56,7 @@ CREATE TABLE `Address` (
 CREATE TABLE `UserAddress` (
     `fkUser` INT NOT NULL,
     `fkAddress` INT NOT NULL,
+	PRIMARY KEY (fkUser, fkAddress),
     FOREIGN KEY (`fkUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE,
     FOREIGN KEY (`fkAddress`) REFERENCES `Address` (`idAddress`) ON DELETE CASCADE
 );

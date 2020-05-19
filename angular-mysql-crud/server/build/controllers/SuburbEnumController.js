@@ -20,7 +20,7 @@ class SuburbEnumController {
     }
     static getSuburbEnum(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idSuburbEnum } = req.query; //req.body req.query req.params
+            const { idSuburbEnum } = req.params; //req.body req.query req.params
             const _suburbsEnum = yield services_1.SuburbEnumService.getSuburbEnum(parseInt(idSuburbEnum));
             res.json({ length: _suburbsEnum.length, recordset: _suburbsEnum });
         });
