@@ -6,13 +6,13 @@ import {SuburbEnum} from '../models';
 export class SuburbEnumController {
 
     static async listSuburbEnum (req: Request, res: Response){
-        const { idSuburbEnum, suburb, postalCode, fkCityEnum } = req.body; //req.body req.query req.params
+        const { idSuburbEnum, suburb, postalCode, fkCityEnum } = req.query; //req.body req.query req.params
         const _suburbsEnum: SuburbEnum[] = await SuburbEnumService.listSuburbEnum(idSuburbEnum, suburb, postalCode, fkCityEnum);
         res.json({length: _suburbsEnum.length, recordset:_suburbsEnum});
     }
 
     static async getSuburbEnum (req: Request, res: Response){
-        const { idSuburbEnum} = req.params; //req.body req.query req.params
+        const { idSuburbEnum} = req.query; //req.body req.query req.params
         const _suburbsEnum: SuburbEnum[] = await SuburbEnumService.getSuburbEnum(parseInt(idSuburbEnum));
         res.json({length: _suburbsEnum.length, recordset:_suburbsEnum});
     }

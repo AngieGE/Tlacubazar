@@ -25,9 +25,11 @@ export class StoreService {
     }
 
     static async createStore(store: Store): Promise<any> {
-      let sql: string = "INSERT INTO store (name, description, fkAddress, isServiceStore, acceptsCacao, fkStatusEnum, fkVendor, fkCategoryEnum) " + 
+      let sql: string = "INSERT INTO store (name, description, phone, link, fkAddress, isServiceStore, acceptsCacao, fkStatusEnum, fkVendor, fkCategoryEnum) " + 
                                 "VALUES ('"+ store.name + "', '" + 
                                             store.description +"', '" + 
+                                            store.phone +"', '" + 
+                                            store.link +"', '" + 
                                             store.fkAddress +"', '" + 
                                             store.isServiceStore + "', '" + 
                                             store.acceptsCacao + "', '" + 
@@ -43,6 +45,8 @@ export class StoreService {
     static async updateStore(idStore: number, store: Store): Promise<any> {
         let sql: string = "UPDATE store SET " +
                                 "name = '" + store.name +"', " +  
+                                "description = '" + store.description +"', " +  
+                                "link = '" + store.link +"', " +  
                                 "fkAddress = '" + store.fkAddress + "', " +
                                 "isServiceStore = '" + store.isServiceStore +"', " + 
                                 "acceptsCacao = " + store.acceptsCacao +", " +  

@@ -42,7 +42,7 @@ export class StoreReviewService {
     }
 
     static async deleteStoreReview(idStoreReview: number): Promise<any> {
-        let sql: string = "DELETE FROM storeReview WHERE idStoreReview = " + idStoreReview;
+        let sql: string = "DELETE FROM storeReview WHERE idStoreReview = " + idStoreReview + ";";
         const resultado= await pool.query(sql);
         return resultado;
     }

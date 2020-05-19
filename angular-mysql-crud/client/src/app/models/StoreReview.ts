@@ -1,4 +1,4 @@
-import { Store, User } from './index';
+import {  User } from './User';
 
 export class StoreReview {
     idStoreReview?: number;
@@ -8,16 +8,16 @@ export class StoreReview {
     fkUser?: number;
 
     // has
-    store: Store = new Store();
-    user: User = new User();
+    // store?: Store = new Store();
+    user?: User = new User();
 
-    constructor(productReview?: StoreReview) {
-      if (productReview != null) {
-        this.idStoreReview = productReview.idStoreReview;
-        this.stars = productReview.stars;
-        this.review = productReview.review;
-        this.fkStore = productReview.fkStore;
-        this.fkUser = productReview.fkUser;
+    constructor(storeReview?: StoreReview) {
+      if (storeReview != null) {
+        this.idStoreReview = storeReview.idStoreReview;
+        this.stars = storeReview.stars;
+        this.review = storeReview.review;
+        this.fkStore = storeReview.fkStore;
+        this.fkUser = storeReview.fkUser;
       }
     }
 }

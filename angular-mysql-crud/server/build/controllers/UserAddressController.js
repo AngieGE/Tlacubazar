@@ -13,7 +13,7 @@ const services_1 = require("../services");
 class UserAddressController {
     static listUserAddress(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { fkUser, fkAddress } = req.body; //req.body req.query req.params
+            const { fkUser, fkAddress } = req.query; //req.body req.query req.params
             const _UserAddress = yield services_1.UserAddressService.listUserAddress(fkUser, fkAddress);
             res.json({ length: _UserAddress.length, recordset: _UserAddress });
         });

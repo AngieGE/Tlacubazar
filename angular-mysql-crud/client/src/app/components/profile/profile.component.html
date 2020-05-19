@@ -32,14 +32,20 @@
         <h4 class="card-title text-center">Direcciones registradas</h4>
       </div>
       <div class="card-body">
-        <h6 class="card-subtitle mb-2 text-muted">Calle 12 de octubre no. 1 col. Vicente E, P.O. Box: 62460</h6>
-        <h6 class="card-subtitle mb-2 text-muted">Calle panorámica #5152, P.O. Box: 44250</h6>
-        <h6 class="card-subtitle mb-2 text-muted">Av. Pablo Livas No. 2103-G, Col. La Quinta</h6>
+        <div class="row" *ngFor="let store of stores">
+          <div class="col-9">
+            <h6 class="card-subtitle mb-2 text-muted">Calle 12 de octubre no. 1 col. Vicente E, P.O. Box: 62460</h6>
+          </div>
+          <div class="col-3">
+            <a (click)="editUserAddress(store.idStore)" class="btn btn-link"><fa-icon [icon]="faEdit"></fa-icon></a>
+            <a (click)="editUserAddress(store.idStore)" class="btn btn-link"><fa-icon [icon]="faTrashAlt"></fa-icon></a>
+          </div>
+        </div>
+
       </div>
       <div class="card-footer">
         <a href="#" class="card-link">Añadir dirección</a>
-        <a href="#" class="card-link">Editar dirección</a>
-        <a href="#" class="card-link">Eliminar dirección</a>
+
       </div>
     </div>
     <!--Registered stores-->
@@ -48,15 +54,18 @@
         <h4 class="text-center">Negocios registrados</h4>
       </div>
       <div class="card-body">
-        <a href=""><h5 class="card-title">Ferreteria Julio</h5></a>
-        <a href=""><h5 class="card-title">Florería Luz</h5></a>
-        <a href=""><h5 class="card-title">Tintorería Dry Clean Service</h5></a>
-        <h6 class="card-subtitle mb-2 text-muted"></h6>
+        <div class="row" *ngFor = "let store of stores">
+          <div class="col-9">
+            <a href="/store/{{store.idStore}}" ><h5 class="card-title">{{store.name}}</h5></a>
+          </div>
+          <div class="col-3">
+            <a (click)="editStore(store.idStore)" class="btn btn-link"><fa-icon [icon]="faEdit"></fa-icon></a>
+            <a (click)="deleteStore(store.idStore)" class="btn btn-link"><fa-icon [icon]="faTrashAlt"></fa-icon></a>
+          </div>
+        </div>
       </div>
       <div class="card-footer">
         <a href="#" class="card-link">Añadir negocio</a>
-        <a href="#" class="card-link">Editar negocio</a>
-        <a href="#" class="card-link">Eliminar negocio</a>
       </div>
     </div>
   </div>

@@ -48,7 +48,7 @@ export class StoreService {
     headers = headers.set('Content-Type', 'application/json');
 
     // Request
-    return this.http.get<Store[]>(`${this.API_URL}/store//${idStore}`, { headers });
+    return this.http.get<Store[]>(`${this.API_URL}/store/${idStore}`, { headers });
   }
 
   public createStore(store: Store): Observable<any> {

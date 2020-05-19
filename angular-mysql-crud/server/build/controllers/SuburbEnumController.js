@@ -13,14 +13,14 @@ const services_1 = require("../services");
 class SuburbEnumController {
     static listSuburbEnum(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idSuburbEnum, suburb, postalCode, fkCityEnum } = req.body; //req.body req.query req.params
+            const { idSuburbEnum, suburb, postalCode, fkCityEnum } = req.query; //req.body req.query req.params
             const _suburbsEnum = yield services_1.SuburbEnumService.listSuburbEnum(idSuburbEnum, suburb, postalCode, fkCityEnum);
             res.json({ length: _suburbsEnum.length, recordset: _suburbsEnum });
         });
     }
     static getSuburbEnum(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idSuburbEnum } = req.params; //req.body req.query req.params
+            const { idSuburbEnum } = req.query; //req.body req.query req.params
             const _suburbsEnum = yield services_1.SuburbEnumService.getSuburbEnum(parseInt(idSuburbEnum));
             res.json({ length: _suburbsEnum.length, recordset: _suburbsEnum });
         });

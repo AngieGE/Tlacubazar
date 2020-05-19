@@ -42,3 +42,32 @@
 
 
 }
+.btn{
+  background-color: #EE6E73;
+  color: black;
+}
+.filled.coloring {
+  color: #f0bb2d;
+}
+#reviews{
+  max-height: 200px;
+}
+.hide-scroll {
+  overflow-y: scroll; /* Add the ability to scroll */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.hide-scroll {
+    -ms-overflow-style: none;
+}
+.icon-red{
+  color: darkred;
+}
+.details:hover{
+  background-color: ghostwhite;
+}

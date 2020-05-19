@@ -3,13 +3,16 @@
     <!--Basic info-->
     <div class="card text-center bg-light text-dark">
       <div class="card-header">
-        <h4 class="card-title text-center">Manzanas4Dayz</h4>
+        <h4 class="card-title text-center">{{store.name}}</h4>
+        <h5 style="font-size: small;">Ofrece productos en {{store.categoryEnum.category}}</h5>
       </div>
       <div class="card-body">
         <h5 class="card-title">Teléfono:</h5>
-        <h6 class="card-subtitle mb-2 text-muted">7774968039</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{store.phone}}</h6>
+        <h5 class="card-title">Sitio web:</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{store.link}}</h6>
         <h5 class="card-title">Representante:</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Enrique Favila</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{store.vendor.firstName}} {{store.vendor.lastName}}</h6>
       </div>
     </div>
   </div>
@@ -23,33 +26,19 @@
           <thead>
           <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Descripcion</th>
+            <th scope="col">Descripción</th>
             <th scope="col">Cantidad disponible</th>
             <th scope="col">Precio</th>
-            <th scope="col">Maximo descuento con cacao</th>
+            <th *ngIf="store.acceptsCacao" scope="col">Máximo descuento con cacao</th>
           </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Manzana Roja</td>
-              <td>Clásica y tradicional manzana roja</td>
-              <td>10</td>
-              <td>$3.43</td>
-              <td>$0.69</td>
-            </tr>
-            <tr>
-              <td>Pera</td>
-              <td>Fantástica pera de máxima calidad</td>
-              <td>7</td>
-              <td>$5.99</td>
-              <td>$1.20</td>
-            </tr>
-            <tr>
-              <td>Manzana Verde</td>
-              <td>La alternativa de siempre: manzana verde</td>
-              <td>14</td>
-              <td>$2.50</td>
-              <td>$0.50</td>
+            <tr *ngFor="let product of products">
+              <td>{{product.name}}</td>
+              <td>{{product.description}}</td>
+              <td>{{product.quantityInStock}}</td>
+              <td>${{product.buyPrice}}</td>
+              <td *ngIf="store.acceptsCacao">${{product.maxCacaoBuyPrice}}</td>
             </tr>
           </tbody>
         </table>

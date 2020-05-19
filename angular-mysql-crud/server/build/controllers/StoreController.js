@@ -20,8 +20,9 @@ class StoreController {
     }
     static getStore(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idStore } = req.query; //req.body req.query req.params
-            const _store = yield services_1.StoreService.listStore(parseInt(idStore));
+            const { idStore } = req.params; //req.body req.query req.params
+            console.log(req.params);
+            const _store = yield services_1.StoreService.getStore(parseInt(idStore));
             res.json({ length: _store.length, recordset: _store });
         });
     }

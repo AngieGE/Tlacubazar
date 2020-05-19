@@ -49,7 +49,6 @@ export class TlacuServices {
         public suburbEnum: SuburbEnumService,
         public userAddress: UserAddressService,
         public user: UserService,
-
         public adressEnum: AddressEnumService,
         public cityEnum: CityEnumService,
         public deliveryMethod: DeliveryMethodService,
@@ -58,7 +57,7 @@ export class TlacuServices {
         public payment: PaymentService,
         public product: ProductService,
         public stateEnum: StateEnumService,
-        public categoryEnum: CategoryEnumService,
+        public categoryEnum: CategoryEnumService
     ) { }
 
 }
