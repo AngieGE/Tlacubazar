@@ -1,16 +1,22 @@
 <div class="row justify-content-md-center">
   <div class="col-3">
     <!--Basic info-->
+
     <div class="card text-center bg-light text-dark">
       <div class="card-header">
         <h4 class="card-title text-center">{{store.name}}</h4>
         <h5 style="font-size: small;">Ofrece productos en {{store.categoryEnum.category}}</h5>
+        <!--Servicio y cacao icon-->
+        <div *ngIf="store.acceptsCacao" class="cursor-hand">
+          <span >Acepta cacao</span><img src="../../../assets/images/vegetariano.png" alt="cacao img" class="inline-block ml-2">
+
+        </div >
       </div>
       <div class="card-body">
         <h5 class="card-title">Teléfono:</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{store.phone}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{store.phone}}77717770435</h6>
         <h5 class="card-title">Sitio web:</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{store.link}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{store.link}}www.tlacubazar.com</h6>
         <h5 class="card-title">Representante:</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{store.vendor.firstName}} {{store.vendor.lastName}}</h6>
       </div>
@@ -30,16 +36,19 @@
             <th scope="col">Cantidad disponible</th>
             <th scope="col">Precio</th>
             <th *ngIf="store.acceptsCacao" scope="col">Máximo descuento con cacao</th>
+            <th scope="col">Agregar</th>
           </tr>
           </thead>
           <tbody>
             <tr *ngFor="let product of products">
-              <td>{{product.name}}</td>
+              <td class="productSelect" (click)="goProduct(product.idProduct)">{{product.name}}</td>
               <td>{{product.description}}</td>
               <td *ngIf="product.quantityInStock > 0">{{product.quantityInStock}}</td>
               <td *ngIf="product.quantityInStock <= 0" style="color: red;">AGOTADO</td>
               <td>${{product.buyPrice}}</td>
               <td *ngIf="store.acceptsCacao">${{product.maxCacaoBuyPrice}}</td>
+              <td><a class="btn btn-link"><fa-icon [icon]="faPlusSquare"></fa-icon></a>
+                <a class="btn btn-link"><fa-icon [icon]="faMinusSquare"></fa-icon></a></td>
             </tr>
           </tbody>
         </table>
