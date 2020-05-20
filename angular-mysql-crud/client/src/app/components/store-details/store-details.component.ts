@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TlacuServices } from '../../services/index';
-import { User, Store, CategoryEnum, StoreReview, Product } from 'src/app/models/index';
+import { User, Store, CategoryEnum, StoreReview, Product, Address } from 'src/app/models/index';
 import { SocialUser } from 'angularx-social-login';
+import { faEdit, faTrashAlt, faPlusSquare, faMinusSquare } from '@fortawesome/free-regular-svg-icons';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
@@ -12,9 +13,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class StoreDetailsComponent implements OnInit {
 
+  // icons
+  faEdit = faEdit;
+  faTrashAlt = faTrashAlt;
+  faPlusSquare = faPlusSquare;
+  faMinusSquare = faMinusSquare;
+  // user
   user: User;
   store: Store = new Store();
+  // products
   products: Product[] = new Array();
+  storeAddress: Address;
 
   constructor(private tlacu: TlacuServices, private router: Router,  private activatedRoute: ActivatedRoute ) {
     this.user = this.tlacu.manager.user;
@@ -42,6 +51,15 @@ export class StoreDetailsComponent implements OnInit {
     // set the address
 
   }
+
+  goProduct(idProduct: number) {
+    this.router.navigate([`/product/${idProduct}`]);
+  }
+
+  // async setStoreAddress(store: Store){
+  //  const address = await this.tlacu.address.getAddress(this.store.fkAddress).toPromise;
+  //  this.storeAddress = new Address(address)
+  // }
 
   async setVendor(store: Store) {
     const vendorRes = await this.tlacu.user.getUser(store.fkVendor).toPromise();
