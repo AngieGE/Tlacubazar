@@ -58,15 +58,22 @@ export class ProductComponent implements OnInit {
     } else  {
       // añadir a carrito
       var today = new Date();
-      //const order: Order = new Order({orderDate: today, fkStatusEnum: _StatusEnum.StatusEnum.PAUSADA,
-       //                             '',  })
-     // this.tlacu.order.createOrder()
+      const order: Order = new Order({orderDate: today,
+                          fkStatusEnum: _StatusEnum.StatusEnum.PAUSADA,
+                          comments: '', totalPrice: this.product.buyPrice,
+                        totalMaxCacaoPrice: this.product.maxCacaoBuyPrice,
+                        fkUser: this.tlacu.manager.user.idUser,
+                        fkProduct: this.product.idProduct});
+                        console.log('create order');
+      this.tlacu.order.createOrder(order).subscribe( res => {
+        console.log(res);
+      });
       // decidir alert
       if (this.tlacu.manager.user.readUserCourse !== 1) {
         alert('Debe iniciar sesión en TlacuBazar para comprar');
       } else {
         alert('Su compra fue agregada a su carrito');
-        this.router.navigate(['/cart/']);
+        //this.router.navigate(['/cart/']);
 
       }
 

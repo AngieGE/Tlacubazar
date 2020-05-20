@@ -67,14 +67,8 @@
         <h4 class="text-center">Negocios registrados</h4>
       </div>
       <div class="card-body">
-        <div class="row" *ngFor = "let store of stores">
-          <div class="col-9">
-            <a href="/store/{{store.idStore}}" ><h5 class="card-title">{{store.name}}</h5></a>
-          </div>
-          <div class="col-3">
-            <a (click)="editStore(store.idStore)" class="btn btn-link"><fa-icon [icon]="faEdit"></fa-icon></a>
-            <a (click)="deleteStore(store.idStore)" class="btn btn-link"><fa-icon [icon]="faTrashAlt"></fa-icon></a>
-          </div>
+        <div class="flex-row center-vertically justify-content-center" >
+          <h6 class="text-center"> Aun no tiene negocios en TlacuBazar</h6>
         </div>
       </div>
       <div class="card-footer">

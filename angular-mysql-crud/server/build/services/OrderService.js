@@ -37,15 +37,15 @@ class OrderService {
         });
     }
     static createOrder(order) {
-        var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "INSERT INTO Order (orderDate, fkStatusEnum, comments, totalPrice, totalMaxCacaoPrice, fkUser, fkStore) VALUES (" + ((_a = order.orderDate) === null || _a === void 0 ? void 0 : _a.toISOString()) + "', " +
-                order.fkStatusEnum + "', " +
+            let sql = "INSERT INTO order ( fkStatusEnum, comments, totalPrice, totalMaxCacaoPrice, fkUser, fkProduct) VALUES ( " +
+                order.fkStatusEnum + ", '" +
                 order.comments + "', " +
-                order.totalPrice + "', " +
-                order.totalMaxCacaoPrice + "', " +
-                order.fkUser + "', " +
+                order.totalPrice + ", " +
+                order.totalMaxCacaoPrice + ", " +
+                order.fkUser + ", " +
                 order.fkProduct + ");";
+            console.log(sql);
             const resultado = yield database_1.default.query(sql);
             return resultado;
         });

@@ -36,7 +36,6 @@
             <th scope="col">Cantidad disponible</th>
             <th scope="col">Precio</th>
             <th *ngIf="store.acceptsCacao" scope="col">Máximo descuento con cacao</th>
-            <th scope="col">Agregar</th>
           </tr>
           </thead>
           <tbody>
@@ -47,8 +46,6 @@
               <td *ngIf="product.quantityInStock <= 0" style="color: red;">AGOTADO</td>
               <td>${{product.buyPrice}}</td>
               <td *ngIf="store.acceptsCacao">${{product.maxCacaoBuyPrice}}</td>
-              <td><a class="btn btn-link"><fa-icon [icon]="faPlusSquare"></fa-icon></a>
-                <a class="btn btn-link"><fa-icon [icon]="faMinusSquare"></fa-icon></a></td>
             </tr>
           </tbody>
         </table>

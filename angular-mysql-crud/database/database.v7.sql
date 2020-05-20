@@ -115,7 +115,7 @@ CREATE TABLE `Product` (
 
 CREATE TABLE `Order` (
   `idOrder` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `orderDate` DATE,
+  `orderDate` TEXT,
   `fkStatusEnum`INT NOT NULL,
   `comments` TEXT,
   `totalPrice` DECIMAL(13,2),
@@ -164,7 +164,9 @@ INSERT INTO `DeliveryMethodEnum` (`deliveryMethod`) VALUES ('En automóvil'), ('
 
 INSERT INTO `User` (`email`, `firstName`, `lastName`, `isVendor`, `phone`, `cacaoBalance`) VALUES ('alejandro.m@gmail.com', 'Alejandro', 'Moral', FALSE, '7771414141', 0.0), ('milagros@manzanas4dayz.com.mx', 'Milagros', 'Ramírez', TRUE, '7774004040', 0.0);
 
-INSERT INTO `AddressEnum` (`address`) VALUES ('Revolución 42'), ('Caudillo del Sur 500'), ('Avenida Universidad 404');
+INSERT INTO `AddressEnum` (`address`) VALUES 
+	('Revolución 42'), ('Caudillo del Sur 500'), ('Avenida Universidad 404'), ('Privada Ajusco #6'),
+	('Calle Elias 23'), ('Subida Chalma Num 33'), ('Calle guadalupe 88'), ('Privada Rosario');
 
 /*STATES*/
 INSERT INTO `StateEnum` (`idStateEnum`,`state`) VALUES (1, 'Morelos');
@@ -194,9 +196,14 @@ INSERT INTO `SuburbEnum` (`idSuburbEnum`,`suburb`,`postalCode`,`fkCityEnum`) VAL
 
 			
 INSERT INTO `Address` (`fkAddressEnum`, `fkStateEnum`, `fkCityEnum`, `fkSuburbEnum`) VALUES 
-    (1, 1, 1, 1),
+    (1, 1, 1, 1), 
     (2, 1, 7, 5),
-    (3, 1, 11, 9);
+    (3, 1, 11, 7),
+	(4, 1, 1, 2), 
+    (5, 1, 7, 4),
+    (6, 1, 11, 8),
+	(7, 1, 7, 6),
+    (8, 1, 11, 9);
 
 INSERT INTO `UserAddress` (`fkUser`, `fkAddress`) VALUES (1, 1), (1, 3), (2, 2);
 
@@ -236,12 +243,22 @@ INSERT INTO `StatusEnum` VALUES
     (9, 'STORE_RECHAZADA');
 
 INSERT INTO `Store` (`name`, `description`, `image`,`fkAddress`, `isServiceStore`, `acceptsCacao`, `fkStatusEnum`,`fkVendor`, `fkCategoryEnum`) VALUES 
-    ('Manzanas4Dayz', 'Tienda de todos tipos de manzanas', NULL, 3, FALSE, TRUE, 7, 2, 2),
-    ('Nutrición Milagros', 'Productos nutrimentales, bajos en grasa.', NULL, 3, TRUE, FALSE, 8, 2, 2);
+    ('Manzanas All Day', 'Tienda de todos tipos de manzanas', NULL, 1, FALSE, TRUE, 8, 2, 1),
+    ('Nutrición Milagros', 'Productos nutrimentales, bajos en grasa.', NULL, 2, FALSE, FALSE, 8, 2, 2),
+	('Floreria Juanita', 'Tenemos todas las flores que pueda imaginar', NULL, 3, FALSE, FALSE, 8, 2, 3),
+	('Tacos locos', 'tacos de canasta super ricos nuetsro taco mas famoso es el de mole, lo invitamos a probarlo.', NULL, 4, FALSE, TRUE, 8, 2, 2),
+	('Carpetas Lore', 'Somos un grupo de mujeres que vendo de tamaño grande. Las telas son 100% morelenses.', NULL, 5, FALSE, TRUE, 8, 2, 13),
+	('El leonsito', 'productos para cocina, echos de material quirurjico, super duradero y seguro', NULL, 6, FALSE, TRUE, 8, 2, 14),
+	('Destapa baños', 'Destapamos todo suuper bien', NULL, 7, TRUE, FALSE, 8, 2, 13),
+	('Clases de inglés online', 'La primera clase es gratis, tengo distintos precios y disponibilidad', NULL, 8, TRUE, FALSE, 8, 2, 9);
+	
 
 INSERT INTO `DeliveryMethod` (`fkStore`, `fkDeliveryMethodEnum`) VALUES (1, 3), (2, 3), (2, 4);
 
 INSERT INTO `Product`(`name`, `description`, `image`, `quantityInStock`, `buyPrice`, `maxCacaoBuyPrice`, `fkStore`, `fkCategoryEnum`) VALUES 
     ('Manzana Roja', 'Clásica y tradicional manzana roja', NULL, 10, 3.43, 0.686, 1, 2),
     ('Manzana Verde', 'La alternativa de siempre: manzana verde', NULL, 14, 2.5, 0.5, 1, 2),
-    ('Pera', 'Fantástica pera de máxima calidad', NULL, 7, 5.99, 1.198, 1, 2);
+    ('Pera', 'Fantástica pera de máxima calidad', NULL, 7, 5.99, 1.198, 5, 13),
+	('Carpeta King Size', 'Carpeta amblia, lavable', NULL, 5, 340.43, 0.686, 5, 13),
+    ('Carpeta estilo Indu', 'Lavable, con secado al sol', NULL, 3, 2000.5, 0.5, 5, 13),
+    ('Carpeta trabajada a mano', 'Garantia de un mes', NULL, 7, 500.99, 1.198, 5, 13);

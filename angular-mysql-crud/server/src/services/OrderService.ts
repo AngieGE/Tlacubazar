@@ -24,14 +24,14 @@ export class OrderService {
     }
 
     static async createOrder(order: Order): Promise<any> {
-        let sql: string = "INSERT INTO Order (orderDate, fkStatusEnum, comments, totalPrice, totalMaxCacaoPrice, fkUser, fkStore) VALUES ("+
-                                        order.orderDate?.toISOString() + "', " +
-                                        order.fkStatusEnum + "', " +
+        let sql: string = "INSERT INTO order ( fkStatusEnum, comments, totalPrice, totalMaxCacaoPrice, fkUser, fkProduct) VALUES ( "+
+                                        order.fkStatusEnum + ", '" +
                                         order.comments + "', " +
-                                        order.totalPrice + "', " +
-                                        order.totalMaxCacaoPrice + "', " +
-                                        order.fkUser + "', " +
+                                        order.totalPrice + ", " +
+                                        order.totalMaxCacaoPrice + ", " +
+                                        order.fkUser + ", " +
                                         order.fkProduct +");"
+                console.log(sql);
         const resultado= await pool.query(sql);
         return resultado;
     }
