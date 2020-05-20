@@ -64,7 +64,7 @@ export class UserAddressService {
     return this.http.put<UserAddress>(`${this.API_URL}/userAddress/${idUserAddress}`, userAddress,  { headers } );
   }
 
-  public deleteUserAddress(idUserAddress: number): Observable<any> {
+  public deleteUserAddress(fkAddress: number, fkUser: number): Observable<any> {
     // Headers
     let headers = this.defaultHeaders;
     headers = headers.set('Accept', 'application/json');
@@ -72,7 +72,7 @@ export class UserAddressService {
 
 
     // Request
-    return this.http.delete(`${this.API_URL}/userAddress/${idUserAddress}`, { headers } );
+    return this.http.delete(`${this.API_URL}/userAddress/${fkAddress}/${fkUser}`, { headers } );
 
   }
 }

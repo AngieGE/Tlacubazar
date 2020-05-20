@@ -1,8 +1,8 @@
 <ul ngbNav #nav="ngbNav" [(activeId)]="active" id="nav" class="nav-tabs justify-content-center">
 
     <!--LOGO-->
-    <li ngbNavItem class="mr-auto ml-5">
-      <div class="flex-row center-vertically justify-content-center h-100 ml-1 pointer" routerLink="/">
+    <li ngbNavItem class="mr-auto ml-5" >
+      <div class="flex-row center-vertically justify-content-center h-100 ml-1 pointer" (click)="clickLogo()">
         <img src="../../../assets/images/tlacubazar.png" alt="logo" id="logo">
       </div>
     </li>
@@ -52,6 +52,7 @@
     <div class="flex-row center-vertically justify-content-center">
       <i class="material-icons text-black">location_on</i>
     </div>
+    <!--if there is no user logged in-->
     <div class="flex-col" *ngIf="user == null">
         <div class="mb-less small-text" (click)="login()">
           Hola
@@ -61,13 +62,37 @@
         </div>
     </div>
 
-    <div class="flex-col" *ngIf="user != null">
-      <div class="mb-less small-text">
-        Hola
+    <!--if there is user logged im-->
+    <li ngbDropdown *ngIf="user != null" style="list-style-type: none;" class="ml-less">
+      <a href (click)="false" class="text-black nav-link h-100" ngbDropdownToggle [ngClass]="{'dropdown-toggle': false }">
+        <!--address set-->
+        <div class="flex-col" *ngIf="user.fkAddress == null">
+          <div class="mb-less small-text">
+            Hola
+          </div>
+          <div class="">
+            Elige tu dirección
+          </div>
+        </div>
+        <!--no address set-->
+        <div class="flex-col" *ngIf="user.fkAddress != null">
+          <div class="mb-less small-text">
+            Estás aqui
+          </div>
+          <div class="">
+            {{user.address.addressEnum.address}}, {{user.address.suburbEnum.suburb}}.
+            {{user.address.cityEnum.city}}, {{user.address.stateEnum.state}} {{user.address.suburbEnum.postalCode}}.
+          </div>
+        </div>
+      </a>
+      <div ngbDropdownMenu>
+        <div ngbDropdownItem class="col" *ngFor="let uAddress of userAddresses">
+          <h6 class="card-subtitle mb-2 text-muted" (click) ="setCurentUserAddress(uAddress.address)">
+            {{uAddress.address.addressEnum.address}}, {{uAddress.address.suburbEnum.suburb}}
+            {{uAddress.address.cityEnum.city}}, {{uAddress.address.stateEnum.state}} {{uAddress.address.suburbEnum.postalCode}}.
+          </h6>
+        </div>
       </div>
-      <div class="">
-        Elige tu dirección
-      </div>
-  </div>
+    </li>
   </div>
 </div>

@@ -36,7 +36,8 @@ class UserAddressController {
     }
     static deleteUserAddress(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { fkUser, fkAddress } = req.params;
+            const { fkAddress, fkUser } = req.params;
+            console.log(req.params);
             const _deleteUserAddress = yield services_1.UserAddressService.deleteUserAddress(parseInt(fkUser), parseInt(fkAddress));
             let suc;
             if (_deleteUserAddress.affectedRows < 1) {

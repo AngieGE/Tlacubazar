@@ -7,7 +7,7 @@ export class SuburbEnum {
     fkCityEnum?: number;
 
     // has
-    cityEnum: CityEnum;
+    cityEnum: CityEnum = new CityEnum();
 
     constructor(suburbEnum?: SuburbEnum) {
       if (suburbEnum != null) {

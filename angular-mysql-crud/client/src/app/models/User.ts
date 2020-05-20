@@ -3,10 +3,10 @@ import { Address } from './Address';
 export class User {
 
   idUser?: number;
-  email?: number;
+  email?: string;
   firstName?:	string;
   lastName?: string;
-  isVendor?: boolean;
+  isVendor?: number;
   phone?: string;
   cacaoBalance?: number;
   readUserCourse?: boolean;
@@ -18,7 +18,8 @@ export class User {
   // Belongs to
   address?: Address;
 
-  constructor(user: User) {
+  constructor(user?: User) {
+    if (user != null) {
       this.idUser = user.idUser;
       this.email = user.email;
       this.firstName = user.firstName;
@@ -29,6 +30,7 @@ export class User {
       this.readUserCourse = user.readUserCourse;
       this.readVendorCourse = user.readVendorCourse;
       this.fkAddress = user.fkAddress;
+    }
 
   }
 }

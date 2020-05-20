@@ -1,4 +1,5 @@
-import { Product, User } from './index';
+import { Product } from './Product';
+import {  User } from './User';
 
 export class ProductReview {
     idProductReview?: number;

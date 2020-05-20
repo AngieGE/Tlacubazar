@@ -18,7 +18,7 @@ import {UserAddressController} from '../controllers'
     config():void{
         this.router.get('/', UserAddressController.listUserAddress);
         this.router.post('/', UserAddressController.createUserAddress);
-        this.router.delete('/:idUserAddress', UserAddressController.deleteUserAddress);
+        this.router.delete('/:fkAddress/:fkUser', UserAddressController.deleteUserAddress);
     }
 }
 

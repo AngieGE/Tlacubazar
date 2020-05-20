@@ -12,7 +12,7 @@ export class StateEnumService {
 
   constructor(private http: HttpClient) { }
 
-  public listStateEnum(idStateEnum?: number, state?: string) {
+  public listStateEnum(idStateEnum?: number, state?: string): Observable<any> {
     let params = new HttpParams();
 
     if (idStateEnum !== undefined && idStateEnum !== null) {

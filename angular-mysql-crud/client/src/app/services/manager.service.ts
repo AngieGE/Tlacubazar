@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { User } from '../models';
+import { Observable, Subject } from 'rxjs';
+import { User, UserAddress } from '../models';
 import {
   AuthService,
   SocialUser,
@@ -16,9 +16,10 @@ import {
 export class ManagerService {
   user: User;
   socialUser: SocialUser;
-
+  userAddress: UserAddress[];
+  updateUserAddress = new Subject<number>();
   constructor() {
-    this.getTokenItems()
+    this.getTokenItems();
   }
 
   setItems(socialUser: SocialUser, user: User) {
@@ -26,6 +27,10 @@ export class ManagerService {
     this.socialUser = socialUser;
     localStorage.setItem('tlacu-user', JSON.stringify(user));
     localStorage.setItem('tlacu-social-user', JSON.stringify(socialUser));
+  }
+
+  setuserAddresses(userAddresses: UserAddress[]) {
+    this.userAddress = userAddresses;
   }
 
   unsetItems() {

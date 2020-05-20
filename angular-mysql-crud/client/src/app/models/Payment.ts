@@ -1,4 +1,5 @@
-import { User, Order } from './index';
+import { User } from './User';
+import {  Order } from './Order';
 
 export class Payment {
     idPayment?: number;

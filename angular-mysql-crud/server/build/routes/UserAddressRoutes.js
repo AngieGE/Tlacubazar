@@ -15,7 +15,7 @@ class UserAddressRoutes {
     config() {
         this.router.get('/', controllers_1.UserAddressController.listUserAddress);
         this.router.post('/', controllers_1.UserAddressController.createUserAddress);
-        this.router.delete('/:idUserAddress', controllers_1.UserAddressController.deleteUserAddress);
+        this.router.delete('/:fkAddress/:fkUser', controllers_1.UserAddressController.deleteUserAddress);
     }
 }
 exports.UserAddressRoutes = UserAddressRoutes;

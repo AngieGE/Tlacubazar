@@ -1,4 +1,5 @@
-import { Store, CategoryEnum } from './index';
+import { Store  } from './Store';
+import {  CategoryEnum } from './CategoryEnum';
 
 export class Product {
     idProduct?: number;

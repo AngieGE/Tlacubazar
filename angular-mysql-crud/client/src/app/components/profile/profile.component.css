@@ -1,1 +1,8 @@
 @import '../../app.component.css';
+.text-blue{
+  color: #007bff;
+}
+.btn-pink{
+  background-color: #EE6E73;
+  color: black;
+}

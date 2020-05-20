@@ -26,7 +26,8 @@ export class UserAddressController {
     }
     
     static async deleteUserAddress(req: Request, res: Response): Promise<void>{
-        const { fkUser, fkAddress} = req.params;
+        const { fkAddress,fkUser} = req.params;
+        console.log(req.params);
         const _deleteUserAddress=await UserAddressService.deleteUserAddress(parseInt(fkUser), parseInt(fkAddress));  
         let suc; 
         if (_deleteUserAddress.affectedRows < 1) {
