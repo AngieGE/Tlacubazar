@@ -9,6 +9,7 @@ class Order {
         this.totalPrice = order.totalPrice;
         this.totalMaxCacaoPrice = order.totalMaxCacaoPrice;
         this.fkUser = order.fkUser;
+        this.fkProduct = order.fkProduct;
     }
 }
 exports.Order = Order;

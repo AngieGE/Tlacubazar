@@ -15,9 +15,13 @@ export class StartComponent implements OnInit {
   }
 
   logout(): void {
-    this.tlacu.manager.unsetItems();
-    this.authService.signOut().then( res => {
+    if (this.tlacu.manager.user == null) {
       this.router.navigate(['/login']);
-    });
+    } else {
+      this.tlacu.manager.unsetItems();
+      this.authService.signOut().then( res => {
+        this.router.navigate(['/login']);
+      });
+    }
   }
 }

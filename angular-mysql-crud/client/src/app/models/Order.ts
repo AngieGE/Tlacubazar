@@ -1,4 +1,6 @@
-import { StateEnum, User } from './index';
+import { StateEnum } from './StateEnum';
+import {  User } from './User';
+import { Product} from './Product';
 
 export class Order {
     idOrder?: number;
@@ -8,10 +10,12 @@ export class Order {
     totalPrice?: number;
     totalMaxCacaoPrice?: number;
     fkUser?: number;
+    fkProduct?: number;
 
     // has
-    statusEnum: StateEnum;
-    user: User;
+    statusEnum?: StateEnum;
+    user?: User;
+    product?: Product;
 
     constructor(order?: Order){
       if (order != null) {
@@ -22,6 +26,7 @@ export class Order {
         this.totalPrice = order.totalPrice;
         this.totalMaxCacaoPrice = order.totalMaxCacaoPrice;
         this.fkUser = order.fkUser;
+        this.fkProduct = order.fkProduct;
       }
     }
 }

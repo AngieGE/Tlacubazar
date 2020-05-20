@@ -13,8 +13,8 @@ export class Product {
 
 
     // has
-    store: Store;
-    categoryEnum: CategoryEnum;
+    store?: Store;
+    categoryEnum?: CategoryEnum;
 
     constructor(product?: Product){
         this.idProduct = product.idProduct;

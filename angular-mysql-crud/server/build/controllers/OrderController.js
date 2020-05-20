@@ -20,7 +20,7 @@ class OrderController {
     }
     static getOrder(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idOrder } = req.query; //req.body req.query req.params
+            const { idOrder } = req.params; //req.body req.query req.params
             const _Order = yield services_1.OrderService.getOrder(parseInt(idOrder));
             res.json({ length: _Order.length, recordset: _Order });
         });

@@ -39,12 +39,13 @@ class OrderService {
     static createOrder(order) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "INSERT INTO Order (orderDate, fkStatusEnum, comments, totalPrice, totalMaxCacaoPrice, fkUser) VALUES (" + ((_a = order.orderDate) === null || _a === void 0 ? void 0 : _a.toISOString()) + "', " +
+            let sql = "INSERT INTO Order (orderDate, fkStatusEnum, comments, totalPrice, totalMaxCacaoPrice, fkUser, fkStore) VALUES (" + ((_a = order.orderDate) === null || _a === void 0 ? void 0 : _a.toISOString()) + "', " +
                 order.fkStatusEnum + "', " +
                 order.comments + "', " +
                 order.totalPrice + "', " +
                 order.totalMaxCacaoPrice + "', " +
-                order.fkUser + ");";
+                order.fkUser + "', " +
+                order.fkProduct + ");";
             const resultado = yield database_1.default.query(sql);
             return resultado;
         });

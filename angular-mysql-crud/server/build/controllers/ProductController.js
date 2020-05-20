@@ -20,7 +20,7 @@ class ProductController {
     }
     static getProduct(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idProduct } = req.query; //req.body req.query req.params
+            const { idProduct } = req.params; //req.body req.query req.params
             const _Product = yield services_1.ProductService.getProduct(parseInt(idProduct));
             res.json({ length: _Product.length, recordset: _Product });
         });

@@ -67,9 +67,9 @@ class UserService {
                 "lastName = '" + user.lastName + "', " +
                 "isVendor = " + user.isVendor + ", " +
                 "phone = '" + user.phone + "', " +
-                "cacaoBalance = " + user.cacaoBalance + " " +
-                "readUserCourse = " + user.readUserCourse + " " +
-                "readVendorCourse = " + user.readVendorCourse + " " +
+                "cacaoBalance = " + user.cacaoBalance + ", " +
+                "readUserCourse = " + user.readUserCourse + ", " +
+                "readVendorCourse = " + user.readVendorCourse + ", " +
                 "fkAddress = " + user.fkAddress + " " +
                 "WHERE idUser = " + idUser + ";";
             const resultado = yield database_1.default.query(sql);

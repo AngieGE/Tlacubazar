@@ -1,0 +1,5 @@
+@import '../../app.component.css';
+.btn{
+  background-color: #EE6E73;
+  color: black;
+}

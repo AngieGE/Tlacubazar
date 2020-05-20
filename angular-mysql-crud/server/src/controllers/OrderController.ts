@@ -12,7 +12,7 @@ export class OrderController {
     }
 
     static async getOrder (req: Request, res: Response){
-        const { idOrder } = req.query; //req.body req.query req.params
+        const { idOrder } = req.params; //req.body req.query req.params
         const _Order: Order[] = await OrderService.getOrder(parseInt(idOrder));
         res.json({length: _Order.length, recordset:_Order});
     }
@@ -28,7 +28,7 @@ export class OrderController {
             _createdOrder.message = "Order was created";
             suc=true;
         }
-        res.json({success: suc,createdOrder:_createdOrder});
+        res.json({success: suc, createdOrder:_createdOrder});
     }
     
     static async updateOrder(req: Request, res: Response): Promise<void>{

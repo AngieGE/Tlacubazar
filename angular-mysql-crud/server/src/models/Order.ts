@@ -6,6 +6,7 @@ export class Order {
     totalPrice?:number;
     totalMaxCacaoPrice?: number;
     fkUser?:number;
+    fkProduct?:number;
 
     constructor(order: Order){
         this.idOrder=order.idOrder;
@@ -15,5 +16,6 @@ export class Order {
         this.totalPrice=order.totalPrice;
         this.totalMaxCacaoPrice=order.totalMaxCacaoPrice;
         this.fkUser=order.fkUser;
+        this.fkProduct=order.fkProduct;
     }
 }

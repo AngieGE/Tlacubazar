@@ -1,1 +1,60 @@
-<p>product works!</p>
+<div class="row justify-content-md-center">
+  <div class="col-12">
+    <div class="row"><!--CONTENIDO-->
+      <!--INFO Y DESCRIPCION-->
+      <div class="col-6 mt-4">
+        <!--Como nos protegemos-->
+        <div class="card text-center bg-light text-dark mb-4">
+          <div class="card-header">
+            <h4 class="card-title text-center">{{product.name}}</h4>
+            <p class="card-title text-center"> <b>Producto del area de {{product.categoryEnum.category}}</b>
+          </div>
+          <div class="card-body">
+            <p>{{product.description}}</p>
+          </div>
+        </div>
+        <!--Sintomas para sospechar que alguien ha adquirido el nuevo coronavirus-->
+        <div class="card text-center bg-light text-dark mb-4">
+          <div class="card-header">
+            <h4 class="card-title text-center">Ratings</h4>
+          </div>
+          <div class="card-body">
+            ...
+          </div>
+        </div>
+      </div>
+      <!--DATOS PARA COMPRAR-->
+      <div class="col-6 mt-4">
+      <!--Como nos protegemos-->
+      <div class="card text-center bg-light text-dark mb-4">
+        <div class="card-header">
+          <h4 class="card-title text-center">Información de compra</h4>
+        </div>
+        <div class="card-body">
+          <!--INFO-->
+          <p>
+            <i class="material-icons cursor-arrow">house</i>
+            <b class="cursor-hand mb-2" (click)="goStore()"> Ve a la tienda</b>
+          </p>
+          <p>
+            <i class="material-icons cursor-arrow" style="color: darkred;">whatshot</i>
+            Quedan {{product.quantityInStock}} unidades en tienda.
+          </p>
+          <!--PRECIO-->
+          <ul class="list-group">
+            <li class="list-group-item"><b>Precio: </b> ${{product.buyPrice}}</li>
+            <li class="list-group-item"><b>Máx descuento con cacao: </b> ${{product.maxCacaoBuyPrice}}</li>
+            <li class="list-group-item">
+              <button  type="button" class="btn mb-3" (click)="addCart()">
+                Poner en mi carrito
+              </button>
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

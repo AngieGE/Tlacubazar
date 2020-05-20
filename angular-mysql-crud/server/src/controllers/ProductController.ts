@@ -12,7 +12,7 @@ export class ProductController {
     }
     
     static async getProduct (req: Request, res: Response){
-        const { idProduct} = req.query; //req.body req.query req.params
+        const { idProduct} = req.params; //req.body req.query req.params
         const _Product: Product[] = await ProductService.getProduct(parseInt(idProduct));
         res.json({length: _Product.length, recordset:_Product});
     }

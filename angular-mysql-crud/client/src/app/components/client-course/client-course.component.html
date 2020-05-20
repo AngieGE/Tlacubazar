@@ -95,5 +95,21 @@
         </div>
       </div>
     </div>
+        <!--Confirm course-->
+        <div class="row" *ngIf="idUser != null && userCourse != 1">
+          <div class="col-12">
+            <button  type="button" class="btn mb-3" (click)="confirmar()">
+              Terminé el curso
+            </button>
+          </div>
+        </div>
+        <!--Ya hizo el curso course-->
+        <div class="row" *ngIf="idUser != null && userCourse == 1">
+          <div class="col-12">
+            <button  type="button" class="btn mb-3" routerLink="/catalogue">
+              !A comprár!
+            </button>
+          </div>
+        </div>
   </div>
 </div>

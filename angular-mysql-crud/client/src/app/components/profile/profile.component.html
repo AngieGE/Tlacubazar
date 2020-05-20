@@ -14,8 +14,8 @@
       </div>
       <div class="card-body">
         <h5 class="card-title">Teléfono:</h5>
-        <h6 class="card-subtitle mb-2 text-muted" *ngIf="user.phone != null">{{user.phone}}</h6>
-        <h6 class="card-subtitle mb-2 text-muted" *ngIf="user.phone == null">---</h6>
+        <h6 class="card-subtitle mb-2 text-muted" *ngIf="user.phone != null && user.phone != 'null'">{{user.phone}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted" *ngIf="user.phone == null || user.phone == 'null'">---</h6>
         <h5 class="card-title">Correo:</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
         <h5 class="card-subtitle mb-2 text-muted" *ngIf="user.isVendor">Miembro vendedor</h5>

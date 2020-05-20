@@ -121,17 +121,10 @@ CREATE TABLE `Order` (
   `totalPrice` DECIMAL(13,2),
   `totalMaxCacaoPrice` DECIMAL(13,2),
   `fkUser` INT NOT NULL,
+  `fkProduct` INT NOT NULL,
+  FOREIGN KEY (`fkProduct`) REFERENCES `Product` (`idProduct`) ON DELETE CASCADE,
   FOREIGN KEY (`fkUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE,
   FOREIGN KEY (`fkStatusEnum`) REFERENCES `StatusEnum` (`idStatusEnum`) ON DELETE CASCADE
-);
-
-CREATE TABLE `OrderDetails` (
-  `idOrderDetails` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `quantityOrdered` INT,
-  `fkOrder` INT NOT NULL,
-  `fkProduct` INT NOT NULL,
-  FOREIGN KEY (`fkOrder`) REFERENCES `Order` (`idOrder`) ON DELETE CASCADE,
-  FOREIGN KEY (`fkProduct`) REFERENCES `Product` (`idProduct`) ON DELETE CASCADE
 );
 
 CREATE TABLE `Payment` (

@@ -9,8 +9,8 @@ export class User {
   isVendor?: number;
   phone?: string;
   cacaoBalance?: number;
-  readUserCourse?: boolean;
-  readVendorCourse?: boolean;
+  readUserCourse?: number;
+  readVendorCourse?: number;
   fkAddress?: number;
 
   // Has many
