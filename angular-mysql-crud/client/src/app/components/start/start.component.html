@@ -1,84 +1,94 @@
-<!--
 
-  <div class="container p-4">
-    <div class="row"><!-ROW INICIAL DESCRIPCION PEQUEÑA->
-      <div class="col s6 m6 l6">
-        <h2>
-        Los negocios de Cuernavaca, al alcance de tu casa.
-      </h2>
-    </div>
-    <div class="col s6 m6 l6 center">
-      <div class="card">
-        <div class="card-image">
-          <img src="https://images.pexels.com/photos/4207892/pexels-photo-4207892.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
-        </div>
+
+  <div class="row justify-content-md-center">
+    <div class="col-12">
+      <div class="row"><!--ROW INICIAL DESCRIPCION PEQUEÑA-->
+        <div class="col s6 m6 l6">
+          <h2>
+          Los negocios de Morelos, al alcance de tu casa.
+        </h2>
       </div>
-    </div>
-  </div>
-  <br><br><br>
-  <div class="row"><!-SEGUNDO ROW 3 DESCRIPCIONES->
-    <div class="col s4 m4">
-      <div class="row">
+      <div class="col s6 m6 l6 center">
         <div class="card">
           <div class="card-image">
-            <img src="https://images.pexels.com/photos/4031818/pexels-photo-4031818.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+            <img src="https://images.pexels.com/photos/4207892/pexels-photo-4207892.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
           </div>
         </div>
       </div>
-      <div class="row">
-        <h4>Sin salir de casa</h4>
       </div>
-      <div class="row">
-        <p>Accede a los servicios de más de 50 negocios alrededor de Morelos.</p>
-      </div>
-    </div>
-    <div class="col s4 m4">
-      <div class="row">
-        <div class="card">
-          <div class="card-image">
-            <img src="https://images.pexels.com/photos/4068322/pexels-photo-4068322.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+      <br><br><br>
+      <div class="row"><!--SEGUNDO ROW 3 DESCRIPCIONES-->
+        <div class="col m-4">
+          <div class="row">
+            <div class="card">
+              <div class="card-image">
+                <img src="https://images.pexels.com/photos/4031818/pexels-photo-4031818.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <h4>Sin salir de casa</h4>
+          </div>
+          <div class="row">
+            <p>Accede a los servicios de más de 50 negocios alrededor de Morelos.</p>
+          </div>
+        </div>
+        <div class="col m-4">
+          <div class="row">
+            <div class="card">
+              <div class="card-image">
+                <img src="https://images.pexels.com/photos/4068322/pexels-photo-4068322.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <h4>Seguridad</h4>
+          </div>
+          <div class="row">
+            <p>Utilizamos encriptacion para mayor seguridad en tus datos personales y de tu negocio.</p>
+          </div>
+        </div>
+        <div class="col m-4">
+          <div class="row">
+            <div class="card">
+              <div class="card-image">
+                <img src="https://images.pexels.com/photos/95425/pexels-photo-95425.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <h4>¿Eres vendedor?</h4>
+          </div>
+          <div class="row">
+            <p>¡Registra tu negocio y empieza a vender ahora mismo!.</p>
           </div>
         </div>
       </div>
-      <div class="row">
-        <h4>seguridad</h4>
-      </div>
-      <div class="row">
-        <p>Utilizamos encriptacion para mayor seguridad en tus datos personales y de tu negocio.</p>
-      </div>
-    </div>
-    <div class="col s4 m4">
-      <div class="row">
-        <div class="card">
-          <div class="card-image">
-            <img src="https://images.pexels.com/photos/95425/pexels-photo-95425.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+      <br><br><br>
+      <div class="row"><!--TERCER ROW UNETE A TLACUBAZAR-->
+        <div class="col s6-m6 center">
+          <div class="card">
+            <div class="card-image">
+              <img src="https://www.imer.mx/tropicalisima/wp-content/uploads/sites/19/TlacuacheMexicano.jpg">
+            </div>
+          </div>
+        </div>
+        <div class="col flex-column center-vertically justify-content-center">
+          <div>
+            <h4>
+              ¿Aún no eres usuario TlacuBazar, qué esperas?
+            </h4>
+          </div>
+          <div class="mb-3">
+            <h4>
+              ¡Únete ya!
+            </h4>
+          </div>
+          <div>
+            <button (click)="logout()" class="btn waves-effect waves-light white black-text">Registrarse</button>
           </div>
         </div>
       </div>
-      <div class="row">
-        <h4>¿Eres vendedor?</h4>
-      </div>
-      <div class="row">
-        <p>¡Registra tu negocio y empieza a vender ahora mismo!.</p>
-      </div>
-    </div>
-  </div>
-  <br><br><br>
-  <div class="row"><!-TERCER ROW UNETE A TLACUBAZAR->
-    <div class="col s6-m6 center">
-      <div class="card">
-        <div class="card-image">
-          <img src="https://www.imer.mx/tropicalisima/wp-content/uploads/sites/19/TlacuacheMexicano.jpg">
-        </div>
-      </div>
-    </div>
-    <div class="col s6-m6 center">
-      <h4>
-        ¿aun no eres usuario tlacubazar?¡qué esperas y unete ya!
-      </h4>
-      <button class="btn waves-effect waves-light white black-text">Registrarse</button>
-    </div>
   </div>
 </div>
 
--->

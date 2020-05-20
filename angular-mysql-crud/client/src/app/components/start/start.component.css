@@ -1,0 +1,8 @@
+@import '../../app.component.css';
+img{
+  width: 100%;
+}
+.btn{
+  background-color: #EE6E73;
+  color: black;
+}
