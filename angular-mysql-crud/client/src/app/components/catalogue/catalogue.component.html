@@ -193,13 +193,18 @@
   <div class="modal-body">
     <div class="flex-row">
       <i class="material-icons text-black">location_on</i>
-      <p class="inline-block">Privada Ajusco #23, Cuernavaca Morelos 62350</p>
+      <p class="inline-block">
+          {{selectedStore.address.addressEnum.address}}, {{selectedStore.address.suburbEnum.suburb}} <br>
+          {{selectedStore.address.cityEnum.city}}, {{selectedStore.address.stateEnum.state}} {{selectedStore.address.suburbEnum.postalCode}}.
+      </p>
       <i class="material-icons text-black ml-3">phone</i>
-      <p class="inline-block">{{selectedStore.phone}}</p>
+      <p class="inline-block" *ngIf="!selectedStore.phone">Sin Telefono</p>
+      <p class="inline-block" *ngIf="selectedStore.phone">{{selectedStore.phone}}</p>
       <i class="material-icons text-black ml-3">person</i>
       <p class="inline-block">{{selectedStore.vendor.firstName}} {{selectedStore.vendor.lastName}}</p>
       <i class="material-icons text-black ml-3">insert_link</i>
-      <p class="inline-block">ww.url.com</p>
+      <p class="inline-block" *ngIf="!selectedStore.link">Sin Sitio Oficial</p>
+      <p class="inline-block" *ngIf="selectedStore.link">{{selectedStore.link}}</p>
     </div>
     <p>{{selectedStore.description}}</p>
     <p>MAPA DE GOOGLE</p>

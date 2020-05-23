@@ -1,4 +1,4 @@
-<div class="row justify-content-md-center">
+<div class="row justify-content-md-center" *ngIf="product">
   <div class="col-12">
     <div class="row"><!--CONTENIDO-->
       <!--INFO Y DESCRIPCION-->
@@ -6,8 +6,8 @@
         <!--Como nos protegemos-->
         <div class="card text-center bg-light text-dark mb-4">
           <div class="card-header">
-            <h4 class="card-title text-center">{{product.name}}</h4>
-            <p class="card-title text-center"> <b>Producto del area de {{product.categoryEnum.category}}</b>
+            <h4 class="card-title text-center" >{{product.name}}</h4>
+            <p class="card-title text-center" *ngIf="product.categoryEnum"> <b>Producto del area de {{product.categoryEnum.category}}</b>
           </div>
           <div class="card-body">
             <p>{{product.description}}</p>
@@ -19,7 +19,48 @@
             <h4 class="card-title text-center">Ratings</h4>
           </div>
           <div class="card-body">
-            ...
+
+            <!--stars-->
+            <li ngbDropdown  class="h-100" >
+              <p ngbDropdownToggle class="cursor-arrow"><i class="material-icons cursor-arrow">star</i> <b>{{product.score}} de 5</b> ({{product.scoreLenght}} calificaciones)</p>
+              <div ngbDropdownMenu *ngIf="idUser != null">
+                <div  ngbDropdownItem>
+                  <ngb-rating [(rate)]="product.currentRate"  [max]="5">
+                    <ng-template let-fill="fill" let-index="index">
+                      <span class="star" [class.filled]="fill === 100"(click)="createReviewScore(product, index+1)" [class.coloring]="index < 5">&#9733;</span>
+                    </ng-template>
+                  </ngb-rating>
+                </div>
+              </div>
+            </li>
+
+            <!--reseñas boton-->
+            <p  (click)="product.isCollapsed = !product.isCollapsed" [attr.aria-expanded]="!product.isCollapsed"
+                aria-controls="collapseExample"  class="small text-blue cursor-hand">
+                Ver/Ocultar todas las reseñas ({{product.productReviews.length}})
+            </p>
+            <div *ngIf="idUser != null" class="flex-column mr-2" cols="50" rows="1">
+              <div>
+                <textarea #textArea class="mr-2" cols="50" rows="1" placeholder="Querémos escucharte"></textarea>
+              </div>
+              <div class="mr-2" cols="50" rows="1">
+                <button  type="button" class="btn mb-3" (click)="createReviewText(product, textArea.value); textArea.value = ''">
+                  Compartir mi opinión
+                </button>
+              </div>
+            </div>
+            <!--reseñas-->
+            <div id="collapseExample" [ngbCollapse]="product.isCollapsed">
+              <div class="card pt-3 hide-scroll" id="reviews">
+                <div class="card-body review-box mb-2" *ngIf="product.productReviews.length == 0">
+                  Se el primero en compartir tu opinión.
+                </div>
+                <div class="flex-row ml-2" *ngFor="let review of product.productReviews">
+                  <i *ngIf="idUser != null && idUser === review.fkUser" class="material-icons icon-red cursor-hand" (click)="deleteReview(product, review.idProductReview)" >delete</i><p class="cursor-arrow"><b>{{review.user.firstName}}: </b> {{review.review}}</p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -38,7 +79,7 @@
           </p>
           <p>
             <i class="material-icons cursor-arrow" style="color: darkred;">whatshot</i>
-            Quedan {{product.quantityInStock}} unidades en tienda.
+            Quedan {{product.quantityInStock}} {{product.metric}} en tienda.
           </p>
           <!--PRECIO-->
           <ul class="list-group">

@@ -12,7 +12,7 @@ export class StoreReviewService {
 
   constructor(private http: HttpClient) { }
 
-  public listStoreReview(fkStore?: number, fkUser?: number) : Observable<any>{
+  public listStoreReview(fkStore?: number, fkUser?: number): Observable<any> {
     let params = new HttpParams();
 
     if (fkStore !== undefined && fkStore !== null) {

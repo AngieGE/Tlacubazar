@@ -1,32 +1,30 @@
 import { StateEnum } from './StateEnum';
-import {  User } from './User';
-import { Product} from './Product';
+import {  Store } from './Store';
+import { PaymentMethodEnum} from './PaymentMethodEnum';
 
 export class Order {
-    idOrder?: number;
-    orderDate?: Date;
-    fkStatusEnum?: number;
-    comments?: string;
-    totalPrice?: number;
-    totalMaxCacaoPrice?: number;
-    fkUser?: number;
-    fkProduct?: number;
+  idOrder?: number;
+  orderDate?: Date;
+  comments?: string;
+  fkUser?: number;
+  fkStore?: number;
+  fkStatusEnum?: number;
+  fkPaymentMethodEnum?: number;
 
     // has
     statusEnum?: StateEnum;
-    user?: User;
-    product?: Product;
+    store?: Store;
+    paymentMethodEnum?: PaymentMethodEnum;
 
     constructor(order?: Order){
       if (order != null) {
         this.idOrder = order.idOrder;
         this.orderDate = order.orderDate;
-        this.fkStatusEnum = order.fkStatusEnum;
         this.comments = order.comments;
-        this.totalPrice = order.totalPrice;
-        this.totalMaxCacaoPrice = order.totalMaxCacaoPrice;
         this.fkUser = order.fkUser;
-        this.fkProduct = order.fkProduct;
-      }
+        this.fkStore = order.fkStore;
+        this.fkStatusEnum = order.fkStatusEnum;
+        this.fkPaymentMethodEnum = order.fkPaymentMethodEnum;
+    }
     }
 }

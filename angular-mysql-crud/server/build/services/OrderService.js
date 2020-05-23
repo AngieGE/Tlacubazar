@@ -14,12 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 class OrderService {
-    static listOrder(idOrder, fkStatusEnum, fkUser) {
+    //params are wrong
+    static listOrder(idOrder, fkUser, fkStore, fkStatusEnum) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "SELECT * FROM `order` WHERE ";
             sql += idOrder != null ? "idOrder = " + idOrder + " AND " : "";
-            sql += fkStatusEnum != null ? "fkStatusEnum = " + fkStatusEnum + " AND " : "";
             sql += fkUser != null ? "fkUser = " + fkUser + " AND " : "";
+            sql += fkStore != null ? "fkStore = " + fkStore + " AND " : "";
+            sql += fkStatusEnum != null ? "fkStatusEnum = " + fkStatusEnum + " AND " : "";
             sql += "1 = 1; ";
             console.log("--------------------------------");
             console.log(sql);
@@ -38,28 +40,25 @@ class OrderService {
     }
     static createOrder(order) {
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "INSERT INTO order ( fkStatusEnum, comments, totalPrice, totalMaxCacaoPrice, fkUser, fkProduct) VALUES ( " +
-                order.fkStatusEnum + ", '" +
-                order.comments + "', " +
-                order.totalPrice + ", " +
-                order.totalMaxCacaoPrice + ", " +
-                order.fkUser + ", " +
-                order.fkProduct + ");";
+            let sql = "INSERT INTO order ( fkUser, fkStore, fkStatusEnum, fkPaymentMethodEnum) VALUES ( " +
+                order.fkUser + ", '" +
+                order.fkStore + "', " +
+                order.fkStatusEnum + ", " +
+                order.fkPaymentMethodEnum + ");";
             console.log(sql);
             const resultado = yield database_1.default.query(sql);
             return resultado;
         });
     }
     static updateOrder(idOrder, order) {
-        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "UPDATE Order SET " +
-                "orderDate = '" + ((_a = order.orderDate) === null || _a === void 0 ? void 0 : _a.toISOString()) + "', " +
-                "fkStatusEnum = '" + order.fkStatusEnum + "' " +
+                "orderDate = '" + new Date() + "', " +
                 "comments = '" + order.comments + "' " +
-                "totalPrice = '" + order.totalPrice + "' " +
-                "totalMaxCacaoPrice = '" + order.totalMaxCacaoPrice + "' " +
                 "fkUser = '" + order.fkUser + "' " +
+                "fkStore = '" + order.fkStore + "' " +
+                "fkStatusEnum = '" + order.fkStatusEnum + "' " +
+                "fkPaymentMethodEnum = '" + order.fkPaymentMethodEnum + "' " +
                 "WHERE idOrder = " + idOrder + ";";
             const resultado = yield database_1.default.query(sql);
             return resultado;

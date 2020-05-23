@@ -48,10 +48,11 @@ class StoreReviewService {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "UPDATE storeReview SET " +
                 "stars = '" + storeReview.stars + "', " +
-                "review = " + storeReview.review + " " +
-                "fkStore = " + storeReview.fkStore + " " +
+                "review = '" + storeReview.review + "', " +
+                "fkStore = " + storeReview.fkStore + ", " +
                 "fkUser = " + storeReview.fkUser + " " +
                 "WHERE idStoreReview = " + idStoreReview + ";";
+            console.log(sql);
             const resultado = yield database_1.default.query(sql);
             return resultado;
         });

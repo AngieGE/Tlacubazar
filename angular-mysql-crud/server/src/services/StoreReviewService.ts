@@ -33,10 +33,11 @@ export class StoreReviewService {
     static async updateStoreReview(idStoreReview: number, storeReview: StoreReview): Promise<any> {
         let sql: string = "UPDATE storeReview SET " +
                                 "stars = '" + storeReview.stars+ "', " + 
-                                "review = " + storeReview.review+ " " +
-                                "fkStore = " + storeReview.fkStore+ " " +
+                                "review = '" + storeReview.review+ "', " +
+                                "fkStore = " + storeReview.fkStore+ ", " +
                                 "fkUser = " + storeReview.fkUser+ " " + 
                                 "WHERE idStoreReview = " + idStoreReview + ";";
+                                console.log(sql);
         const resultado= await pool.query(sql);
         return resultado;
     }

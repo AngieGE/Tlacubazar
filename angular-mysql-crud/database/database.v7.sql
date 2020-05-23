@@ -61,11 +61,6 @@ CREATE TABLE `UserAddress` (
     FOREIGN KEY (`fkAddress`) REFERENCES `Address` (`idAddress`) ON DELETE CASCADE
 );
 
-CREATE TABLE `DeliveryMethodEnum` (
-  `idDeliveryMethod` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `deliveryMethod` VARCHAR(50)
-);
-
 CREATE TABLE `StatusEnum` (
   `idStatusEnum` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `status` VARCHAR(50)
@@ -80,10 +75,12 @@ CREATE TABLE `Store` (
   `idStore` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50),
   `description` TEXT,
+  `phone` VARCHAR(50),
+  `link` VARCHAR(50),
   `image` VARCHAR(70),
-  `fkAddress` INT NOT NULL,
   `isServiceStore` BOOLEAN,
   `acceptsCacao` BOOLEAN,
+  `fkAddress` INT NOT NULL,
   `fkStatusEnum`INT NOT NULL,
   `fkVendor` INT NOT NULL,
   `fkCategoryEnum` INT NOT NULL,
@@ -92,19 +89,27 @@ CREATE TABLE `Store` (
   FOREIGN KEY (`fkCategoryEnum`) REFERENCES `CategoryEnum` (`idCategoryEnum`) ON DELETE CASCADE
 );
 
-CREATE TABLE `DeliveryMethod` (
-  `fkStore` INT NOT NULL,
-  `fkDeliveryMethodEnum` INT NOT NULL,
-  FOREIGN KEY (`fkStore`) REFERENCES `Store` (`idStore`) ON DELETE CASCADE,
-  FOREIGN KEY (`fkDeliveryMethodEnum`) REFERENCES `DeliveryMethodEnum` (`idDeliveryMethod`) ON DELETE CASCADE
+CREATE TABLE `PaymentMethodEnum` (
+  `idPaymentMethodEnum` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `paymentMethod` VARCHAR(30)
 );
+
+CREATE TABLE `StorePaymentMethod` (
+  `fkStore` INT NOT NULL,
+  `fkPaymentMethodEnum` INT NOT NULL,
+  PRIMARY KEY (fkStore, fkPaymentMethodEnum),
+  FOREIGN KEY (`fkStore`) REFERENCES `Store` (`idStore`)  ON DELETE CASCADE,
+  FOREIGN KEY (`fkPaymentMethodEnum`) REFERENCES `PaymentMethodEnum` (`idPaymentMethodEnum`) ON DELETE CASCADE
+);
+
 
 CREATE TABLE `Product` (
   `idProduct` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(70),
   `description` TEXT,
   `image` VARCHAR(70),
-  `quantityInStock` SMALLINT,
+  `quantityInStock` INT,
+  `metric` VARCHAR(30) DEFAULT 'unidades',
   `buyPrice` DECIMAL(13,2),
   `maxCacaoBuyPrice` DECIMAL(13,2),
   `fkStore` INT NOT NULL,
@@ -115,29 +120,27 @@ CREATE TABLE `Product` (
 
 CREATE TABLE `Order` (
   `idOrder` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `orderDate` TEXT,
-  `fkStatusEnum`INT NOT NULL,
-  `comments` TEXT,
-  `totalPrice` DECIMAL(13,2),
-  `totalMaxCacaoPrice` DECIMAL(13,2),
+  `orderDate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `comments` TEXT DEFAULT '',
   `fkUser` INT NOT NULL,
-  `fkProduct` INT NOT NULL,
-  FOREIGN KEY (`fkProduct`) REFERENCES `Product` (`idProduct`) ON DELETE CASCADE,
+  `fkStore` INT NOT NULL,
+  `fkStatusEnum`INT NOT NULL,
+  `fkPaymentMethodEnum` INT NOT NULL,
   FOREIGN KEY (`fkUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE,
-  FOREIGN KEY (`fkStatusEnum`) REFERENCES `StatusEnum` (`idStatusEnum`) ON DELETE CASCADE
+  FOREIGN KEY (`fkStore`) REFERENCES `Store` (`idStore`) ON DELETE CASCADE,
+  FOREIGN KEY (`fkStatusEnum`) REFERENCES `StatusEnum` (`idStatusEnum`) ON DELETE CASCADE,
+  FOREIGN KEY (`fkPaymentMethodEnum`) REFERENCES `PaymentMethodEnum` (`idPaymentMethodEnum`) ON DELETE CASCADE
 );
 
-CREATE TABLE `Payment` (
-  `idPayment` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `paymentDate` DATE,
-  `amount` DECIMAL(13,2),
-  `cacaoAmount` DECIMAL(13,2),
-  `fkClient` INT NOT NULL,
-  `fkVendor` INT NOT NULL,
-  `fkOrder` INT NOT NULL,
-  FOREIGN KEY (`fkClient`) REFERENCES `User` (`idUser`) ON DELETE CASCADE,
-  FOREIGN KEY (`fkVendor`) REFERENCES `User` (`idUser`) ON DELETE CASCADE,
-  FOREIGN KEY (`fkOrder`) REFERENCES `Order` (`idOrder`) ON DELETE CASCADE
+CREATE TABLE `OrderProduct` (
+  `idOrderProduct` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `cacaoAmount` DECIMAL(13,2) NOT NULL DEFAULT 0,
+  `amount` DECIMAL(13,2) NOT NULL DEFAULT 1,
+  `date` DATETIME  DEFAULT CURRENT_TIMESTAMP,
+  `fkUser` INT NOT NULL,
+  `fkProduct` INT NOT NULL,
+  FOREIGN KEY (`fkUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE,
+  FOREIGN KEY (`fkProduct`) REFERENCES `Product` (`idProduct`) ON DELETE CASCADE
 );
 
 CREATE TABLE `ProductReview` (
@@ -160,10 +163,10 @@ CREATE TABLE `StoreReview` (
   FOREIGN KEY (`fkUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE
 );
 
-INSERT INTO `DeliveryMethodEnum` (`deliveryMethod`) VALUES ('En automóvil'), ('Transporte público'), ('A pie'), ('En bicicleta'), ('Recoger pedido');
-
+/*USER*/
 INSERT INTO `User` (`email`, `firstName`, `lastName`, `isVendor`, `phone`, `cacaoBalance`) VALUES ('alejandro.m@gmail.com', 'Alejandro', 'Moral', FALSE, '7771414141', 0.0), ('milagros@manzanas4dayz.com.mx', 'Milagros', 'Ramírez', TRUE, '7774004040', 0.0);
 
+/*ADDRESS ENUM*/
 INSERT INTO `AddressEnum` (`address`) VALUES 
 	('Revolución 42'), ('Caudillo del Sur 500'), ('Avenida Universidad 404'), ('Privada Ajusco #6'),
 	('Calle Elias 23'), ('Subida Chalma Num 33'), ('Calle guadalupe 88'), ('Privada Rosario');
@@ -184,15 +187,29 @@ INSERT INTO `CityEnum` (`idCityEnum`, `city`, `fkStateEnum`) VALUES
 
 /*SUBURBS & POSTAL CODE*/
 INSERT INTO `SuburbEnum` (`idSuburbEnum`,`suburb`,`postalCode`,`fkCityEnum`) VALUES
-    (1,'Amacuzac',62640, 1),
+    /*AMACUZAC 1*/
+	(1,'Amacuzac',62640, 1),
     (2, 'Barreal',62643, 1),
     (3, 'Benito Juarez',62654, 1),
-    (4,'Acapatzingo', 62493, 7),
-    (5, 'Adolfo Lopez Mateos', 62115, 7),
-    (6, 'Adolfo Ruiz Cortines',62159, 7),
-    (7,'Álamos',62905, 11),
-    (8, 'Azuchilera',62914, 11),
-    (9, 'Benito Juarez',62900, 11);
+	(4,'Bungalows',62644, 1),
+    (5, 'Cajones',62653, 1),
+    (6, 'Campo Nuevo',62653, 1),
+	
+	/*CUERNAVACA 7*/
+    (7,'Acapatzingo', 62493, 7),
+    (8, 'Adolfo Lopez Mateos', 62115, 7),
+    (9, 'Adolfo Ruiz Cortines',62159, 7),
+	(10,'Ahuatepec', 62300, 7),
+    (11, 'Chapultepec', 62450, 7),
+    (12, 'Cuauhtémoc',62200, 7),
+	(13,'Cuernavaca Centro', 62000, 7),
+    (14, 'Insurgentes', 62200, 7),
+    (15, 'Los Volcanes',62350, 7),
+	
+	/*JOJUTLA 11*/
+    (16,'Álamos',62905, 11),
+    (17, 'Azuchilera',62914, 11),
+    (18, 'Benito Juarez',62900, 11);
 
 			
 INSERT INTO `Address` (`fkAddressEnum`, `fkStateEnum`, `fkCityEnum`, `fkSuburbEnum`) VALUES 
@@ -242,18 +259,32 @@ INSERT INTO `StatusEnum` VALUES
     (8, 'STORE_ACEPTADA'),
     (9, 'STORE_RECHAZADA');
 
-INSERT INTO `Store` (`name`, `description`, `image`,`fkAddress`, `isServiceStore`, `acceptsCacao`, `fkStatusEnum`,`fkVendor`, `fkCategoryEnum`) VALUES 
-    ('Manzanas All Day', 'Tienda de todos tipos de manzanas', NULL, 1, FALSE, TRUE, 8, 2, 1),
-    ('Nutrición Milagros', 'Productos nutrimentales, bajos en grasa.', NULL, 2, FALSE, FALSE, 8, 2, 2),
-	('Floreria Juanita', 'Tenemos todas las flores que pueda imaginar', NULL, 3, FALSE, FALSE, 8, 2, 3),
-	('Tacos locos', 'tacos de canasta super ricos nuetsro taco mas famoso es el de mole, lo invitamos a probarlo.', NULL, 4, FALSE, TRUE, 8, 2, 2),
-	('Carpetas Lore', 'Somos un grupo de mujeres que vendo de tamaño grande. Las telas son 100% morelenses.', NULL, 5, FALSE, TRUE, 8, 2, 13),
-	('El leonsito', 'productos para cocina, echos de material quirurjico, super duradero y seguro', NULL, 6, FALSE, TRUE, 8, 2, 14),
-	('Destapa baños', 'Destapamos todo suuper bien', NULL, 7, TRUE, FALSE, 8, 2, 13),
-	('Clases de inglés online', 'La primera clase es gratis, tengo distintos precios y disponibilidad', NULL, 8, TRUE, FALSE, 8, 2, 9);
-	
+/*Payment method enum*/
+INSERT INTO `PaymentMethodEnum` (`idPaymentMethodEnum`,`paymentMethod`) VALUES 
+	(1, 'Tarjeta'), 
+	(2, 'Efectivo');
 
-INSERT INTO `DeliveryMethod` (`fkStore`, `fkDeliveryMethodEnum`) VALUES (1, 3), (2, 3), (2, 4);
+/* Store  */
+INSERT INTO `Store` (`idStore`, `name`, `description`, `image`,`fkAddress`, `isServiceStore`, `acceptsCacao`, `fkStatusEnum`,`fkVendor`, `fkCategoryEnum`) VALUES 
+    (1, 'Manzanas All Day', 'Tienda de todos tipos de manzanas', NULL, 1, FALSE, TRUE, 8, 2, 1),
+    (2, 'Nutrición Milagros', 'Productos nutrimentales, bajos en grasa.', NULL, 2, FALSE, FALSE, 8, 2, 2),
+	(3, 'Floreria Juanita', 'Tenemos todas las flores que pueda imaginar', NULL, 3, FALSE, FALSE, 8, 2, 3),
+	(4, 'Tacos locos', 'tacos de canasta super ricos nuetsro taco mas famoso es el de mole, lo invitamos a probarlo.', NULL, 4, FALSE, TRUE, 8, 2, 2),
+	(5, 'Carpetas Lore', 'Somos un grupo de mujeres que vendo de tamaño grande. Las telas son 100% morelenses.', NULL, 5, FALSE, TRUE, 8, 2, 13),
+	(6, 'El leonsito', 'productos para cocina, echos de material quirurjico, super duradero y seguro', NULL, 6, FALSE, TRUE, 8, 2, 14),
+	(7, 'Destapa baños', 'Destapamos todo suuper bien', NULL, 7, TRUE, FALSE, 8, 2, 13),
+	(8, 'Clases de inglés online', 'La primera clase es gratis, tengo distintos precios y disponibilidad', NULL, 8, TRUE, FALSE, 8, 2, 9);
+	
+/*Store Paymentt method */
+INSERT INTO `StorePaymentMethod` (`fkStore`, `fkPaymentMethodEnum`) VALUES 
+	(1, 1), (1, 2),
+	(2, 1), (2, 2),
+	(3, 1), (3, 2),
+	(4, 1), (4, 2),
+	(5, 1), (5, 2),
+	(6, 1), (6, 2),
+	(7, 1), (7, 2),
+	(8, 1), (8, 2);
 
 INSERT INTO `Product`(`name`, `description`, `image`, `quantityInStock`, `buyPrice`, `maxCacaoBuyPrice`, `fkStore`, `fkCategoryEnum`) VALUES 
     ('Manzana Roja', 'Clásica y tradicional manzana roja', NULL, 10, 3.43, 0.686, 1, 2),
@@ -262,3 +293,8 @@ INSERT INTO `Product`(`name`, `description`, `image`, `quantityInStock`, `buyPri
 	('Carpeta King Size', 'Carpeta amblia, lavable', NULL, 5, 340.43, 0.686, 5, 13),
     ('Carpeta estilo Indu', 'Lavable, con secado al sol', NULL, 3, 2000.5, 0.5, 5, 13),
     ('Carpeta trabajada a mano', 'Garantia de un mes', NULL, 7, 500.99, 1.198, 5, 13);
+
+
+INSERT INTO `productreview` (`idProductReview`, `stars`, `review`, `fkProduct`, `fkUser`) VALUES 
+	(NULL, '5', 'La manzana esta súper grande y dulce.', '1', '2'), 
+	(NULL, '4', 'Muy buena calidad, siempre pido la manzana roja.', '1', '1');

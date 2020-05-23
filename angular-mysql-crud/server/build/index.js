@@ -30,10 +30,9 @@ class Server {
         this.app.use('/stateEnum', routes_1.StateEnumRoutes.getInstance().router);
         this.app.use('/cityEnum', routes_1.CityEnumRoutes.getInstance().router);
         this.app.use('/suburbEnum', routes_1.SuburbEnumRoutes.getInstance().router);
-        this.app.use('/deliveryMethod', routes_1.DeliveryMethodRoutes.getInstance().router);
-        this.app.use('/orderDetails', routes_1.OrderDetailsRoutes.getInstance().router);
+        this.app.use('/paymentMethodEnum', routes_1.PaymentMethodEnumRoutes.getInstance().router);
+        this.app.use('/orderProduct', routes_1.OrderProductRoutes.getInstance().router);
         this.app.use('/order', routes_1.OrderRoutes.getInstance().router);
-        this.app.use('/payment', routes_1.PaymentRoutes.getInstance().router);
         this.app.use('/product', routes_1.ProductRoutes.getInstance().router);
         this.app.use('/productReview', routes_1.ProductReviewRoutes.getInstance().router);
         this.app.use('/storeReview', routes_1.StoreReviewRoutes.getInstance().router);

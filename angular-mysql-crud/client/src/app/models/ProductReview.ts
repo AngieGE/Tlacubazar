@@ -9,8 +9,8 @@ export class ProductReview {
     fkUser?: number;
 
     // has
-    product: Product;
-    user: User;
+    product?: Product;
+    user?: User;
 
     constructor(productReview?: ProductReview) {
       if (productReview != null) {

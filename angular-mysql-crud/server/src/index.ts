@@ -1,8 +1,8 @@
 import express, {Application} from 'express';
 import { UserRoutes, StoreRoutes, AddressRoutes,
         AddressEnumRoutes, StateEnumRoutes, CityEnumRoutes,
-        SuburbEnumRoutes, DeliveryMethodRoutes, OrderDetailsRoutes,
-        OrderRoutes, PaymentRoutes, ProductRoutes, ProductReviewRoutes,
+        SuburbEnumRoutes, PaymentMethodEnumRoutes, OrderProductRoutes,
+        OrderRoutes, ProductRoutes, ProductReviewRoutes,
         StoreReviewRoutes, UserAddressRoutes, CategoryEnumRoutes } from './routes';
 import morgan from 'morgan';
 import cors from 'cors';
@@ -36,10 +36,9 @@ class Server{
         this.app.use('/stateEnum', StateEnumRoutes.getInstance().router);
         this.app.use('/cityEnum', CityEnumRoutes.getInstance().router);
         this.app.use('/suburbEnum', SuburbEnumRoutes.getInstance().router);
-        this.app.use('/deliveryMethod', DeliveryMethodRoutes.getInstance().router);
-        this.app.use('/orderDetails', OrderDetailsRoutes.getInstance().router);
+        this.app.use('/paymentMethodEnum', PaymentMethodEnumRoutes.getInstance().router);
+        this.app.use('/orderProduct', OrderProductRoutes.getInstance().router);
         this.app.use('/order', OrderRoutes.getInstance().router);
-        this.app.use('/payment', PaymentRoutes.getInstance().router);
         this.app.use('/product', ProductRoutes.getInstance().router);
         this.app.use('/productReview', ProductReviewRoutes.getInstance().router);
         this.app.use('/storeReview', StoreReviewRoutes.getInstance().router);

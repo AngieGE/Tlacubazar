@@ -10,9 +10,10 @@ export class Store {
   description?: string;
   phone?: string;
   link?: string;
-  fkAddress?: number;
+  image?: string;
   isServiceStore?: number;
   acceptsCacao?: number;
+  fkAddress?: number;
   fkStatusEnum?: number;
   fkVendor?: number;
   fkCategoryEnum?: number;
@@ -38,9 +39,10 @@ export class Store {
       this.description = store.description;
       this.phone = store.phone;
       this.link = store.link;
-      this.fkAddress = store.fkAddress;
+      this.image = store.image;
       this.isServiceStore = store.isServiceStore;
       this.acceptsCacao = store.acceptsCacao;
+      this.fkAddress = store.fkAddress;
       this.fkStatusEnum = store.fkStatusEnum;
       this.fkVendor = store.fkVendor;
       this.fkCategoryEnum = store.fkCategoryEnum;

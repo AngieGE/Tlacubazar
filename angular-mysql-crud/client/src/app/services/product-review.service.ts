@@ -12,7 +12,7 @@ export class ProductReviewService {
 
   constructor(private http: HttpClient) { }
 
-  public listProductReview(fkProduct?: number, fkUser?: number) {
+  public listProductReview(fkProduct?: number, fkUser?: number): Observable<any> {
     let params = new HttpParams();
 
     if (fkProduct !== undefined && fkProduct !== null) {
@@ -53,7 +53,7 @@ export class ProductReviewService {
     return this.http.put<ProductReview>(`${this.API_URL}/productReview/${idProductReview}`, productReview, { headers });
   }
 
-  public deleteProduct(idProduct: number): Observable<any> {
+  public deleteProductReview(idProduct: number): Observable<any> {
     let headers = this.defaultHeaders;
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');

@@ -4,11 +4,12 @@ import pool from "../database";
 export class ProductService {
    
     static async listProduct(name?: string, fkStore?: number, fkCategoryEnum?:number): Promise<Product[]>  {
-        let sql: string = "SELECT * FROM Product WHERE "
+        let sql: string = "SELECT * FROM product WHERE "
         sql += name!=null ? "name = " + name + " AND " : "";
         sql += fkStore!=null ? "fkStore = '" + fkStore + "' AND " : "";
         sql += fkCategoryEnum!=null ? "fkCategoryEnum = '" + fkCategoryEnum + "' AND " : "";
         sql += "1 = 1 ";
+        console.log(sql);
         const recordset = await pool.query(sql);
         return recordset;
     }
@@ -22,10 +23,11 @@ export class ProductService {
     }
 
     static async createProduct(product: Product): Promise<any> {
-        let sql: string = "INSERT INTO product (name, descripcion, quantityStock, buyPrice, maxCacaoBuyPrice, fkStore, fkCategoryEnum) " + 
+        let sql: string = "INSERT INTO product (name, descripcion, quantityStock, metric, buyPrice, maxCacaoBuyPrice, fkStore, fkCategoryEnum) " + 
                            "VALUES ('"+ product.name + "', '" + 
                                         product.description + "', "+
                                         product.quantityInStock+", "+
+                                        product.metric+", "+
                                         product.buyPrice+", "+
                                         product.maxCacaoBuyPrice+", "+
                                         product.fkStore+", "+
@@ -39,6 +41,7 @@ export class ProductService {
                                 "name = '" + product.name+ "', " + 
                                 "description = " + product.description+ ", " +
                                 "quantityInStock = " + product.quantityInStock+ ", " +
+                                "metric = " + product.metric+ ", " +
                                 "buyPrice = " + product.buyPrice+ ", " +
                                 "maxCacaoBuyPrice = " + product.maxCacaoBuyPrice + ", " +
                                 "fkStore = " + product.fkStore+ ", " + 

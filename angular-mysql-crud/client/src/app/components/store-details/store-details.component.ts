@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TlacuServices } from '../../services/index';
-import { User, Store, CategoryEnum, StoreReview, Product, Address } from 'src/app/models/index';
+import { User, Store, CategoryEnum, StoreReview, Product, Address,
+        AddressEnum, StateEnum, CityEnum, SuburbEnum } from 'src/app/models/index';
 import { SocialUser } from 'angularx-social-login';
 import { faEdit, faTrashAlt, faPlusSquare, faMinusSquare } from '@fortawesome/free-regular-svg-icons';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -31,7 +32,7 @@ export class StoreDetailsComponent implements OnInit {
     // get store
     this.getStoreDetails(idStore);
     // get dtore products
-    this.getProducts();
+    this.getProducts(idStore);
   }
 
   ngOnInit(): void {
@@ -49,17 +50,57 @@ export class StoreDetailsComponent implements OnInit {
     // set the reviews and score
     this.setReviewsAndScore(this.store);
     // set the address
-
+    this.setStoreAddress(this.store);
   }
 
   goProduct(idProduct: number) {
     this.router.navigate([`/product/${idProduct}`]);
   }
 
-  // async setStoreAddress(store: Store){
-  //  const address = await this.tlacu.address.getAddress(this.store.fkAddress).toPromise;
-  //  this.storeAddress = new Address(address)
-  // }
+  // -------------- GET ADDRESS ------------------
+  setStoreAddress(store: Store) {
+    this.tlacu.address.getAddress(store.fkAddress).subscribe( res => {
+      // set the address
+      store.address = new Address(res.recordset[0]);
+
+      // set the address enum
+      this.setAddressEnum(store.address);
+
+      // set the state enum //userAddress.address.stateEnum = res
+      this.setStateEnum(store.address);
+
+      // set the city enum  //userAddress.address.cityEnum = res
+      this.setCityEnum(store.address);
+
+      // set the suburb enum //userAddress.address.suburbEnum = res
+      this.setSuburbEnum(store.address);
+    }, err => {console.log(err); });
+  }
+
+  setAddressEnum(address: Address) {
+    this.tlacu.adressEnum.getAddressEnum(address.fkAddressEnum).subscribe( res => {
+      address.addressEnum = new AddressEnum(res.recordset[0]);
+    });
+  }
+
+  setStateEnum(address: Address) {
+    this.tlacu.stateEnum.getStateEnum(address.fkStateEnum).subscribe( res => {
+      address.stateEnum = new StateEnum(res.recordset[0]);
+    });
+  }
+
+  setCityEnum(address: Address) {
+    this.tlacu.cityEnum.getCityEnum(address.fkCityEnum).subscribe( res => {
+      address.cityEnum = new CityEnum(res.recordset[0]);
+    });
+  }
+
+  setSuburbEnum(address: Address) {
+    this.tlacu.suburbEnum.getSuburbEnum(address.fkSuburbEnum).subscribe( res => {
+      address.suburbEnum = new SuburbEnum(res.recordset[0]);
+    });
+  }
+// -------------- GET ADDRESS END ------------------
 
   async setVendor(store: Store) {
     const vendorRes = await this.tlacu.user.getUser(store.fkVendor).toPromise();
@@ -99,8 +140,8 @@ export class StoreDetailsComponent implements OnInit {
   }
 
 
-  async getProducts() {
-    const productsRes = await this.tlacu.product.listProduct(null, this.store.idStore, null).toPromise();
+  async getProducts(idStore) {
+    const productsRes = await this.tlacu.product.listProduct(null, idStore, null).toPromise();
     if (productsRes.length > 0) {
       console.log(productsRes.length + ' products');
       productsRes.recordset.forEach( product => {
@@ -110,7 +151,6 @@ export class StoreDetailsComponent implements OnInit {
         // push it into the array
         this.products.push(prod);
     });
-      console.log(this.products);
     } else {
       console.log('no products');
     }

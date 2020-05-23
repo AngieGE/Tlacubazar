@@ -2,12 +2,14 @@ import { Order } from "../models";
 import pool from "../database";
 
 export class OrderService {
+    //params are wrong
    
-    static async listOrder(idOrder?:number, fkStatusEnum?:number, fkUser?:number): Promise<Order[]>  {
+    static async listOrder(idOrder?:number, fkUser?:number,fkStore?:number, fkStatusEnum?:number, ): Promise<Order[]>  {
         let sql: string ="SELECT * FROM `order` WHERE " 
         sql += idOrder!=null ? "idOrder = " + idOrder + " AND " : "";
-        sql += fkStatusEnum!=null ? "fkStatusEnum = " + fkStatusEnum + " AND " : "";
         sql += fkUser!=null ? "fkUser = " + fkUser + " AND " : "";
+        sql += fkStore!=null ? "fkStore = " + fkStore + " AND " : "";
+        sql += fkStatusEnum!=null ? "fkStatusEnum = " + fkStatusEnum + " AND " : "";
         sql += "1 = 1; ";
         console.log("--------------------------------");
         console.log(sql)
@@ -24,13 +26,11 @@ export class OrderService {
     }
 
     static async createOrder(order: Order): Promise<any> {
-        let sql: string = "INSERT INTO order ( fkStatusEnum, comments, totalPrice, totalMaxCacaoPrice, fkUser, fkProduct) VALUES ( "+
-                                        order.fkStatusEnum + ", '" +
-                                        order.comments + "', " +
-                                        order.totalPrice + ", " +
-                                        order.totalMaxCacaoPrice + ", " +
-                                        order.fkUser + ", " +
-                                        order.fkProduct +");"
+        let sql: string = "INSERT INTO order ( fkUser, fkStore, fkStatusEnum, fkPaymentMethodEnum) VALUES ( "+
+                                        order.fkUser + ", '" +
+                                        order.fkStore + "', " +
+                                        order.fkStatusEnum + ", " +
+                                        order.fkPaymentMethodEnum +");"
                 console.log(sql);
         const resultado= await pool.query(sql);
         return resultado;
@@ -38,12 +38,12 @@ export class OrderService {
 
     static async updateOrder(idOrder:number, order: Order): Promise<any> {
         let sql: string = "UPDATE Order SET " +
-                                "orderDate = '" + order.orderDate?.toISOString() + "', " + 
-                                "fkStatusEnum = '" + order.fkStatusEnum + "' " +
+                                "orderDate = '" +new Date() + "', " + 
                                 "comments = '" + order.comments+ "' " + 
-                                "totalPrice = '" + order.totalPrice+ "' " + 
-                                "totalMaxCacaoPrice = '" + order.totalMaxCacaoPrice+ "' " + 
-                                "fkUser = '" + order.fkUser+ "' " + 
+                                "fkUser = '" + order.fkUser + "' " +
+                                "fkStore = '" + order.fkStore+ "' " + 
+                                "fkStatusEnum = '" + order.fkStatusEnum+ "' " + 
+                                "fkPaymentMethodEnum = '" + order.fkPaymentMethodEnum+ "' " + 
                                 "WHERE idOrder = " + idOrder + ";";
         const resultado= await pool.query(sql);
         return resultado;

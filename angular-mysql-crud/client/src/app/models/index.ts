@@ -3,9 +3,8 @@ export * from './AddressEnum';
 export * from './CityEnum';
 export * from './DeliveryMethod';
 export * from './DeliveryMethodEnum';
-export * from './OrderDetails';
+export * from './OrderProduct';
 export * from './Order';
-export * from './Payment';
 export * from './Product';
 export * from './ProductReview';
 export * from './StateEnum';
@@ -16,4 +15,6 @@ export * from './User';
 export * from './UserAddress';
 export * from './StatusEnum';
 export * from './CategoryEnum';
+export * from './PaymentMethodEnum';
+export * from './OrderProduct';
 

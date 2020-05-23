@@ -3,8 +3,7 @@ export * from './address.service';
 export * from './city-enum.service';
 export * from './delivery-method.service';
 export * from './order.service';
-export * from './order-details.service';
-export * from './payment.service';
+export * from './order-product.service';
 export * from './product.service';
 export * from './product-review.service';
 export * from './state-enum.service';
@@ -21,8 +20,7 @@ import { AddressService } from './address.service';
 import { CityEnumService } from './city-enum.service';
 import { DeliveryMethodService } from './delivery-method.service';
 import { OrderService } from './order.service';
-import { OrderDetailsService } from './order-details.service';
-import { PaymentService } from './payment.service';
+import { OrderProductService } from './order-product.service';
 import { ProductService } from './product.service';
 import { StateEnumService } from './state-enum.service';
 import { ManagerService } from './manager.service';
@@ -34,6 +32,7 @@ import { UserAddressService } from './user-address.service';
 import { CategoryEnumService } from './category-enum.service';
 import { UserService } from './user.service';
 import { Injectable } from '@angular/core';
+import { Order } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -53,8 +52,7 @@ export class TlacuServices {
         public cityEnum: CityEnumService,
         public deliveryMethod: DeliveryMethodService,
         public order: OrderService,
-        public orderDetails: OrderDetailsService,
-        public payment: PaymentService,
+        public orderDetails: OrderProductService,
         public product: ProductService,
         public stateEnum: StateEnumService,
         public categoryEnum: CategoryEnumService

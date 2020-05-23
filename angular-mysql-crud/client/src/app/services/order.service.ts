@@ -12,9 +12,7 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  public listOrder(
-    idOrder?: number, fkStatusEnum?: number, fkUser?: number
-  ): Observable<any> {
+  public listOrder( idOrder?: number, fkUser?: number, fkStore?: number,  fkStatusEnum?: number): Observable<any> {
     let params = new HttpParams();
 
     if (idOrder !== undefined && idOrder !== null) {
@@ -22,6 +20,9 @@ export class OrderService {
     }
     if (fkStatusEnum !== undefined && fkStatusEnum !== null) {
       params = params.set('fkStatusEnum', fkStatusEnum.toString());
+    }
+    if (fkStore !== undefined && fkStore !== null) {
+      params = params.set('fkStore', fkStore.toString());
     }
     if (fkUser !== undefined && fkUser !== null) {
       params = params.set('fkUser', fkUser.toString());

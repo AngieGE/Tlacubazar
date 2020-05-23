@@ -23,7 +23,6 @@ class StoreService {
             sql += fkVendor != null ? "fkVendor = " + fkVendor + " AND " : "";
             sql += fkCategoryEnum != null ? "fkCategoryEnum = " + fkCategoryEnum + " AND " : "";
             sql += "1 = 1 ";
-            console.log(sql);
             const recordset = yield database_1.default.query(sql);
             return recordset;
         });
@@ -39,14 +38,15 @@ class StoreService {
     }
     static createStore(store) {
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "INSERT INTO store (name, description, phone, link, fkAddress, isServiceStore, acceptsCacao, fkStatusEnum, fkVendor, fkCategoryEnum) " +
+            let sql = "INSERT INTO store (name, description, phone, link, image, isServiceStore, acceptsCacao, fkAddress, fkStatusEnum, fkVendor, fkCategoryEnum) " +
                 "VALUES ('" + store.name + "', '" +
                 store.description + "', '" +
                 store.phone + "', '" +
                 store.link + "', '" +
-                store.fkAddress + "', '" +
+                store.image + "', '" +
                 store.isServiceStore + "', '" +
                 store.acceptsCacao + "', '" +
+                store.fkAddress + "', '" +
                 store.fkStatusEnum + "', '" +
                 store.fkVendor + "', '" +
                 store.fkCategoryEnum + "');";
@@ -60,13 +60,15 @@ class StoreService {
             let sql = "UPDATE store SET " +
                 "name = '" + store.name + "', " +
                 "description = '" + store.description + "', " +
+                "phone = '" + store.phone + "', " +
                 "link = '" + store.link + "', " +
-                "fkAddress = '" + store.fkAddress + "', " +
+                "image = '" + store.image + "', " +
                 "isServiceStore = '" + store.isServiceStore + "', " +
                 "acceptsCacao = " + store.acceptsCacao + ", " +
+                "fkAddress = '" + store.fkAddress + "', " +
                 "fkStatusEnum = '" + store.fkStatusEnum + "', " +
                 "fkVendor = " + store.fkVendor + ", " +
-                "fkVendor = " + store.fkCategoryEnum + " " +
+                "fkCategoryEnum = " + store.fkCategoryEnum + " " +
                 "WHERE idStore = " + idStore + ";";
             const resultado = yield database_1.default.query(sql);
             return resultado;

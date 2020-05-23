@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TlacuServices } from '../../services/index';
-import { Store } from '../../models/Store';
 import {Router} from '@angular/router';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CategoryEnum, User, StoreReview } from 'src/app/models';
+import { CategoryEnum, User, StoreReview, Address, Store,
+        AddressEnum, CityEnum, StateEnum, SuburbEnum } from 'src/app/models';
 
 @Component({
   selector: 'app-catalogue',
@@ -57,10 +57,15 @@ export class CatalogueComponent implements OnInit {
    async getStores() {
     const iss = (this.isServiceStore) ? 1 : 0;
     const cacao = (this.onlyCacaoStores) ? 1 : null;
+    console.log("cacao store " + cacao)
     let storesTemp: Store[] = Array();
     const storesRes = await this.tlacu.store.listStore(iss, cacao, null, null, null).toPromise();
-    if (storesRes.length <= 0) { return; }
+    if (storesRes.length <= 0) {
+      this.stores = Array();
+      return;
+    }
     storesRes.recordset.forEach(store => {
+      console.log(store);
       // revisar que este en las categorias
       this.categories.forEach( cat => {
         if (cat.selected && store.fkCategoryEnum === cat.idCategoryEnum) {
@@ -71,6 +76,8 @@ export class CatalogueComponent implements OnInit {
           this.setCategory(s);
           // set the reviews and score
           this.setReviewsAndScore(s);
+          // set address
+          this.setStoreAddress(s);
           // store it in temp array
           storesTemp.push(s);
         }
@@ -140,6 +147,52 @@ export class CatalogueComponent implements OnInit {
     this.selectedStore = store;
   }
 
+  // -------------- GET ADDRESS ------------------
+
+    setStoreAddress(store: Store) {
+      this.tlacu.address.getAddress(store.fkAddress).subscribe( res => {
+        // set the address
+        store.address = new Address(res.recordset[0]);
+
+        // set the address enum
+        this.setAddressEnum(store.address);
+
+        // set the state enum //userAddress.address.stateEnum = res
+        this.setStateEnum(store.address);
+
+        // set the city enum  //userAddress.address.cityEnum = res
+        this.setCityEnum(store.address);
+
+        // set the suburb enum //userAddress.address.suburbEnum = res
+        this.setSuburbEnum(store.address);
+      }, err => {console.log(err); });
+    }
+
+    setAddressEnum(address: Address) {
+      this.tlacu.adressEnum.getAddressEnum(address.fkAddressEnum).subscribe( res => {
+        address.addressEnum = new AddressEnum(res.recordset[0]);
+      });
+    }
+
+    setStateEnum(address: Address) {
+      this.tlacu.stateEnum.getStateEnum(address.fkStateEnum).subscribe( res => {
+        address.stateEnum = new StateEnum(res.recordset[0]);
+      });
+    }
+
+    setCityEnum(address: Address) {
+      this.tlacu.cityEnum.getCityEnum(address.fkCityEnum).subscribe( res => {
+        address.cityEnum = new CityEnum(res.recordset[0]);
+      });
+    }
+
+    setSuburbEnum(address: Address) {
+      this.tlacu.suburbEnum.getSuburbEnum(address.fkSuburbEnum).subscribe( res => {
+        address.suburbEnum = new SuburbEnum(res.recordset[0]);
+      });
+    }
+// -------------- GET ADDRESS END ------------------
+
   createReviewText(store: Store, reviewText: string) {
     if (reviewText.length > 0) {
       const storeReview = new StoreReview({stars: 0, review: reviewText, fkStore: store.idStore, fkUser: this.idUser});
@@ -162,7 +215,7 @@ export class CatalogueComponent implements OnInit {
 
   deleteReview(store: Store, idStoreReview: number) {
     this.tlacu.storeReview.deleteStoreReview(idStoreReview).subscribe( res => {
-      alert('Comentario eliminado exitosamente');
+      // alert('Comentario eliminado exitosamente');
       this.setReviewsAndScore(store);
     });
   }
@@ -174,6 +227,7 @@ export class CatalogueComponent implements OnInit {
       pastReviewRes.recordset.forEach(review => {
         const rev = new StoreReview(review);
         if (rev.stars != null && rev.stars > 0) {
+          rev.stars = score;
           this.tlacu.storeReview.deleteStoreReview(rev.idStoreReview).subscribe( res => {console.log(res); });
         }
       });

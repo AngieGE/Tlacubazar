@@ -16,11 +16,12 @@ const database_1 = __importDefault(require("../database"));
 class ProductService {
     static listProduct(name, fkStore, fkCategoryEnum) {
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "SELECT * FROM Product WHERE ";
+            let sql = "SELECT * FROM product WHERE ";
             sql += name != null ? "name = " + name + " AND " : "";
             sql += fkStore != null ? "fkStore = '" + fkStore + "' AND " : "";
             sql += fkCategoryEnum != null ? "fkCategoryEnum = '" + fkCategoryEnum + "' AND " : "";
             sql += "1 = 1 ";
+            console.log(sql);
             const recordset = yield database_1.default.query(sql);
             return recordset;
         });
@@ -36,10 +37,11 @@ class ProductService {
     }
     static createProduct(product) {
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "INSERT INTO product (name, descripcion, quantityStock, buyPrice, maxCacaoBuyPrice, fkStore, fkCategoryEnum) " +
+            let sql = "INSERT INTO product (name, descripcion, quantityStock, metric, buyPrice, maxCacaoBuyPrice, fkStore, fkCategoryEnum) " +
                 "VALUES ('" + product.name + "', '" +
                 product.description + "', " +
                 product.quantityInStock + ", " +
+                product.metric + ", " +
                 product.buyPrice + ", " +
                 product.maxCacaoBuyPrice + ", " +
                 product.fkStore + ", " +
@@ -54,6 +56,7 @@ class ProductService {
                 "name = '" + product.name + "', " +
                 "description = " + product.description + ", " +
                 "quantityInStock = " + product.quantityInStock + ", " +
+                "metric = " + product.metric + ", " +
                 "buyPrice = " + product.buyPrice + ", " +
                 "maxCacaoBuyPrice = " + product.maxCacaoBuyPrice + ", " +
                 "fkStore = " + product.fkStore + ", " +

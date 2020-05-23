@@ -13,8 +13,8 @@ const services_1 = require("../services");
 class OrderController {
     static listOrder(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idOrder, fkStatusEnum, fkUser } = req.query; //req.body req.query req.params
-            const _Order = yield services_1.OrderService.listOrder(idOrder, fkStatusEnum, fkUser);
+            const { idOrder, fkUser, fkStore, fkStatusEnum } = req.query; //req.body req.query req.params
+            const _Order = yield services_1.OrderService.listOrder(idOrder, fkUser, fkStore, fkStatusEnum);
             res.json({ length: _Order.length, recordset: _Order });
         });
     }
@@ -55,7 +55,7 @@ class OrderController {
                 _updateOrder.message = 'the Order was updated ';
                 suc = true;
             }
-            res.json({ success: suc, updateOrder: _updateOrder });
+            res.json({ success: suc, updatedOrder: _updateOrder });
         });
     }
     static deleteOrder(req, res) {
@@ -71,7 +71,7 @@ class OrderController {
                 _deleteOrder.message = 'the Order was deleted ';
                 suc = true;
             }
-            res.json({ success: suc, deleteOrder: _deleteOrder });
+            res.json({ success: suc, deletedOrder: _deleteOrder });
         });
     }
 }

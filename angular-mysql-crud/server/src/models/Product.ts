@@ -3,6 +3,7 @@ export class Product {
     name?:string;
     description?:string;
     quantityInStock?:number;
+    metric?: string;
     buyPrice?:number;
     maxCacaoBuyPrice?:number;
     fkStore?:number;
@@ -13,6 +14,7 @@ export class Product {
         this.name=product.name
         this.description=product.description;
         this.quantityInStock=product.quantityInStock;
+        this.metric=product.metric;
         this.buyPrice=product.buyPrice;
         this.maxCacaoBuyPrice=product.maxCacaoBuyPrice;
         this.fkStore=product.fkStore;

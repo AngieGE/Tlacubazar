@@ -14,7 +14,7 @@ export class ProductService {
 
   public listProduct(name?: string, fkStore?: number, fkCategoryEnum?: number): Observable<any> {
     let params = new HttpParams();
-
+    console.log(fkStore);
     if (name !== undefined && name !== null) {
       params = params.set('name', name);
     }
@@ -24,6 +24,7 @@ export class ProductService {
     if (fkCategoryEnum !== undefined && fkCategoryEnum !== null) {
       params = params.set('fkCategoryEnum', fkCategoryEnum.toString());
     }
+    console.log(params);
 
     let headers = this.defaultHeaders;
     headers = headers.set('Accept', 'application/json');

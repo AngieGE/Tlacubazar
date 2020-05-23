@@ -1,5 +1,60 @@
 @import '../../app.component.css';
+.w-80{
+  width: 80%;
+}
 .btn{
   background-color: #EE6E73;
   color: black;
+}
+.filled.coloring {
+  color: #f0bb2d;
+}
+*{
+  list-style: none
+}
+.m-neg{
+  margin-bottom: -13px;
+}
+.list{
+  overflow-y: scroll;
+  height: 80vh;
+}
+div.dropdown-menu.show{
+  left: 40% !important;
+}
+#reviews{
+  max-height: 200px;
+}
+.hide-scroll {
+  overflow-y: scroll; /* Add the ability to scroll */
+}
+.text-blue{
+  color: #0000EE;
+}
+.review-box{
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+
+
+}
+#reviews{
+  max-height: 200px;
+}
+.hide-scroll {
+  overflow-y: scroll; /* Add the ability to scroll */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.hide-scroll {
+    -ms-overflow-style: none;
+}
+.icon-red{
+  color: darkred;
 }

@@ -6,8 +6,8 @@ import {Order} from '../models';
 export class OrderController {
 
     static async listOrder (req: Request, res: Response){
-        const { idOrder, fkStatusEnum,  fkUser} = req.query; //req.body req.query req.params
-        const _Order: Order[] = await OrderService.listOrder(idOrder, fkStatusEnum, fkUser);
+        const { idOrder, fkUser, fkStore,  fkStatusEnum} = req.query; //req.body req.query req.params
+        const _Order: Order[] = await OrderService.listOrder(idOrder, fkUser, fkStore,  fkStatusEnum);
         res.json({length: _Order.length, recordset:_Order});
     }
 
@@ -43,7 +43,7 @@ export class OrderController {
             _updateOrder.message='the Order was updated ';
             suc=true;
         }
-        res.json({success: suc, updateOrder: _updateOrder})
+        res.json({success: suc, updatedOrder: _updateOrder})
     }
     
     static async deleteOrder(req: Request, res: Response): Promise<void>{
@@ -57,6 +57,6 @@ export class OrderController {
             _deleteOrder.message='the Order was deleted ';
             suc=true;
         }
-        res.json({success:suc, deleteOrder: _deleteOrder})
+        res.json({success:suc, deletedOrder: _deleteOrder})
     }
 }
