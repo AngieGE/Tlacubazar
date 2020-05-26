@@ -3,7 +3,7 @@ import pool from "../database";
 
 export class AddressService {
    
-    static async listAddress(idAddress?:number, fkAddressEnum?:number, fkStateEnum?:number, fkCityEnum?:number, fkSuburbEnum?:number): Promise<Address[]>  {
+    static async listAddress( idAddress?:number, fkAddressEnum?:number, fkStateEnum?:number, fkCityEnum?:number, fkSuburbEnum?:number): Promise<Address[]>  {
         let sql: string = "SELECT * FROM address WHERE "
         sql += idAddress!=null ? "idAddress = " + idAddress + " AND " : "";
         sql += fkAddressEnum!=null ? "fkAddressEnum = " + fkAddressEnum + " AND " : "";

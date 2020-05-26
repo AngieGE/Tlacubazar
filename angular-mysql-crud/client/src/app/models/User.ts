@@ -30,6 +30,11 @@ export class User {
       this.readUserCourse = user.readUserCourse;
       this.readVendorCourse = user.readVendorCourse;
       this.fkAddress = user.fkAddress;
+      if (user.address) {
+        this.address = user.address;
+      } else {
+        this.address = new Address();
+      }
     }
 
   }

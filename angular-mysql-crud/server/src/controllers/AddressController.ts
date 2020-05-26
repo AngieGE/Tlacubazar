@@ -7,7 +7,7 @@ export class AddressController {
 
     static async listAddress (req: Request, res: Response){
         const { idAddress, fkAddressEnum, fkStateEnum, fkCityEnum, fkSuburbEnum } = req.query; //req.body req.query req.params
-        const _addresses: Address[] = await AddressService.listAddress(idAddress, fkAddressEnum, fkStateEnum, fkCityEnum, fkSuburbEnum);
+        const _addresses: Address[] = await AddressService.listAddress( idAddress, fkAddressEnum, fkStateEnum, fkCityEnum, fkSuburbEnum);
         res.json({length: _addresses.length, recordset:_addresses});
     }
 

@@ -28,9 +28,12 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
     this.tlacu.manager.updateUserAddress.subscribe(
       state => {
-        console.log('el evento paso suscription');
+        console.log('enter suscription event');
+        console.log(this.tlacu.manager.user);
         if (this.tlacu.manager.user.fkAddress == null) {
           this.user.fkAddress = null;
+          this.user.address = null;
+          this.tlacu.manager.updateCurrentUserAddress.next(1);
         }
         this.getUserAddresses();
       }
@@ -103,11 +106,12 @@ export class NavigationComponent implements OnInit {
     this.tlacu.manager.setItems( this.tlacu.manager.socialUser, this.tlacu.manager.user);
     this.user.fkAddress = address.idAddress;
     this.user.address = address;
-    this.tlacu.manager.updateUserAddress.next(1);
+    // this.tlacu.manager.updateUserAddress.next(1);
+    this.tlacu.manager.updateCurrentUserAddress.next(1);
   }
   // -------------- ADDRESS ------------------
   async getUserAddresses() {
-    console.log('get direcciones nav');
+    console.log('get addresses in navbar');
     let addressesTemp: UserAddress[] = new Array();
     const userAddressesRes = await this.tlacu.userAddress.listUserAddress(this.user.idUser).toPromise();
     if (userAddressesRes.length > 0 ) {
@@ -119,6 +123,8 @@ export class NavigationComponent implements OnInit {
         addressesTemp.push(userAdd);
       });
       this.userAddresses = addressesTemp; // set addresses array
+    } else {
+      this.userAddresses = new Array();
     }
   }
 

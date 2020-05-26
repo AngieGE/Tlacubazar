@@ -13,8 +13,8 @@ export class AddressService {
   constructor(private http: HttpClient) { }
 
   public listAddress(
-    idAddress?: number, fkAddressEnum?: number, fkStateEnum?: number,
-    fkCityEnum?: number, fkSuburbEnum?: number
+    idAddress?: number, fkAddressEnum?: number,
+    fkStateEnum?: number, fkCityEnum?: number, fkSuburbEnum?: number
   ): Observable<any> {
     let params = new HttpParams();
 

@@ -31,7 +31,6 @@ export class Store {
   score: number;
   scoreLenght: number;
   currentRate = 5;
-
   constructor(store?: Store) {
     if (store != null) {
       this.idStore = store.idStore;

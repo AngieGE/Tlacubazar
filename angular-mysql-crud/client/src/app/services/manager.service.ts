@@ -18,6 +18,7 @@ export class ManagerService {
   socialUser: SocialUser;
   userAddress: UserAddress[];
   updateUserAddress = new Subject<number>();
+  updateCurrentUserAddress = new Subject<number>();
   constructor() {
     this.getTokenItems();
   }

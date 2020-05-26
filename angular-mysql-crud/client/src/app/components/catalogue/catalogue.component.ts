@@ -22,6 +22,7 @@ export class CatalogueComponent implements OnInit {
   hovered = 0;
   readonly = false;
   idUser;
+  userAddress: Address;
 
   constructor(private tlacu: TlacuServices, private router: Router,
               config: NgbModalConfig, private modalService: NgbModal) {
@@ -46,18 +47,27 @@ export class CatalogueComponent implements OnInit {
     this.categories = Array();
     this.selectedStore = null;
     this.idUser = (this.tlacu.manager.user != null) ? this.tlacu.manager.user.idUser : null;
-
+    this.userAddress = (this.tlacu.manager.user) ? this.tlacu.manager.user.address : null;
     // start all
     this.getCategories();
     this.getStores();
+    console.log(this.userAddress);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.tlacu.manager.updateCurrentUserAddress.subscribe(
+      state => {
+        this.idUser = (this.tlacu.manager.user != null) ? this.tlacu.manager.user.idUser : null;
+        this.userAddress = (this.tlacu.manager.user) ? this.tlacu.manager.user.address : null;
+        console.log('event catalogue');
+        this.getStores();
+      });
+  }
 
    async getStores() {
     const iss = (this.isServiceStore) ? 1 : 0;
     const cacao = (this.onlyCacaoStores) ? 1 : null;
-    console.log("cacao store " + cacao)
+    console.log("cacao store " + cacao);
     let storesTemp: Store[] = Array();
     const storesRes = await this.tlacu.store.listStore(iss, cacao, null, null, null).toPromise();
     if (storesRes.length <= 0) {
@@ -65,7 +75,6 @@ export class CatalogueComponent implements OnInit {
       return;
     }
     storesRes.recordset.forEach(store => {
-      console.log(store);
       // revisar que este en las categorias
       this.categories.forEach( cat => {
         if (cat.selected && store.fkCategoryEnum === cat.idCategoryEnum) {
@@ -77,13 +86,12 @@ export class CatalogueComponent implements OnInit {
           // set the reviews and score
           this.setReviewsAndScore(s);
           // set address
-          this.setStoreAddress(s);
-          // store it in temp array
-          storesTemp.push(s);
+          this.setStoreAddress(s, storesTemp);
         }
       });
     });
     this.stores = storesTemp;
+    console.log(this.stores);
   }
 
   async setVendor(store: Store) {
@@ -107,7 +115,6 @@ export class CatalogueComponent implements OnInit {
         // set user
         this.tlacu.user.getUser(rev.fkUser).subscribe( user => {
           rev.user = new User(user.recordset);
-          console.log(rev);
           if (rev.review !== 'null' && rev.review !== 'undefined' && rev.review.length) {
             storeReviews.push(rev);
           }
@@ -149,7 +156,7 @@ export class CatalogueComponent implements OnInit {
 
   // -------------- GET ADDRESS ------------------
 
-    setStoreAddress(store: Store) {
+    setStoreAddress(store: Store, storesTemp) {
       this.tlacu.address.getAddress(store.fkAddress).subscribe( res => {
         // set the address
         store.address = new Address(res.recordset[0]);
@@ -165,6 +172,20 @@ export class CatalogueComponent implements OnInit {
 
         // set the suburb enum //userAddress.address.suburbEnum = res
         this.setSuburbEnum(store.address);
+
+        // check if city is same as user city
+        if (this.userAddress == null || this.userAddress.fkCityEnum == null) {
+          console.log('no hay usuario');
+          storesTemp.push(store);
+        } else {
+          console.log(store.address.fkCityEnum);
+          if (this.userAddress.fkCityEnum === store.address.fkCityEnum) {
+            console.log('es el mismo');
+            storesTemp.push(store);
+          } else {
+            console.log('no es el mismo');
+          }
+        }
       }, err => {console.log(err); });
     }
 
@@ -191,6 +212,7 @@ export class CatalogueComponent implements OnInit {
         address.suburbEnum = new SuburbEnum(res.recordset[0]);
       });
     }
+
 // -------------- GET ADDRESS END ------------------
 
   createReviewText(store: Store, reviewText: string) {

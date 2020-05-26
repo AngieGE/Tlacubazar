@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
 
   // -------------- ADDRESS ------------------
   async getUserAddresses() {
-    console.log('get direcciones prof');
+    console.log('get addresses in profile');
     const addressesTemp: UserAddress[] = new Array();
     const userAddressesRes = await this.tlacu.userAddress.listUserAddress(this.user.idUser).toPromise();
     if (userAddressesRes.length > 0 ) {
@@ -87,7 +87,10 @@ export class ProfileComponent implements OnInit {
         addressesTemp.push(userAdd);
       });
       this.userAddresses = addressesTemp; // set addresses array console.log(this.userAddresses);
+    } else {
+      this.userAddresses = new Array();
     }
+
   }
 
   setAddress(userAddress: UserAddress) {
@@ -153,11 +156,8 @@ export class ProfileComponent implements OnInit {
   }
 
   getSuburbs(idCityEnum: number ) {
-    console.log('get suburbs');
-    console.log(idCityEnum);
     let suburbArrayTemp: SuburbEnum[] = new Array();
     this.tlacu.suburbEnum.listSuburbEnum(null, null, null, idCityEnum).subscribe( res => {
-      console.log(res);
       if (res.length > 0) {
         res.recordset.forEach(suburb => {
           const s = new SuburbEnum(suburb);
@@ -182,15 +182,18 @@ export class ProfileComponent implements OnInit {
   public deleteStore(idStore: number) {
     console.log('Eliminando tienda ' + idStore);
   }
+
   public deleteUserAddress(userAddress: UserAddress) {
-    console.log('Eliminando user address'); // console.log(userAddress);
+    console.log('Eliminando user address ' + userAddress.fkAddress); // console.log(userAddress);
     if (this.tlacu.manager.user.fkAddress != null && this.tlacu.manager.user.fkAddress === userAddress.fkAddress) {
       this.tlacu.manager.user.fkAddress = null;
+      this.tlacu.manager.user.address = null;
+      this.tlacu.manager.setItems(this.tlacu.manager.socialUser, this.tlacu.manager.user);
+      console.log('elimino la direccion actual');
     }
     this.tlacu.userAddress.deleteUserAddress(userAddress.fkAddress, userAddress.fkUser).subscribe( res => {
-      console.log(res);
       this.getUserAddresses();
-      this.tlacu.manager.updateUserAddress.next(1);
+      this.tlacu.manager.updateUserAddress.next(1); // tal vez se deba pasar adentro de la funcion getUserAddresses
     }, err => { console.log(err); });
 
   }
@@ -206,7 +209,6 @@ export class ProfileComponent implements OnInit {
           if (res.success) {
             console.log(res);
             const idAddressEnum: number = res.createdAddressEnum.insertId;
-            console.log(idAddressEnum);
             // create Address
             const add = new Address({fkAddressEnum: idAddressEnum, fkStateEnum: this.selectedState,
                                      fkCityEnum: this.selectedCity, fkSuburbEnum: this.selectedSuburb});
