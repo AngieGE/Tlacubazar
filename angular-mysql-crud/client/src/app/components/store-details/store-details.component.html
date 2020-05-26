@@ -44,7 +44,7 @@
             <th *ngIf="store.acceptsCacao" scope="col">Máximo descuento con cacao</th>
           </tr>
           </thead>
-          <tbody>
+          <tbody *ngIf="products.length > 0">
             <tr *ngFor="let product of products">
               <td class="productSelect" (click)="goProduct(product.idProduct)">{{product.name}}</td>
               <td>{{product.description}}</td>
@@ -52,6 +52,11 @@
               <td *ngIf="product.quantityInStock <= 0" style="color: red;">AGOTADO</td>
               <td>${{product.buyPrice}}</td>
               <td *ngIf="store.acceptsCacao">${{product.maxCacaoBuyPrice}}</td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="products.length <= 0" class="w-100">
+            <tr class="text-center">
+              ¡Oops! Aun no hay productos en esta disponibles
             </tr>
           </tbody>
         </table>
