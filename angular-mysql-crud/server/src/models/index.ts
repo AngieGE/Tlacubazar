@@ -5,6 +5,7 @@ export * from './PaymentMethodEnum';
 export * from './OderProduct';
 export * from './Order';
 export * from './Product';
+export * from './OderProduct'
 export * from './ProductReview';
 export * from './StateEnum';
 export * from './Store';

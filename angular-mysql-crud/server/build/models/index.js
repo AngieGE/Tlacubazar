@@ -10,6 +10,7 @@ __export(require("./PaymentMethodEnum"));
 __export(require("./OderProduct"));
 __export(require("./Order"));
 __export(require("./Product"));
+__export(require("./OderProduct"));
 __export(require("./ProductReview"));
 __export(require("./StateEnum"));
 __export(require("./Store"));
