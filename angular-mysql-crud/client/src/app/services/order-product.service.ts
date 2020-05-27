@@ -12,7 +12,8 @@ export class OrderProductService {
 
   constructor(private http: HttpClient) { }
 
-  public listOrderProduct( idOrderProduct?: number, fkUser?: number, fkProduct?: number) {
+  public listOrderProduct( idOrderProduct?: number, fkUser?: number,
+              fkProduct?: number, fkStatusEnum?: number): Observable<any> {
     let params = new HttpParams();
     if (idOrderProduct !== undefined && idOrderProduct !== null) {
       params = params.set('idOrderProduct', idOrderProduct.toString());
@@ -22,6 +23,9 @@ export class OrderProductService {
     }
     if (fkProduct !== undefined && fkProduct !== null) {
       params = params.set('fkProduct', fkProduct.toString());
+    }
+    if (fkStatusEnum !== undefined && fkStatusEnum !== null) {
+      params = params.set('fkStatusEnum', fkStatusEnum.toString());
     }
 
     let headers = this.defaultHeaders;
@@ -47,7 +51,7 @@ export class OrderProductService {
     return this.http.post<OrderProduct>(`${this.API_URL}/orderProduct`, orderProduct, { headers });
   }
 
-  public updateStoreReview(idOrderProduct: number, orderProduct: OrderProduct): Observable<any> {
+  public updateOrderProduct(idOrderProduct: number, orderProduct: OrderProduct): Observable<any> {
     let headers = this.defaultHeaders;
     headers = headers.set('Accept', 'application/json');
     headers = headers.set('Content-Type', 'application/json');

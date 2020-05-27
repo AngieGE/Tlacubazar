@@ -3,11 +3,12 @@ import pool from "../database";
 
 export class OrderProductService {
    
-    static async listOrderProduct(idOrderProduct?:number, fkUser?:number, fkProduct?:number): Promise<OrderProduct[]>  {
+    static async listOrderProduct(idOrderProduct?:number, fkUser?:number, fkProduct?:number, fkStatusEnum?: number): Promise<OrderProduct[]>  {
         let sql: string = "SELECT * FROM orderProduct WHERE "
         sql += idOrderProduct!=null ? "idOrderProduct = " + idOrderProduct + " AND " : "";
         sql += fkUser!=null ? "fkUser = " + fkUser + " AND " : "";
         sql += fkProduct!=null ? "fkProduct = " + fkProduct + " AND " : "";
+        sql += fkStatusEnum!=null ? "fkStatusEnum = " + fkStatusEnum + " AND " : "";
         sql += "1 = 1 ";
         const recordset = await pool.query(sql);
         return recordset;
@@ -22,11 +23,11 @@ export class OrderProductService {
     }
 
     static async createOrderProduct(orderProduct: OrderProduct): Promise<any> {
-        let sql: string = "INSERT INTO orderProduct (cacaoAmount, c, fkUser, fkProduct) " + 
-                           "VALUES ('"+ orderProduct.cacaoAmount + "', '" + 
-                                        orderProduct.amount + "', " +
+        let sql: string = "INSERT INTO orderProduct (amount, fkUser, fkProduct) " + 
+                           "VALUES ('"+ orderProduct.amount + "', '" + 
                                         orderProduct.fkUser + "', " +
                                         orderProduct.fkProduct +");"
+                                        console.log(sql);
         const resultado= await pool.query(sql);
         return resultado;
     }
@@ -34,11 +35,13 @@ export class OrderProductService {
     static async updateOrderProduct(idOrderProduct:number , orderProduct: OrderProduct): Promise<any> {
         let sql: string = "UPDATE orderProduct SET " +
                                 "cacaoAmount = '" + orderProduct.cacaoAmount + "', " + 
-                                "amount = '" + orderProduct.amount + "' " +
-                                "date = '" + orderProduct.date+ "' " + 
-                                "fkUser = '" + orderProduct.fkUser+ "' " + 
-                                "fkProduct = '" + orderProduct.fkProduct+ "' " + 
+                                "amount = '" + orderProduct.amount + "', " +
+                                // "date = '" + orderProduct.date?.toDateString() + "', " + 
+                                "fkUser = '" + orderProduct.fkUser + "', " + 
+                                "fkProduct = '" + orderProduct.fkProduct + "', " + 
+                                "fkStatusEnum = '" + orderProduct.fkStatusEnum + "' " + 
                                 "WHERE idOrderProduct = " + idOrderProduct + ";";
+                                console.log(sql);
         const resultado= await pool.query(sql);
         return resultado;
     }

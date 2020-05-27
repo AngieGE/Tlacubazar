@@ -139,8 +139,10 @@ CREATE TABLE `OrderProduct` (
   `date` DATETIME  DEFAULT CURRENT_TIMESTAMP,
   `fkUser` INT NOT NULL,
   `fkProduct` INT NOT NULL,
+  `fkStatusEnum`INT NOT NULL DEFAULT 1,
   FOREIGN KEY (`fkUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE,
-  FOREIGN KEY (`fkProduct`) REFERENCES `Product` (`idProduct`) ON DELETE CASCADE
+  FOREIGN KEY (`fkProduct`) REFERENCES `Product` (`idProduct`) ON DELETE CASCADE,
+  FOREIGN KEY (`fkStatusEnum`) REFERENCES `StatusEnum` (`idStatusEnum`) ON DELETE CASCADE
 );
 
 CREATE TABLE `ProductReview` (
@@ -249,15 +251,14 @@ INSERT INTO `CategoryEnum` VALUES (21, 'Videojuegos');
 
 /*Status enum*/
 INSERT INTO `StatusEnum` VALUES
-    (1, 'ESPERANDO_ENVIO'),
-    (2, 'PAUSADA'),
+    (1, 'EN_CARRITO'),
+    (2, 'ESPERANDO_ENVIO'),
     (3, 'ENVIADA'),
     (4, 'RECIBIDA'),
-    (5, 'PAGADA'),
-    (6, 'CANCELADA'),
-    (7, 'STORE_EN_ESPERA'),
-    (8, 'STORE_ACEPTADA'),
-    (9, 'STORE_RECHAZADA');
+    (5, 'CANCELADA'),
+    (6, 'STORE_EN_ESPERA'),
+    (7, 'STORE_ACEPTADA'),
+    (8, 'STORE_RECHAZADA');
 
 /*Payment method enum*/
 INSERT INTO `PaymentMethodEnum` (`idPaymentMethodEnum`,`paymentMethod`) VALUES 

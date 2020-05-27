@@ -5,6 +5,7 @@ export class OrderProduct {
     date?: Date;
     fkUser?: number;
     fkProduct?: number;
+    fkStatusEnum?: number;
 
     constructor(orderProduct: OrderProduct ){
         this.idOrderProduct=orderProduct.idOrderProduct;
@@ -13,5 +14,6 @@ export class OrderProduct {
         this.date=orderProduct.date;
         this.fkUser=orderProduct.fkUser;
         this.fkProduct=orderProduct.fkProduct;
+        this.fkStatusEnum=orderProduct.fkStatusEnum;
     }
 }

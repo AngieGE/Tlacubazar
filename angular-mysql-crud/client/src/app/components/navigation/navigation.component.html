@@ -2,14 +2,14 @@
 
     <!--LOGO-->
     <li ngbNavItem class="mr-auto ml-5" >
-      <div class="flex-row center-vertically justify-content-center h-100 ml-1 pointer" (click)="clickLogo()">
+      <div class="flex-row center-vertically justify-content-center h-100 ml-1 pointer" (click)="clickLogo(); dd.value = ''">
         <img src="../../../assets/images/tlacubazar.png" alt="logo" id="logo">
       </div>
     </li>
 
     <!--Shopping cart-->
     <li [ngbNavItem]="1" class="flex-row center-vertically h-100">
-      <a ngbNavLink class="flex-row center-vertically h-100" (click)="goCart()" >
+      <a ngbNavLink class="flex-row center-vertically h-100" (click)="goCart(); dd.value = ''" >
         <div>
           <i class="material-icons text-black">shopping_cart</i>
         </div>
@@ -21,12 +21,12 @@
 
     <!--catalogue-->
     <li ngbDropdown [ngbNavItem]="2" class="h-100" [ngClass]="{'active': active === 2}">
-      <a href (click)="false" class="text-black nav-link h-100" [ngClass]="{'active': active === 2}" ngbDropdownToggle>
-        Catálogo
+      <a href #dd (click)="false" class="text-black nav-link h-100" [ngClass]="{'active': active === 2}" ngbDropdownToggle>
+        Catálogo {{dd.value}}
       </a>
       <div ngbDropdownMenu>
-        <button (click)="goService()" ngbDropdownItem>Servicios</button>
-        <button (click)="goProduct()" ngbDropdownItem>Productos</button>
+        <button (click)="goService(); dd.value = 'Servicios'" ngbDropdownItem>Servicios</button>
+        <button (click)="goProduct(); dd.value = 'Productos'" ngbDropdownItem>Productos</button>
       </div>
     </li>
 
@@ -34,12 +34,12 @@
     <li ngbDropdown [ngbNavItem]="3" class="h-100 mr-5"  [ngClass]="{'active': active === 3}" *ngIf="user != null" >
       <a href (click)="false" class="nav-link text-black" ngbDropdownToggle>Mi cuenta</a>
       <div ngbDropdownMenu>
-        <button (click)="myProfile()" ngbDropdownItem>Mi Perfil</button>
-        <button (click)="logout()" ngbDropdownItem>Cerrar sesión</button>
+        <button (click)="myProfile(); dd.value = ''" ngbDropdownItem>Mi Perfil</button>
+        <button (click)="logout(); dd.value = ''" ngbDropdownItem>Cerrar sesión</button>
       </div>
     </li>
     <!--login-->
-    <li ngbNavItem [ngbNavItem]="4" (click)="login()" *ngIf="user == null" class="h-100 mr-5">
+    <li ngbNavItem [ngbNavItem]="4" (click)="login(); dd.value = ''" *ngIf="user == null" class="h-100 mr-5">
       <a class=" text-black" ngbNavLink>Iniciar sesión</a>
     </li>
 

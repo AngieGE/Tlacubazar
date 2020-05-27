@@ -52,7 +52,7 @@ export class TlacuServices {
         public cityEnum: CityEnumService,
         public deliveryMethod: DeliveryMethodService,
         public order: OrderService,
-        public orderDetails: OrderProductService,
+        public orderProduct: OrderProductService,
         public product: ProductService,
         public stateEnum: StateEnumService,
         public categoryEnum: CategoryEnumService

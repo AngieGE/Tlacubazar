@@ -1,5 +1,27 @@
 @import '../../app.component.css';
-.btn{
+.btnpink{
   background-color: #EE6E73;
   color: black;
+}
+h3{
+  text-align: center;
+}
+#category-bottons{
+  margin-bottom: -13px;
+}
+.text-blue{
+  color: #0000EE;
+}
+.list{
+  overflow-y: scroll;
+  height: 60vh;
+}
+.font-small{
+  font-size: small;
+}
+.btnAmount{
+  border: 1px solid gainsboro;
+}
+.cant{
+  margin-top: 5px;
 }

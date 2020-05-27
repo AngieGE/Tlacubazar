@@ -36,7 +36,7 @@
 
   <!--productos-->
   <div class="row flex-row justify-content-center list w-100 " *ngIf="!isServiceStore">
-    <p class="text-muted m-neg cursor-arrow">{{stores.length}} resultados encontrados. </p>
+    <p class="text-muted m-neg cursor-arrow"> <strong>{{stores.length}}</strong> resultados encontrados. </p>
     <div *ngFor="let store of stores" class="w-100">
         <div class="card m-3 ml-4">
           <div class="card-body">
@@ -103,7 +103,7 @@
 
   <!--Servicios-->
   <div class="row flex-row justify-content-center list w-100 " *ngIf="isServiceStore">
-    <p class="text-muted m-neg cursor-arrow">{{stores.length}} resultados encontrados. </p>
+    <p class="text-muted m-neg cursor-arrow"><strong>{{stores.length}}</strong> resultados encontrados. </p>
     <div *ngFor="let store of stores" class="w-100">
         <div class="card m-3 ml-4">
           <div class="card-body">

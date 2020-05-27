@@ -3,7 +3,7 @@ import { TlacuServices } from '../../services/index';
 import {Router} from '@angular/router';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryEnum, User, StoreReview, Address, Store,
-        AddressEnum, CityEnum, StateEnum, SuburbEnum } from 'src/app/models';
+        AddressEnum, CityEnum, StateEnum, SuburbEnum, OrderProduct } from 'src/app/models';
 
 @Component({
   selector: 'app-catalogue',
@@ -51,7 +51,6 @@ export class CatalogueComponent implements OnInit {
     // start all
     this.getCategories();
     this.getStores();
-    console.log(this.userAddress);
   }
 
   ngOnInit(): void {
@@ -67,7 +66,6 @@ export class CatalogueComponent implements OnInit {
    async getStores() {
     const iss = (this.isServiceStore) ? 1 : 0;
     const cacao = (this.onlyCacaoStores) ? 1 : null;
-    console.log("cacao store " + cacao);
     let storesTemp: Store[] = Array();
     const storesRes = await this.tlacu.store.listStore(iss, cacao, null, null, null).toPromise();
     if (storesRes.length <= 0) {
@@ -85,7 +83,7 @@ export class CatalogueComponent implements OnInit {
           this.setCategory(s);
           // set the reviews and score
           this.setReviewsAndScore(s);
-          // set address
+          // set address and store it in storesTemp
           this.setStoreAddress(s, storesTemp);
         }
       });
@@ -93,6 +91,7 @@ export class CatalogueComponent implements OnInit {
     this.stores = storesTemp;
     console.log(this.stores);
   }
+
 
   async setVendor(store: Store) {
     const vendorRes = await this.tlacu.user.getUser(store.fkVendor).toPromise();
@@ -156,7 +155,7 @@ export class CatalogueComponent implements OnInit {
 
   // -------------- GET ADDRESS ------------------
 
-    setStoreAddress(store: Store, storesTemp) {
+    setStoreAddress(store: Store, storesTemp: OrderProduct[]) {
       this.tlacu.address.getAddress(store.fkAddress).subscribe( res => {
         // set the address
         store.address = new Address(res.recordset[0]);
@@ -175,15 +174,15 @@ export class CatalogueComponent implements OnInit {
 
         // check if city is same as user city
         if (this.userAddress == null || this.userAddress.fkCityEnum == null) {
-          console.log('no hay usuario');
+          // console.log('no hay usuario');
           storesTemp.push(store);
         } else {
-          console.log(store.address.fkCityEnum);
+          // console.log(store.address.fkCityEnum);
           if (this.userAddress.fkCityEnum === store.address.fkCityEnum) {
-            console.log('es el mismo');
+            // console.log('es el mismo');
             storesTemp.push(store);
           } else {
-            console.log('no es el mismo');
+            // console.log('no es el mismo');
           }
         }
       }, err => {console.log(err); });

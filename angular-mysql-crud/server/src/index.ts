@@ -43,7 +43,7 @@ class Server{
         this.app.use('/productReview', ProductReviewRoutes.getInstance().router);
         this.app.use('/storeReview', StoreReviewRoutes.getInstance().router);
         this.app.use('/userAddress', UserAddressRoutes.getInstance().router);
-
+        this.app.use('/orderProduct', OrderProductRoutes.getInstance().router);
         this.app.use('/categoryEnum', CategoryEnumRoutes.getInstance().router);
     }
 

@@ -8,6 +8,7 @@ class OrderProduct {
         this.date = orderProduct.date;
         this.fkUser = orderProduct.fkUser;
         this.fkProduct = orderProduct.fkProduct;
+        this.fkStatusEnum = orderProduct.fkStatusEnum;
     }
 }
 exports.OrderProduct = OrderProduct;

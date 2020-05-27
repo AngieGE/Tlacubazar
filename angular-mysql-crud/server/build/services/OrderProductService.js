@@ -14,12 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 class OrderProductService {
-    static listOrderProduct(idOrderProduct, fkUser, fkProduct) {
+    static listOrderProduct(idOrderProduct, fkUser, fkProduct, fkStatusEnum) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "SELECT * FROM orderProduct WHERE ";
             sql += idOrderProduct != null ? "idOrderProduct = " + idOrderProduct + " AND " : "";
             sql += fkUser != null ? "fkUser = " + fkUser + " AND " : "";
             sql += fkProduct != null ? "fkProduct = " + fkProduct + " AND " : "";
+            sql += fkStatusEnum != null ? "fkStatusEnum = " + fkStatusEnum + " AND " : "";
             sql += "1 = 1 ";
             const recordset = yield database_1.default.query(sql);
             return recordset;
@@ -36,11 +37,11 @@ class OrderProductService {
     }
     static createOrderProduct(orderProduct) {
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "INSERT INTO orderProduct (cacaoAmount, c, fkUser, fkProduct) " +
-                "VALUES ('" + orderProduct.cacaoAmount + "', '" +
-                orderProduct.amount + "', " +
+            let sql = "INSERT INTO orderProduct (amount, fkUser, fkProduct) " +
+                "VALUES ('" + orderProduct.amount + "', '" +
                 orderProduct.fkUser + "', " +
                 orderProduct.fkProduct + ");";
+            console.log(sql);
             const resultado = yield database_1.default.query(sql);
             return resultado;
         });
@@ -49,11 +50,13 @@ class OrderProductService {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = "UPDATE orderProduct SET " +
                 "cacaoAmount = '" + orderProduct.cacaoAmount + "', " +
-                "amount = '" + orderProduct.amount + "' " +
-                "date = '" + orderProduct.date + "' " +
-                "fkUser = '" + orderProduct.fkUser + "' " +
-                "fkProduct = '" + orderProduct.fkProduct + "' " +
+                "amount = '" + orderProduct.amount + "', " +
+                // "date = '" + orderProduct.date?.toDateString() + "', " + 
+                "fkUser = '" + orderProduct.fkUser + "', " +
+                "fkProduct = '" + orderProduct.fkProduct + "', " +
+                "fkStatusEnum = '" + orderProduct.fkStatusEnum + "' " +
                 "WHERE idOrderProduct = " + idOrderProduct + ";";
+            console.log(sql);
             const resultado = yield database_1.default.query(sql);
             return resultado;
         });

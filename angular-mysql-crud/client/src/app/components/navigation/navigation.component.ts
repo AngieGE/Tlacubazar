@@ -25,35 +25,33 @@ export class NavigationComponent implements OnInit {
     this.getUserAddresses();
   }
 
-  ngOnInit(): void {
-    this.tlacu.manager.updateUserAddress.subscribe(
-      state => {
-        console.log('enter suscription event');
-        console.log(this.tlacu.manager.user);
-        if (this.tlacu.manager.user.fkAddress == null) {
-          this.user.fkAddress = null;
-          this.user.address = null;
-          this.tlacu.manager.updateCurrentUserAddress.next(1);
-        }
-        this.getUserAddresses();
+ngOnInit(): void {
+  this.tlacu.manager.updateUserAddress.subscribe(
+    state => {
+      if (this.tlacu.manager.user.fkAddress == null) {
+        this.user.fkAddress = null;
+        this.user.address = null;
+        this.tlacu.user.updateUser(this.user.idUser, this.user).subscribe( res => {
+          console.log(res);
+        });
+        this.tlacu.manager.updateCurrentUserAddress.next(1);
       }
-  );
-  }
+      this.getUserAddresses();
+    });
+
+  this.tlacu.manager.cartEvent.subscribe(
+    state => {
+      console.log('cart event');
+      this.getCartProduct();
+    });
+}
 
 
 
   getCartProduct() {
-    this.tlacu.order.listOrder(null, _StatusEnum.StatusEnum.ESPERANDO_ENVIO, this.user.idUser).subscribe( orders => { // esperando envio
-      this.cartProducts = orders.length;
-    });
-    this.tlacu.order.listOrder(null, _StatusEnum.StatusEnum.PAUSADA, this.user.idUser).subscribe( orders => { // pausado
-      this.cartProducts += orders.length;
-    });
-    this.tlacu.order.listOrder(null, _StatusEnum.StatusEnum.ENVIADA, this.user.idUser).subscribe( orders => { // enviada
-      this.cartProducts += orders.length;
-    });
-    this.tlacu.order.listOrder(null, _StatusEnum.StatusEnum.PAGADA, this.user.idUser).subscribe( orders => { // pagada
-      this.cartProducts += orders.length;
+    this.tlacu.orderProduct.listOrderProduct(null, this.tlacu.manager.user.idUser, null, _StatusEnum.StatusEnum.EN_CARRITO).
+      subscribe( orders => { // esperando envio
+        this.cartProducts = orders.length;
     });
   }
 

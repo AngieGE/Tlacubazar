@@ -13,8 +13,8 @@ const services_1 = require("../services");
 class OrderProductController {
     static listOrderProduct(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idOrderProduct, fkUser, fkProduct } = req.query; //req.body req.query req.params
-            const _orderProduct = yield services_1.OrderProductService.listOrderProduct(idOrderProduct, fkUser, fkProduct);
+            const { idOrderProduct, fkUser, fkProduct, fkStatusEnum } = req.query; //req.body req.query req.params
+            const _orderProduct = yield services_1.OrderProductService.listOrderProduct(idOrderProduct, fkUser, fkProduct, fkStatusEnum);
             res.json({ length: _orderProduct.length, recordset: _orderProduct });
         });
     }

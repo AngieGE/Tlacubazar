@@ -16,9 +16,10 @@ import {
 export class ManagerService {
   user: User;
   socialUser: SocialUser;
-  userAddress: UserAddress[];
   updateUserAddress = new Subject<number>();
   updateCurrentUserAddress = new Subject<number>();
+  cartEvent = new Subject<number>();
+
   constructor() {
     this.getTokenItems();
   }
@@ -30,16 +31,13 @@ export class ManagerService {
     localStorage.setItem('tlacu-social-user', JSON.stringify(socialUser));
   }
 
-  setuserAddresses(userAddresses: UserAddress[]) {
-    this.userAddress = userAddresses;
-  }
-
   unsetItems() {
       this.user = null;
       this.socialUser = null;
       localStorage.setItem('tlacu-user', null);
       localStorage.setItem('tlacu-social-user', null);
   }
+
   getTokenItems() {
     try {
         this.user = JSON.parse(localStorage.getItem('tlacu-user'));
@@ -51,5 +49,7 @@ export class ManagerService {
         this.unsetItems();
     }
   }
+
+
 
 }

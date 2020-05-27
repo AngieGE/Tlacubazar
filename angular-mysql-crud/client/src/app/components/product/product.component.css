@@ -2,7 +2,7 @@
 .w-80{
   width: 80%;
 }
-.btn{
+.btnpink{
   background-color: #EE6E73;
   color: black;
 }
@@ -36,8 +36,6 @@ div.dropdown-menu.show{
   padding-right: 1.25rem !important;
   padding-top: 0rem !important;
   padding-bottom: 0rem !important;
-
-
 }
 #reviews{
   max-height: 200px;
@@ -57,4 +55,7 @@ div.dropdown-menu.show{
 }
 .icon-red{
   color: darkred;
+}
+.btnAmount{
+  border: 1px solid gainsboro;
 }

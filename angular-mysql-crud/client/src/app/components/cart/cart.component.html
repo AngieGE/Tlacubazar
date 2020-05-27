@@ -1,8 +1,107 @@
 
 <!--User logged in and products in cart-->
-<div *ngIf="user !== null && cartProducts >= 1 " class="row justify-content-md-center">
-  <div class="col flex-column justify-content-center center-vertically">
-    <h3>Su carrito</h3>
+<div *ngIf="user !== null " class="row justify-content-md-center">
+  <div class="col-12">
+    <div class="row">
+
+      <!--carrito con articulos-->
+      <div class="col-8" *ngIf="cartOrders.length >= 1">
+        <h3>Carrito</h3>
+        <!--quick select products -->
+        <div class="flex-row" id="category-bottons">
+          <p  class="card-link text-blue cursor-hand" (click)="setAllCategories(true);">Todas</p>
+          <p  class="card-link text-blue cursor-hand" (click)="setAllCategories(false);">Ninguna</p>
+        </div>
+        <!--items scroll list-->
+        <div class="list" *ngIf=" this.userCityId != null">
+          <div *ngFor="let cartOrder of cartOrders" class="w-100 mb-2">
+            <div class="card" *ngIf="cartOrder.cityEnum && cartOrder.cityEnum.idCityEnum == userCityId">
+              <div class="card-body m-2">
+                <div class="row" *ngIf="cartOrder.product">
+                  <input  type="checkbox"  [attr.checked]="(cartOrder.selected == true) ? 'checked' : null" (click)="clickCartOrder(cartOrder)">
+                  <h5 class="cursor-hand ml-2" (click)=goProduct(cartOrder.product.idProduct)>{{cartOrder.product.name}}</h5>
+                </div>
+                <div class="ml-2">
+                  <p class="text-blue font-small cursor-arrow">{{cartOrder.date | date}} {{cartOrder.cityEnum.city}}, Morelos</p>
+                </div>
+                <div class="row" *ngIf="cartOrder.product">
+                  <p class="mr-2 cursor-arrow"> <strong>Precio: </strong> ${{cartOrder.product.buyPrice}}</p>
+                  <p class="cursor-arrow"> <strong>Máximo descuento con cacao: </strong> ${{cartOrder.product.maxCacaoBuyPrice}}</p>
+                </div>
+                <div class="row" *ngIf="cartOrder.product">
+                  <strong class="cursor-arrow cant">Cantidad:</strong>
+                  <div class="d-inline-block ml-2" ngbDropdown #myDrop="ngbDropdown">
+                    <button #dd class="btn btnAmount mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">{{dd.value || cartOrder.amount}}</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                      <button *ngIf="cartOrder.product.quantityInStock>=1" (click)="dd.value = 1; updateAmount(cartOrder, 1)" ngbDropdownItem>1</button>
+                      <button *ngIf="cartOrder.product.quantityInStock>=2" (click)="dd.value = 2; updateAmount(cartOrder, 2)" ngbDropdownItem>2</button>
+                      <button *ngIf="cartOrder.product.quantityInStock>=3" (click)="dd.value = 3; updateAmount(cartOrder, 3)" ngbDropdownItem>3</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--items scroll list-->
+        <div class="list" *ngIf="this.userCityId == null">
+          <div>
+            <h5>Por favor seleccione su ubicación para mostrarle los pedidos de esa area.</h5>
+            <img src="../../../assets/images/tlacu-cart.png" alt="imagen de tlacu" width="60%">
+          </div>
+        </div>
+        <!--Buy btn-->
+        <div class="mr-2" cols="50" rows="1">
+          <button  type="button" class="btn btnpink mb-3" (click)="removeOrderProducts()">
+            Eliminar
+          </button>
+          <button  type="button" class="btn btnpink mb-3 ml-3" (click)="open(content)">
+            Comprar
+          </button>
+        </div>
+      </div>
+
+      <!--Carrito vacio-->
+      <div class="col-8" *ngIf="cartOrders.length <= 0">
+        <h3>Carrito</h3>
+        <!--quick select products -->
+        <div class="flex-row" id="category-bottons">
+          <p  class="card-link text-blue cursor-hand" (click)="setAllCategories(true);">Todas</p>
+          <p  class="card-link text-blue cursor-hand" (click)="setAllCategories(false);">Ninguna</p>
+        </div>
+        <!--items scroll list-->
+        <div class="list">
+          <div>
+            <h5>Opps, su carrito de TlacuBazar esta vacío</h5>
+            <img src="../../../assets/images/tlacu-cart.png" alt="imagen de tlacu" width="60%">
+          </div>
+        </div>
+        <!--Buy btn-->
+        <div class="mr-2" cols="50" rows="1">
+          <button  type="button" class="btn btnpink mb-3">
+            Eliminar
+          </button>
+          <button  type="button" class="btn btnpink mb-3 ml-3" (click)="open(content)">
+            Comprar
+          </button>
+        </div>
+      </div>
+
+      <!--order-->
+      <div class="col-4">
+        <!---->
+        <h3>Órdenes</h3>
+        <div class="card text-center bg-light text-dark mb-4">
+          <div class="card-header">
+            <h4 class="card-title text-center">Orden 1</h4>
+          </div>
+          <div class="card-body">
+            Info de la orden
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -15,10 +114,22 @@
   </div>
 </div>
 
-<!--User logged in but No products in cart-->
-<div *ngIf="user !== null && cartProducts <= 0" class="row justify-content-md-center contenedor-cart">
-  <div class="col flex-column justify-content-center center-vertically">
-    <h3>Oops, su carrito de TlacuBazar esta vacio.</h3>
-    <img src="../../../assets/images/tlacu-cart.png" alt="imagen de tlacu" width="60%">
+<!--MODAL-->
+<ng-template #content let-c="close" let-d="dismiss">
+  <!--HEADER-->
+  <div class="modal-header">
+    <div class="flex-column">
+      <!--titulo-->
+      <h4 class="modal-title cursor-arrow" id="modal-basic-title">Artículos</h4>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-</div>
+  <!--BODY-->
+  <div class="modal-body">
+    modal body
+
+  </div>
+
+</ng-template>

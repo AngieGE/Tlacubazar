@@ -22,7 +22,7 @@
 
             <!--stars-->
             <li ngbDropdown  class="h-100" >
-              <p ngbDropdownToggle class="cursor-arrow"><i class="material-icons cursor-arrow">star</i> <b>{{product.score}} de 5</b> ({{product.scoreLenght}} calificaciones)</p>
+              <p ngbDropdownToggle class="cursor-arrow"><i class="material-icons cursor-arrow">star</i> <b>{{product.score || 0}} de 5</b> ({{product.scoreLenght || 0}} calificaciones)</p>
               <div ngbDropdownMenu *ngIf="idUser != null">
                 <div  ngbDropdownItem>
                   <ngb-rating [(rate)]="product.currentRate"  [max]="5">
@@ -44,7 +44,7 @@
                 <textarea #textArea class="mr-2" cols="50" rows="1" placeholder="Querémos escucharte"></textarea>
               </div>
               <div class="mr-2" cols="50" rows="1">
-                <button  type="button" class="btn mb-3" (click)="createReviewText(product, textArea.value); textArea.value = ''">
+                <button  type="button" class="btn btnpink mb-3" (click)="createReviewText(product, textArea.value); textArea.value = ''">
                   Compartir mi opinión
                 </button>
               </div>
@@ -86,7 +86,19 @@
             <li class="list-group-item"><b>Precio: </b> ${{product.buyPrice}}</li>
             <li class="list-group-item"><b>Máx descuento con cacao: </b> ${{product.maxCacaoBuyPrice}}</li>
             <li class="list-group-item">
-              <button  type="button" class="btn mb-3" (click)="addCart()">
+              <b>Cantidad: </b>
+              <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                <button #dd class="btn btnAmount mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">{{dd.value || '1'}}</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                  <button *ngIf="product.quantityInStock >=1" (click)="dd.value = 1" ngbDropdownItem>1</button>
+                  <button *ngIf="product.quantityInStock >=2" (click)="dd.value = 2" ngbDropdownItem>2</button>
+                  <button *ngIf="product.quantityInStock >=3" (click)="dd.value = 3" ngbDropdownItem>3</button>
+                </div>
+              </div>
+
+            </li>
+            <li class="list-group-item">
+              <button  type="button" class="btn btnpink mb-3" (click)="addCart(dd.value)">
                 Poner en mi carrito
               </button>
             </li>
