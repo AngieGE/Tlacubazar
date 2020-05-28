@@ -6,6 +6,7 @@ export * from './DeliveryMethodEnum';
 export * from './OrderProduct';
 export * from './Order';
 export * from './Product';
+export * from './OrderProduct';
 export * from './ProductReview';
 export * from './StateEnum';
 export * from './Store';
