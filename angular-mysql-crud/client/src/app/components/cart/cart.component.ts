@@ -17,6 +17,7 @@ export class CartComponent implements OnInit {
   cartOrders: OrderProduct[];
   selectedCartOrders: OrderProduct[];
   userCityId: number;
+  total: number;
 
   constructor( private tlacu: TlacuServices, private router: Router, private modalService: NgbModal) {
     this.user = this.tlacu.manager.user;
@@ -121,7 +122,18 @@ export class CartComponent implements OnInit {
       alert('Selecciona los articulos que deseas ordenar');
       return;
     }
+    this.total = this.calcularTotal();
     this.modalService.open(content);
+  }
+
+  calcularTotal(): number {
+    let total = 0;
+    let cacaoDiscount = 0;
+    this.selectedCartOrders.forEach( co => {
+      total += co.product.buyPrice;
+      cacaoDiscount += co.product.maxCacaoBuyPrice;
+    } );
+    return total;
   }
 
   goProduct(id: number) {
