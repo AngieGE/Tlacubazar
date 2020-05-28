@@ -150,6 +150,7 @@ export class CartComponent implements OnInit {
     });
     this.getCartProduct();
     this.selectedCartOrders = new Array();
+    this.tlacu.manager.cartEvent.next(1);
   }
 
   setSelectedCartOrders() {

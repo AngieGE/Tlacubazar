@@ -28,6 +28,9 @@
 .center-vertically{
   align-items: center;
 }
+.bottom-vertically{
+  align-items: flex-end;
+}
 .wrap{
   flex-wrap: wrap;
 }
@@ -51,4 +54,10 @@
 }
 .opinion-box{
   width: 70%;
+}
+.mb-neg{
+  margin-bottom: -15px;
+}
+.text-small{
+  font-size: small;
 }

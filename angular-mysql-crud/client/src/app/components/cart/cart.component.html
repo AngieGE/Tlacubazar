@@ -118,18 +118,64 @@
 <ng-template #content let-c="close" let-d="dismiss">
   <!--HEADER-->
   <div class="modal-header">
+    <!--titulo-->
     <div class="flex-column">
-      <!--titulo-->
       <h4 class="modal-title cursor-arrow" id="modal-basic-title">Artículos</h4>
     </div>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <!--BODY-->
-  <div class="modal-body">
-    modal body
-
+  <div class="bg-purple p-2 text-white">
+    <i class="material-icons text-black">location_on</i> Envío a:
+    {{user.address.addressEnum.address}}, {{user.address.suburbEnum.suburb}}.
+    {{user.address.cityEnum.city}}, {{user.address.stateEnum.state}} {{user.address.suburbEnum.postalCode}}.
   </div>
+  <!-- Cacao switch -->
+  <div class="custom-control custom-switch ml-3">
+    <input type="checkbox" class="custom-control-input" id="customSwitches">
+    <label class="custom-control-label" for="customSwitches">Utilizar cacao ({{user.cacaoBalance}} disponible)</label>
+  </div>
+  <!--BODY-->
+  <div class="modal-body p-0 ml-3">
+    <div *ngFor="let orderProduct of selectedCartOrders; let i = index" >
+      <div class="card-body p-0 ml-3 mt-2">
+        <div class="row">
+          <h5 class="">{{i+1}}. {{orderProduct.product.name}}</h5>
+        </div>
+        <div class="">
+          <p class="text-blue font-small cursor-arrow">{{orderProduct.date | date}} {{orderProduct.cityEnum.city}}, Morelos</p>
+        </div>
+        <div class="col no-bottom" >
+          <p class="cursor-arrow"> <strong>Precio: </strong> ${{orderProduct.product.buyPrice}}</p>
+          <p class="cursor-arrow"> <strong>Máximo descuento con cacao: </strong> ${{orderProduct.product.maxCacaoBuyPrice}}</p>
+          <p class="cursor-arrow"><strong class="cursor-arrow cant">Cantidad:</strong> {{orderProduct.amount}} {{orderProduct.product.metric}}</p>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+  <!--FOOTER-->
+  <div class="modal-footer ">
+    <div class="flex-column w-100">
+      <!--info pago-->
+      <div class="flex-row mb-1">
+        <button  type="button" class="btn btnpink mb-3" (click)="d('Cross click')">
+          Cancelar
+        </button>
+        <button  type="button" class="btn btnpink mb-3 ml-3">
+          Aceptar
+        </button>
+        <div class="col flex-column  bottom-vertically">
+          <div>
+            <strong>TOTAL = $</strong>
+          </div>
+          <div class="text-small">
+            Usted esta ahorrando
+          </div>
+        </div>
+      </div>
 
+    </div>
+  </div>
 </ng-template>

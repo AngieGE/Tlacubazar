@@ -25,3 +25,10 @@ h3{
 .cant{
   margin-top: 5px;
 }
+.bg-blue{ background-color:  #34cdf7;}
+.bg-purple{ background-color:  #5220b9;}
+.bg-pink{ background-color: #b0478a;}
+.bg-yellow{ background-color:  #f0bb2d;}
+.no-bottom p{
+  margin-bottom: 0;
+}
